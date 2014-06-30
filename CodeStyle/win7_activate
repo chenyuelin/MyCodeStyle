@@ -5,7 +5,7 @@ slmgr.vbs -dlv
 slmgr.vbs -xpr
 会显示具体的系统试用到期时间。初装系统应该是剩余43200分钟，也就是30天整。
 
-slmgr.vbs/rearm
+slmgr.vbs /rearm
 稍等几秒钟会弹出对话框提示命令完成，重启生效。
 重启之后，还会提示系统激活到期，但是没关系，下次启动或者注销一下就不会再提示激活了。从系统控制面板中也能够看到“剩余30天可以激活”的提示。该命令在正常情况下可以运行三次。
 
@@ -21,3 +21,12 @@ C:\Program Files\Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform
 如果您正在使用的 64 位版本，你应该转到： 
 C:\Program Files(X86)\Common Files\Microsoft Shared\OfficeSoftwareProtectionPlatform
 运行OSPPREARM.EXE
+cscript ospp.vbs /sethst:cckms.nccu.edu.tw
+cscript ospp.vbs /act
+cscript ospp.vbs /dstatus
+cscript ospp.vbs /remhst
+
+cscript ospp.vbs /sethst:127.0.0.2
+cscript ospp.vbs /act
+cscript ospp.vbs /dstatus
+cscript ospp.vbs /remhst
