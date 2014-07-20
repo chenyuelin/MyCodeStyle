@@ -1,0 +1,28 @@
+CyclicBarrier障栅(可多次使用)
+example:
+CyclicBarrier barrier = new CyclicBarrier(10);
+public void run(){
+//TODO
+barrier.await();
+}
+
+
+
+CountDownLatch倒计时门栓(一次性使用，如计数器到达0就再不能重用了。)
+倒计时门栓为常为成对组合使用。
+
+
+java.util.concurrent.Exchanger<V>交换器
+
+
+java.util.concurrent.SynchronousQueue<E>同步队列
+
+
+Semaphore:信号量
+
+
+
+
+CompletionService:ExecutorService的扩展，可以获得线程执行结果的
+
+javax.xml.bind.DatatypeConverter base64转换工具类
