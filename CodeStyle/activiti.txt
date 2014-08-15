@@ -1,0 +1,4 @@
+1)表达式
+execution：DelegateExecution提供外出执行的额外信息。
+task：DelegateTask提供当前任务的额外信息。注意，只对任务监听器的表达式有效。
+authenticatedUserId：当前登录的用户id。如果没有用户登录，这个变量就不可用。
