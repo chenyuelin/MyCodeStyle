@@ -1,0 +1,50 @@
+1)profile有两种：
+默认的：通过"spring.profiles.default"属性获取，如果没有配置默认值是"default"
+明确激活的：通过"spring.profiles.active"获取
+查找顺序是：先进性明确激活的匹配，如果没有指定明确激活的（即集合为空）就找默认的；配置属性值从Environment读取。
+一、启动Java应用时，通过-D传入系统参数
+-Dspring.profiles.active=dev  
+二、如果是web环境，可以通过上下文初始化参数设置
+<context-param>
+	<param-name>spring.profiles.active</param-name>  
+	<param-value>dev</param-value>  
+</context-param>
+三、使用@ActiveProfiles来激活
+通常在测试环境中使用@ActiveProfiles("test") 
+
+
+2) ***************** MVC ********************** 
+--------------- Input argument. -----------------------
+org.springframework.web.context.request.WebRequest
+org.springframework.web.context.request.NativeWebRequest
+java.util.Locale [for the current request locale, determined by the most specific locale resolver available, in effect, the configured LocaleResolver in a Servlet environment.]
+java.io.InputStream / java.io.Reader
+java.io.OutputStream / java.io.Writer
+java.security.Principal
+@PathVariable
+@MatrixVariable
+@RequestParam
+@RequestHeader
+@RequestBody
+@RequestPart
+@CookieValue
+@ModelAttribute
+HttpEntity<?>
+java.util.Map / org.springframework.ui.Model / org.springframework.ui.ModelMap
+org.springframework.web.servlet.mvc.support.RedirectAttributes
+org.springframework.validation.Errors
+org.springframework.validation.BindingResult
+org.springframework.web.bind.support.SessionStatus
+org.springframework.web.util.UriComponentsBuilder
+
+----------------- Return types ----------------------------
+ModelAndView
+Model
+Map
+View
+String
+void
+@ResponseBody
+HttpEntity<?> / ResponseEntity<?>
+Callable<?>
+DeferredResult<?>
