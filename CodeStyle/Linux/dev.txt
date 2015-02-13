@@ -1,0 +1,22 @@
+/dev/hd[a-t]：IDE设备
+/dev/sd[a-z]：SCSI设备
+/dev/fd[0-7]：标准软驱
+/dev/md[0-31]：软raid设备
+/dev/loop[0-7]：本地回环设备
+/dev/ram[0-15]：内存
+/dev/null：无限数据接收设备,相当于黑洞
+/dev/zero：无限零资源
+/dev/tty[0-63]：虚拟终端
+/dev/ttyS[0-3]：串口
+/dev/lp[0-3]：并口
+/dev/console：控制台
+/dev/fb[0-31]：framebuffer
+/dev/cdrom => /dev/hdc
+/dev/modem => /dev/ttyS[0-9]
+/dev/pilot => /dev/ttyS[0-9]
+/dev/random：随机数设备
+/dev/urandom：随机数设备
+(PS：随机数设备，后面我会再写篇博客总结一下)
+/dev目录下的节点是怎么创建的?
+devf或者udev会自动帮你创建得。
+kobject是sysfs文件系统的基础，udev通过监测、检测sysfs来获取新创建的设备的。

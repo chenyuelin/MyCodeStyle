@@ -1,0 +1,37 @@
+文章一
+linux和windows文件的共享：(在Ubuntu12.04下无需手动安装samba服务）
+1. windows共享一个文件夹，比如说文件夹名为deamon，该机器的IP是192.168.11.51（windows操作）
+2. 对该共享文件夹设置用户权限。比如说windows下有个账户julianz，密码是123456。赋予该账户对该共享目录读写权限。（windows操作）
+3. 在Linux下创建一目录/mnt/win。（Linux， root操作）
+4. sudo mount //192.168.11.51/deamon /mnt/win/ -o username=julianz,password=123456,dmask=777,fmask=777。（Linux， root操作）
+5. 然后，Linux root 用户可以在/mnt/win下读写文件。该操作可以同步到windows的共享目录中。
+如果想实现Linux开机自动挂载，可以在/etc/rc.loca文件中加入下面这行：
+mount //192.168.11.51/deamon /mnt/win/ -o username=julianz,password=123456,dmask=777,fmask=777
+
+上面是对Ubuntu讲的。如果是CentOS，mount命令为：
+mount -t cifs username=julianz,password=123456  //192.168.11.51/deamon /mnt/win/
+
+文章二
+Mount CIFS  
+2012-05-08 10:15:42|  分类： Linux |举报|字号 订阅
+mount -t cifs -o username="共享用户",password="密码" //ip/sharing_folder /mountpoint
+刚知道还可以这样。。。。
+都不用samba....
+  [转]  如何在Windows和Linux中共享文件？samba也许是个不错的选择。但是我用的CentOS5中若用smbfs就是一个“Wrong fs type”。仔细查找了相关资料，找出几个解决方法：
+   1 mount -o username=your_name,password=your_password //server/share_folder /mount_point
+   2 mount -t cifs username=your_name,password=your_password //server/share_folder /mount_point
+   这两种方法本质都一样，但要注意your_name用户必须对share_folder拥有完全操作的权限，当然若要只读甚至随便乱写个用户名密码都可 以。
+   3 写到/etc/fstab文件中，在该文件最后添加一行：
+   //server/share_folder /mount_point  cifs username,password,rw 
+   这样还是有个缺点，即用户名和密码都以明文的方式暴露了，还可以这样：
+   4 编辑/etc/fstab，按如下格式添加：
+   //server/share_folder /mount_point  cifs credential=/root/credential
+     而/root/credential中内容如下：
+     useername=your_name
+     password=your_password
+   但是还有个问题，普通用户是无权使用mount的，
+   5 使用sudo
+   6 对mount.cifs添加suid。
+   
+反挂载
+sudo umount /dev/sda1
