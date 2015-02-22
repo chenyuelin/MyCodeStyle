@@ -1,0 +1,3 @@
+=)How to add Tomcat 8 to Eclipse Kepler without installing the big whole WTP package
+http://download.eclipse.org/webtools/repository/luna
+http://stackoverflow.com/questions/25164774/how-to-add-tomcat-8-to-eclipse-kepler-without-installing-the-big-whole-wtp-packa

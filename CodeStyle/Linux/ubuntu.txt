@@ -1,0 +1,12 @@
+按装五笔
+sudo apt-get install ibus-table-wubi
+ibus-setup
+
+按装五笔拼音模式
+sudo apt-get install fcitx-table-wbpy
+
+按装Flash
+sudo apt-get install flashplugin-nonfree
+
+挂载共享virtualbox目录
+sudo mount -t vboxsf gongxiang /mnt/shared/
