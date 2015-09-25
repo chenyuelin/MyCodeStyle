@@ -1,0 +1,11 @@
+Skeleton
+http://bbs.nga.cn/read.php?tid=4410005
+
+国服6.2.0版反和谐补丁
+http://bbs.nga.cn/read.php?tid=5508017
+http://bbs.nga.cn/read.php?tid=5493238
+
+
+Plugin
+Coordinates[map coordinate]
+http://www.curse.com/addons/wow/coordinates
