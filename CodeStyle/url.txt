@@ -1,5 +1,17 @@
 http://wj32.org/wp/
 
+Eclipse Class Decompiler
+http://bbs.csdn.net/topics/390263414
+
+JPA
+http://wiki.eclipse.org/EclipseLink/UserGuide/JPA/Basic_JPA_Development/Querying/JPQL
+
+How to conceive a boy.
+http://baike.pcbaby.com.cn/qzbd/939341.html
+
+Hacker Attack
+http://map.norsecorp.com
+
 cl1024
 https://groups.yahoo.com/neo/groups/clbbs1024/info
 http://page.vlwo.org/index.htm
