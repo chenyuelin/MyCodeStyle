@@ -12,6 +12,12 @@ http://baike.pcbaby.com.cn/qzbd/939341.html
 Hacker Attack
 http://map.norsecorp.com
 
+china-pub
+http://www.china-pub.com
+
+mozilla
+http://ftp.mozilla.org/pub
+
 cl1024
 https://groups.yahoo.com/neo/groups/clbbs1024/info
 http://page.vlwo.org/index.htm
