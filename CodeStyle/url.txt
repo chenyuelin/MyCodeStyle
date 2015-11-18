@@ -1,7 +1,11 @@
 http://wj32.org/wp/
 
+CentOS
+http://mirrors.163.com/centos/7/isos/x86_64/
+
 Eclipse Class Decompiler
 http://bbs.csdn.net/topics/390263414
+Eclipse Class Decompiler插件更新站点： http://feeling.sourceforge.net/update
 
 JPA
 http://wiki.eclipse.org/EclipseLink/UserGuide/JPA/Basic_JPA_Development/Querying/JPQL
