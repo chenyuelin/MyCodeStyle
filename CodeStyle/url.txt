@@ -18,6 +18,12 @@ http://www.china-pub.com
 mozilla
 http://ftp.mozilla.org/pub
 
+Fernando
+http://www.win-raid.com/t11f23-Modded-Intel-AHCI-and-RAID-Drivers-digitally-signed.html
+http://www.win-raid.com/t25f23-Which-are-the-quot-best-quot-Intel-AHCI-RAID-drivers.html
+http://www.win-raid.com/t1300f25-Tips-Discussion-Usage-of-quot-mod-signed-quot-Drivers.html#msg15574
+http://www.win-raid.com
+
 VMware Workstation 10简体中文正式版官方下载地址：
 https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.7-2844087.exe
 
