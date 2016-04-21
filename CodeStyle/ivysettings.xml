@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GB18030"?>
+<ivysettings>
+	<property name="ivy.shared.default.root"             value="/home/admin/ivy/shared/" override="false"/>
+	<property name="ivy.shared.default.ivy.pattern"      value="[organisation]/[module]/[revision]/[type]s/[artifact].[ext]" override="false"/>
+	<property name="ivy.shared.default.artifact.pattern" value="[organisation]/[module]/[revision]/[type]s/[artifact].[ext]" override="false"/>
+
+	<resolvers>
+	
+		<chain name="public" returnFirst="true">
+			<ibiblio name="public-oschina" m2compatible="true" root="http://maven.oschina.net/content/groups/public/"/>
+			<ibiblio name="public-maven" m2compatible="true" />
+		</chain>
+		
+		<!--
+		<mirroredurl name="publica" m2compatible="true" mirrorListUrl="file:///e:/wzd/mavenrepolist.txt">
+			<artifact pattern="[module]/[type]s/[artifact]-[revision].[ext]" />
+		</mirroredurl>
+		
+		<ibiblio name="shared" root="http://192.168.1.2:8081/nexus/content/groups/public/" pattern="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
+		-->
+
+		<sftp name="shared" user="admin" userPassword="12345678" host="192.168.1.3">
+			<ivy pattern="${ivy.shared.default.root}/${ivy.shared.default.ivy.pattern}" />
+			<artifact pattern="${ivy.shared.default.root}/${ivy.shared.default.artifact.pattern}" />
+		</sftp>
+	</resolvers>
+
+	<settings defaultResolver="default" />
+
+	<include url="${ivy.default.settings.dir}/ivysettings-local.xml" />
+	<include url="${ivy.default.settings.dir}/ivysettings-main-chain.xml" />
+	<include url="${ivy.default.settings.dir}/ivysettings-default-chain.xml" />
+
+</ivysettings>
