@@ -4,3 +4,6 @@
 3)Select "Web Tool Platform" last version
 4)select "JST Server Adapters" and "JST Server Adapters Extensions" install.
 url)http://stackoverflow.com/questions/25164774/how-to-add-tomcat-8-to-eclipse-kepler-without-installing-the-big-whole-wtp-packa
+
+eclipselink.weaving
+-javaagent:"D:\ivy2\cache\org.eclipse.persistence\eclipselink\jars\eclipselink-2.6.3.jar"
