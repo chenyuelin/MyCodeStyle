@@ -7,3 +7,7 @@ url)http://stackoverflow.com/questions/25164774/how-to-add-tomcat-8-to-eclipse-k
 
 eclipselink.weaving
 -javaagent:"D:\ivy2\cache\org.eclipse.persistence\eclipselink\jars\eclipselink-2.6.3.jar"
+
+subclipse
+Links for 1.12.x Release:
+Eclipse update site URL: http://subclipse.tigris.org/update_1.12.x
