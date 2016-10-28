@@ -7,6 +7,9 @@ Eclipse Class Decompiler
 http://bbs.csdn.net/topics/390263414
 Eclipse Class Decompiler插件更新站点： http://feeling.sourceforge.net/update
 
+Spring中文reference
+http://git.oschina.net/free/spring-framework-reference
+
 JPA
 http://wiki.eclipse.org/EclipseLink/UserGuide/JPA/Basic_JPA_Development/Querying/JPQL
 
