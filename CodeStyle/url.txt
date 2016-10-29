@@ -53,6 +53,10 @@ http://et8.org/index.php
 ×ÖÄ»
 http://subhd.com
 
+opera_http
+http://get.geo.opera.com/pub/opera
+
+
 cl1024
 https://groups.yahoo.com/neo/groups/clbbs1024/info
 http://page.vlwo.org/index.htm
