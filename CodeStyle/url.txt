@@ -56,6 +56,15 @@ http://subhd.com
 opera_http
 http://get.geo.opera.com/pub/opera
 
+DDNS
+http://www.pubyun.com
+chenyuelin
+chenyuelin.f3322.net
+
+»¨Éú¿Ç
+http://hsk.oray.com
+chenyuelin311
+chenyuelin311.gicp.net
 
 cl1024
 https://groups.yahoo.com/neo/groups/clbbs1024/info
