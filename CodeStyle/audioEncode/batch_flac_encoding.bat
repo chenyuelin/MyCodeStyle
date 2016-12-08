@@ -2,6 +2,11 @@
 setlocal enabledelayedexpansion 
 cd flac-1.3.1-icl
 
+set ta=庾澄庆
+set tAlbum=九十年代金庸影视剧歌曲精选
+set ty=2010
+set tg=Anime
+
 set srcPath=D:\Music\Illusions\新建文件夹\新建文件夹
 set targetPath=D:\Music\Illusions\新建文件夹\新建文件夹
 
@@ -19,7 +24,7 @@ set tempnum=0!index!
  set tempnum=!index!
 )
 
-flac -f -6 -o "%targetPath%\!tt!.flac" "%srcPath%\!fileFullName!.wav"
+flac -f -6 --tag=Title="!tt!" --tag=Album="%tAlbum%" --tag=Genre=%tg% -o "%targetPath%\!tt!.flac" "%srcPath%\!fileFullName!.wav"
 set /a index+=1
 )
 
