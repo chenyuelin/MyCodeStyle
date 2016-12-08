@@ -66,6 +66,9 @@ http://hsk.oray.com
 chenyuelin311
 chenyuelin311.gicp.net
 
+ID3
+http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/ID3.html
+
 cl1024
 https://groups.yahoo.com/neo/groups/clbbs1024/info
 http://page.vlwo.org/index.htm
