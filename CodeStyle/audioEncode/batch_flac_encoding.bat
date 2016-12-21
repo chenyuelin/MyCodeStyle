@@ -24,7 +24,7 @@ set tempnum=0!index!
  set tempnum=!index!
 )
 
-flac -f -6 --tag=Title="!tt!" -T Artist="%ta%" --tag=Album="%tAlbum%" --tag=Genre=%tg% -T Track=!tn! -o "%targetPath%\!tt!.flac" "%srcPath%\!fileFullName!.wav"
+flac -f -6 -T Title="!tt!" -T Artist="%ta%" -T Album="%tAlbum%" -T Genre=%tg% -T date=%ty%  -T Track=!tn! -o "%targetPath%\!tt!.flac" "%srcPath%\!fileFullName!.wav"
 set /a index+=1
 )
 
