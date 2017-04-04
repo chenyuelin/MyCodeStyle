@@ -10,3 +10,6 @@ MTU
 win
 netsh interface ipv4 show subinterfaces
 ping -l 1452 -f www.baidu.com (+28)
+
+Ô¶³ÌĞ­ÖúÃüÁî
+msra.exe
