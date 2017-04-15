@@ -13,3 +13,6 @@ ping -l 1452 -f www.baidu.com (+28)
 
 远程协助命令
 msra.exe
+
+windows自带cab工具
+iexpress.exe
