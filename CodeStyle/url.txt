@@ -43,8 +43,13 @@ https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.7-2
 Alter.Org.UA
 http://alter.org.ua/en/soft/win/uni_ata/
 
-Microsoft Toolkit
-http://freemicrosofttoolkit.com/
+小马激活
+http://www.pccppc.com/
+
+win7,8更新修复
+http://www.win7china.com/html/20415.html
+https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness-tool
+http://www.catalog.update.microsoft.com/home.aspx(手动下载当前系统3006137补丁包)
 
 MX Player
 https://sites.google.com/site/mxvpen/
