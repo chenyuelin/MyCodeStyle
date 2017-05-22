@@ -1,0 +1,7 @@
+doom3
+http://www.moddb.com/mods/wulfen-texture-pack/addons/wulfen-texture-pack-201
+
+CatalystAI
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000(或0001)\UMD\
+看见英文带有CatalystAI   打开 把数字设置为 31 （或32 ）至30 ，
+最后看见英文带有 CatalystAI_DEF 打开把数字1设置为0 。
