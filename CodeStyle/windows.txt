@@ -4,3 +4,5 @@ pro版：	   [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Pa
 
 2)禁止ipc$空连接
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA]把RestrictAnonymous = DWORD的键值改为：00000001
+
+v7iu61g91vb3
