@@ -83,3 +83,5 @@ tar
 9°¢*.zip ”√ unzip Ω‚—π
 #tar zxvf /bbs.tar.zip -C /zzz/bbsΩ‚—π
 #tar zcvf /zzz.tar.gz ./zzz—πÀı
+
+wget -P /root/test -O "baidu.html" "http://www.baidu.com/index.html"  

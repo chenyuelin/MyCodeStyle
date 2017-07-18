@@ -5,4 +5,22 @@ pro版：	   [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Pa
 2)禁止ipc$空连接
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA]把RestrictAnonymous = DWORD的键值改为：00000001
 
+
+secdrv.sys驱动程序服务
+为此，请在提升的命令提示符处键入以下命令。应在键入每个命令后按 Enter。
+若要禁用驱动程序的服务，请键入以下命令：sc config secdrv start= disabled
+若要将驱动程序的服务设置为人工，请键入以下命令：sc config secdrv start= demand
+若要启用驱动程序的服务（并将它设置为自动），请键入以下命令：sc config secdrv start=auto
+若要手动启动驱动程序的服务，请键入以下命令：sc start secdrv
+若要手动停止驱动程序的服务，请键入以下命令：sc stop secdrv
+
+或者，您可以直接修改注册表。为此，请按照下列步骤操作：
+依次单击“开始”和“运行”，在“打开”框中键入 regedit，再单击“确定”。
+在注册表中找到并单击以下子项：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\secdrv
+右键单击“开始”，然后单击“修改”。
+在“值数据”框中，执行下列操作之一：
+键入 4 禁用驱动程序的服务，然后单击“确定”。
+键入 3 将驱动程序的服务设置为人工，然后单击“确定”。
+键入 2 将驱动程序的服务设置为自动，然后单击“确定”。
+
 v7iu61g91vb3
