@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GB18030"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+						http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<interactiveMode>false</interactiveMode>
+	<mirrors>
+		<mirror>
+			<id>alimaven</id>
+			<name>aliyun maven</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+
+		<mirror>
+			<id>UK</id>
+			<name>UK Central</name>
+			<url>http://uk.maven.org/maven2/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+
+		<mirror>
+			<id>rep2</id>
+			<name>rep2</name>
+			<url>http://repo2.maven.org/maven2/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+	</mirrors>		
+</settings>
