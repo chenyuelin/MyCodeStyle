@@ -3,6 +3,9 @@ http://wj32.org/wp/
 CentOS
 http://mirrors.163.com/centos/7/isos/x86_64/
 
+Sockscap64
+https://www.sockscap64.com
+
 JAVA Decompiler
 http://jd.benow.ca
 
