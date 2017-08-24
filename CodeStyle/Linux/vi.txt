@@ -1,5 +1,7 @@
 http://www.jianshu.com/p/bcbe916f97e1
 
+http://blog.csdn.net/edward_qing_lee/article/details/23290339(删除很全)
+
 vi filename :打开或新建文件，并将光标置于第一行首 
 vi +n filename ：打开文件，并将光标置于第n行首 
 vi + filename ：打开文件，并将光标置于最后一行首 
@@ -86,6 +88,8 @@ d$：删至行尾
 ndd：删除当前行及其后n-1行 
 x或X：删除一个字符，x删除光标后的，而X删除光标前的 
 Ctrl+u：删除输入方式下所输入的文本 
+c        功能和d相同，区别在于完成删除操作后进入INSERT MODE
+cc       也是删除当前行，然后进入INSERT MODE
 
 搜索及替换命令 
 /pattern：从光标开始处向文件尾搜索pattern 
