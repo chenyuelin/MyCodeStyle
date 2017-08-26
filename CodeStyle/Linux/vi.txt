@@ -2,6 +2,14 @@ http://www.jianshu.com/p/bcbe916f97e1
 
 http://blog.csdn.net/edward_qing_lee/article/details/23290339(删除很全)
 
+显示行号
+输入命令：vi /etc/vimrc
+set nu	行号
+
+:0,:1,gg都可以到第一行
+shift+g到末行
+或者:$=检查总行数比如24，:24到第24行
+
 vi filename :打开或新建文件，并将光标置于第一行首 
 vi +n filename ：打开文件，并将光标置于第n行首 
 vi + filename ：打开文件，并将光标置于最后一行首 

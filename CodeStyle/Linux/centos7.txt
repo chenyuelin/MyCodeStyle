@@ -1,3 +1,9 @@
+linux命令大全
+http://man.linuxde.net/
+
+默认jvm路径
+/usr/lib/jvm
+
 svn
 安装sudo yum install subversion
 查看安装版本svnserve --version
@@ -97,3 +103,31 @@ cent7防火墙
 查看已启动的服务列表：systemctl list-unit-files|grep enabled 
 firewall-cmd --list-ports
 firewall-cmd --state
+
+静态ip
+vi /etc/sysconfig/network-scripts/ifcfg-eth0
+BOOTPROTO="static"
+ONBOOT="yes"
+PEERDNS=no 不重写/etc/resolv.conf
+
+IPADDR=192.168.1.90
+NETMASK=255.255.255.0
+NM_CONTROLLED=no
+GATEWAY=192.168.1.1
+DNS1=192.168.1.1
+DNS2=8.8.8.8
+service network restart
+
+新建用户
+http://blog.csdn.net/li_101357/article/details/46778827
+useradd -m hadoop
+passwd hadoop
+
+ssh配置无密码登录 
+http://man.linuxde.net/ssh-keygen
+ssh-keygen -t dsa
+scp id_dsa.pub user@ip:.ssh/authorized_keys
+或
+cat id_dsa.pub >> .ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys(有时可以不用更改)
