@@ -1,0 +1,2 @@
+client shell
+bin/hadoop fs -ls hdfs://ip:9000/path
