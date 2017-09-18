@@ -9,9 +9,11 @@ https://www.sockscap64.com
 JAVA Decompiler
 http://jd.benow.ca
 
-Eclipse Class Decompiler
-http://bbs.csdn.net/topics/390263414
-Eclipse Class Decompiler插件更新站点： http://feeling.sourceforge.net/update
+Boilsoft Video Splitter
+http://www.boilsoft.com
+
+Medieval CUE Splitter
+http://www.medieval.it
 
 Spring中文reference
 http://git.oschina.net/free/spring-framework-reference
@@ -76,16 +78,6 @@ http://subhd.com
 
 opera_http
 http://get.geo.opera.com/pub/opera
-
-DDNS
-http://www.pubyun.com
-chenyuelin
-chenyuelin.f3322.net
-
-花生壳
-http://hsk.oray.com
-chenyuelin311
-chenyuelin311.gicp.net
 
 ID3
 http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/ID3.html

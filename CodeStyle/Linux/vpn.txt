@@ -1,0 +1,122 @@
+centos7 xl2tpd libreswan vpn
+
+http://www.linuxcc.com/archives/56.html
+http://www.orangetakam.com/blog/archives/201
+https://imkira.com/a15.html
+https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Securing_Virtual_Private_Networks.html
+
+1)yum install -y epel-release
+
+2)yum install -y xl2tpd libreswan
+mv /etc/ipsec.d/v6neighbor-hole.conf /etc/ipsec.d/v6neighbor-hole.conf_bak(中有个默认的配置文件，不过是IPv6的，可以删除或者改个名字让其无效,这一步可做可不做)
+
+3)修改ipsec 主配置文件
+vi /etc/ipsec.conf
+添加nat_traversal=yes充许传透nat建立l2tp连接
+
+4)建立ipsec 与 l2tp 服务关联的配置文件
+vi /etc/ipsec.d/l2tp_psk.conf(此文件不存在 需要手动创建)
+conn L2TP-PSK-NAT
+	rightsubnet=vhost:%priv
+	forceencaps=yes(强制使用NAT-T，在不正常的情况下可以试下此值)
+	also=L2TP-PSK-noNAT
+	auto=add
+conn L2TP-PSK-noNAT
+	authby=secret
+	pfs=no
+	#keyingtries=3
+	#dpdaction=clear
+	#rekey=no(服务器对 Windows 发出 rekey 请求会断开连接。待验证)
+	#ikelifetime=8h
+	#type=transport
+	left=192.168.1.50(service/VPS的外网地址,某些vps只有eth0一块网卡的,就填内网地址，内核开启nat转发就可以了,CentOS7以下的用iptables定义转发规则)
+	leftprotoport=17/1701
+	right=%any
+	rightprotoport=17/%any
+或
+conn L2TP-PSK-LEFT
+	leftsubnet=0.0.0.0/0 <= left側(VPNクライアント)のサブネット
+	dpddelay=10 <= 10秒間隔(iphoneの再接続対応)
+	dpdtimeout=30 <= 30秒で応答がなければタイムアウト(iphoneの再接続対応)
+	dpdaction=clear <= タイムアウトで接続情報をクリア(iphoneの再接続対応)
+	forceencaps=yes <= ESPを強制的にカプセル化するかどうか
+	left=%any <= left側(VPNクライアント)のIPアドレス(何でもこい)
+	leftprotoport=17/%any <= left側(VPNクライアント)のプロトコル17(UDP)でポート番号(何でもこい)
+	also=L2TP-PSK-RIGHT <= インクルードみたいな感じ
+conn L2TP-PSK-RIGHT
+	authby=secret <= 認証方式は共通鍵方式
+	pfs=no <= PFS(Perfect Forward Security)は相手側がIKEv1が使えることが前提となるため
+	auto=add <= 接続待ち状態
+	keyingtries=3 <= 接続を3回までリトライ
+	type=transport <= ホスト間のIPSec-VPNなので
+	right=192.168.1.101 <= right側(VPNサーバ)のIPアドレス
+	rightprotoport=17/1701 <= right側(VPNサーバ)のプロトコル17(UDP)でポート番号(1701)
+
+5)当建立l2tp连接时，需要输入预共享密匙，以下为预共享密匙的配置文件：
+vi /etc/ipsec.secrets
+include /etc/ipsec.d/*.secrets(却省配置中已包含这行，请确认)
+vi /etc/ipsec.d/linuxcc_l2tp.secrets(新建的文件)
+"Local Ip address" "remote ip address" :PSK "your key"
+列：192.168.3.148 %any 0.0.0.0 :PSK "123"
+%any %any: PSK "shqy"(这里配制成功案例)
+
+6)修改内核支持，可以对照以下配置修改，或者直接复制，修改完后运行sysctl -p 使配置生效
+vi /etc/sysctl.conf
+添加
+net.ipv4.ip_forward = 1
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.eth0.rp_filter = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+#net.ipv4.conf.default.accept_source_route = 0
+#如果不需要建立ipv6建接支持，ipv6的配置可以省略
+#net.ipv6.conf.all.disable_ipv6 = 1
+#net.ipv6.conf.default.disable_ipv6 = 1
+#net.ipv6.conf.lo.disable_ipv6 = 1
+或
+net.ipv4.ip_forward = 1 <= IPv4転送を有効にする
+net.ipv4.conf.all.accept_redirects = 0 <= ICMPリダイレクトを受信しない
+net.ipv4.conf.all.send_redirects = 0 <= ICMPリダイレクトを送信しない
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.enp1s0.accept_redirects = 0
+net.ipv4.conf.enp1s0.send_redirects = 0
+net.ipv4.conf.lo.accept_redirects = 0
+net.ipv4.c2sub-titleonf.lo.send_redirects = 0
+7)到此步可以启动ipsec并且验证正确性。
+ipsec setup start
+ipsec verify
+8)修改xl2tpd主配置文件
+vi /etc/xl2tpd/xl2tpd.conf
+在[global]添加如下配制
+[global]
+auth file = /etc/ppp/chap-secrets(用户名与密码文件,此为默认值，可以不做配制)
+ipsec saref = yes(启用xl2tpd的ipsec支持)
+[lns default]下修改
+[lns default]
+#设置建立连接后，分配给客户端的ip地址ip range与local ip,并可以注掉ppp debug = yes
+ip range = 192.168.1.128-192.168.1.254
+local ip = 192.168.1.99
+9)修改xl2tpd属性配置文件
+添加require-mschap-v2(用来支持windows 7，windows8 连接)
+修改ms-dns(分配给客户端的dns)
+debug也可以注掉
+10）建立xl2tpd连接的用户
+vi /etc/ppp/chap-secrets
+用户名 服务器名称 密码 客户端ip
+cyl * cyl *(现有例子)
+
+
+# 启动服务
+systemctl start ipsec
+# 开机启动
+systemctl enable ipsec
+
+# 启动服务
+systemctl start xl2tpd
+# 开机启动
+systemctl enable xl2tpd
+
+微软官方配制NAT-T穿透方案
+https://support.microsoft.com/zh-cn/help/926179/how-to-configure-an-l2tp-ipsec-server-behind-a-nat-t-device-in-windows
