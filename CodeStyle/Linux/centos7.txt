@@ -25,6 +25,7 @@ ssh
 chkconfig sshd on开机启动|chkconfig sshd off则禁止SSH开机启动
 service sshd restart重启SSH服务|service sshd start 启动服务 |service sshd stop 停止服务
 AllowUsers user1 user2指定用户登录，如果不加此属性则所有用户都可以登录
+http://www.jinbuguo.com/openssh/sshd_config.html
 
 pscp
 1、把服务器上的/root/dir目录取回本地"C:\My Documents\data\"目录
@@ -63,6 +64,7 @@ Options:
   -scp      强制使用SCP协议
   
 tar
+http://blog.csdn.net/rocklee/article/details/73277839
 -c: 建立压缩档案
 -x：解压
 -t：查看内容
@@ -77,21 +79,23 @@ tar
 -O：将文件解开到标准输出
 下面的参数-f是必须的
 -f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。
-总结
-1、*.tar 用 tar –xvf 解压
-2、*.gz 用 gzip -d或者gunzip 解压
-3、*.tar.gz和*.tgz 用 tar –xzf 解压
-4、*.bz2 用 bzip2 -d或者用bunzip2 解压
-5、*.tar.bz2用tar –xjf 解压
-6、*.Z 用 uncompress 解压
-7、*.tar.Z 用tar –xZf 解压
-8、*.rar 用 unrar e解压
-9、*.zip 用 unzip 解压
+ `--auto-compress'
+`-a'
+    Select a compression program to use by the archive file name suffix. The following suffixes are recognized:
+gzip=.gz .tgz .taz
+compress=.Z .taZ
+bzip2=.bz2 .tz2 .tbz2 .tbz
+lzip=lz
+lzma=.lzma .tlz
+lzop=.lzo
+xz=.xz
 #tar zxvf /bbs.tar.zip -C /zzz/bbs解压
 #tar zcvf /zzz.tar.gz ./zzz压缩
+https://superuser.com/questions/305128/how-to-specify-level-of-compression-when-using-tar-zcvf
+https://superuser.com/questions/514260/how-to-obtain-maximum-compression-with-tar-gz
 
-linux zip 命令详解 
--c：将解压缩的结果
+linux zip 命令详解
+-1至-9压缩等级(default 6)
 -l：显示压缩文件内所包含的文件
 -p：与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换
 -t：检查压缩文件是否正确
@@ -129,7 +133,6 @@ unzip -t wwwroot.zip
 8、把/home目录下面wwwroot.zip里面的所有文件解压到第一级目录
 unzip -j wwwroot.zip
 
-wget -P /root/test -O "baidu.html" "http://www.baidu.com/index.html"
 
 cent7防火墙
 http://havee.me/linux/2015-01/using-firewalls-on-centos-7.html
@@ -150,6 +153,7 @@ firewall-cmd --zone=work --change-interface=eth0
 firewall-cmd --zone=work --add-port=8080/tcp
 firewall-cmd --zone=work --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
 firewall-cmd --runtime-to-permanent
+firewall-cmd --reload
 
 静态ip
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -191,8 +195,28 @@ netstat命令详解
 -s 按各个协议进行统计
 -c 每隔一个固定时间，执行该netstat命令。
 提示：LISTEN和LISTENING的状态只有用-a或者-l才能看到
-netstat -antp
+netstat -anltp
 
+SFTP(internal-sftp)
+https://www.digitalocean.com/community/tutorials/how-to-enable-sftp-without-shell-access-on-centos-7
+1)添加任意sftp用户(用户shell可设为/bin/false或/usr/sbin/nologin，也可以不作更改。useradd xxx -g xxxx -s /bin/false)
+2)新建sftp工作目录(目录的拥有者必需为root，组可任意，一般为设为root,权限必需设为755或750)
+3)如果支持上传或修改功能需要在sftp工作根目录下新建文件夹，拥有者为sftp登录用户，权限加上读写即刻
+4)修改/etc/ssh/sshd_config
+把Subsystem sftp /usr/local/libexec/sftp-server行改为Subsystem sftp internal-sftp(可不做更改)
+添加Match Group xxx或Match User xxx来设定sftp可登陆的用户
+添加ForceCommand internal-sftp(设定强制使用internal-sftp命令)
+添加ChrootDirectory /opt/sftp/xxx(%u/%h)来指定sftp根工作目录(%u为当前登录用户名,%h为当用登录用户的home目录)
+添加X11Forwarding no(可选)
+添加AllowTcpForwarding no(可选)
+添加AllowAgentForwarding no(可选)
+systemctl restart sshd
+
+
+日志
+/var/log/secure可以看到登陆的情况
+/var/log/btmp中可以查看到登陆失败的记录（可通过lastb命令进行检查）
+/var/log/lastlog中可以查看最近登陆的记录 （可通过last命令进行检查）
 
 centos 7 密码忘记
 http://blog.163.com/wilicedon_lee/blog/static/8158848320156311186191/
@@ -206,3 +230,21 @@ http://blog.163.com/wilicedon_lee/blog/static/8158848320156311186191/
 8. 完成后输入   touch /.autorelabel 回车
 9. 输入 exit 回车
 10.  reboot 重启 过程慢，要耐心等等
+
+SELinux
+查看SELinux状态
+sestatus或getenforce
+临时关闭
+setenforce 0(permissive模式)
+setenforce 1(enforcing模式)
+永久关闭
+修改/etc/selinux/config
+将SELINUX=enforcing改为SELINUX=disabled
+http://blog.csdn.net/jmilk/article/details/50337721
+http://blog.chinaunix.net/uid-26495963-id-3300475.html
+http://www.toxingwang.com/linux-unix/linux-basic/900.html
+setsebool getsebool
+chcon
+semanage
+sealert -l 2ad073a4-7c64-4175-93ff-9d78f75133af
+sealert -a /var/log/audit/audit.log > /path/to/mylogfile.txt
