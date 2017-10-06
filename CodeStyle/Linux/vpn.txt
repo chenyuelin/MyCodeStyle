@@ -122,4 +122,7 @@ systemctl enable xl2tpd
 如服务端有防火墙，应把防火墙的zone设为external，不然无法正常工作。
 
 微软官方配制NAT-T穿透方案
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent(win7+)
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IPSec(xp)
+AssumeUDPEncapsulationContextOnSendRule DWORD(2)
 https://support.microsoft.com/zh-cn/help/926179/how-to-configure-an-l2tp-ipsec-server-behind-a-nat-t-device-in-windows
