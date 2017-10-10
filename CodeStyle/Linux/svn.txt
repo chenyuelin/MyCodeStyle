@@ -1,0 +1,80 @@
+svn
+安装sudo yum install subversion
+查看安装版本svnserve --version
+subversion默认以/var/svn作为数据根目录，可以通过/etc/sysconfig/svnserve修改这个默认位置。(建多库可以OPTIONS="-r /var/svn --config-file /var/svn/conf/svnserve.conf")
+restorecon -vr /var/svn/svnserve(需要修正seLinux上下文得到操作许可)
+创建SVN版本库目录sudo mkdir -p /var/svn/
+创建版本库sudo svnadmin create /var/svn/svnrepos
+进入conf目录（该svn版本库配置文件）cd /var/svn/svnrepos/conf/
+svnserve.conf 服务综合配置文件
+[general]
+anon-access = none　　　　  #控制非鉴权用户访问版本库的权限
+auth-access = write　　　　  #控制鉴权用户访问版本库的权限
+password-db = passwd　　   #指定用户名口令文件名
+authz-db = authz　　　　　　#指定权限配置文件名
+realm = Jishu　　　　　　　　#指定版本库的认证域，即在登录时提示的认证域名称
+passwd是帐号密码文件
+[users]
+admin = admin1234 　　  #用户，密码
+Tom = Tom1234 　　　　#用户，密码
+Jack = Jack1234 　　　　 #用户，密码
+authz文件是权限控制文件
+[groups]
+admin = admin 　　　　 　　#admin为用户组,等号之后的admin为用户
+test = Tom,Jack
+[Jishu:/] 　　　　 　　 　　 #表示根目录（/data/svn/Jishu），Jishu: svn仓库名
+@admin = rw 　　　　 　　 #表示admin组对根目录有读写权限,r为读，w为写
+*=
+[Jishu:/test] 　　　　 　　 #表示test目录（/data/svn/Jishu/test）
+@test = rw 　　　　　　    #表示test组对test目录有读写权限
+*=
+(不需要)关联svn主目录 sudo svnserve -dr /var/svn/svnrepos
+sudo systemctl enable svnserve.service #注意：根目录必须是/var/svn 这样才能设置成功！！
+查看SVN服务：$ ps aux|grep svnserve 默认端口为：3690
+访问svn://192.168.1.200/svnrepos
+找出该进程，直接kill掉。
+ps -aux |grep svn
+kill -9 进程id
+http://svnbook.red-bean.com/en/1.6/svn.serverconfig.svnserve.html
+http://www.cnblogs.com/fjping0606/p/6049868.html
+
+Selinux篇
+system_u:system_r:svnserve_t:s0 tcontext=system_u:object_r:var_t:s0
+
+
+restorecon -v /var/svn/shqy/format(不光是format目录，要改变shqy及其子目录)
+semanage fcontext -a -t FILE_TYPE '/var/svn/shqy/format'(不光是format目录，要改变shqy及其子目录)
+
+If you believe that svnserve should be allowed getattr access on the format file by default.
+Then you should report this as a bug.
+You can generate a local policy module to allow this access.
+Do
+allow this access for now by executing:
+# ausearch -c 'svnserve' --raw | audit2allow -M my-svnserve
+# semodule -i my-svnserve.pp
+
+Additional Information:
+Source Context                system_u:system_r:svnserve_t:s0
+Target Context                unconfined_u:object_r:var_t:s0
+Target Objects                /var/svn/shqy/format [ file ](不光是format目录，要改变shqy及其子目录)
+Source                        svnserve
+Source Path                   /usr/bin/svnserve
+Port                          <Unknown>
+Host                          localhost.localdomain
+Source RPM Packages
+Target RPM Packages
+Policy RPM                    selinux-policy-3.13.1-102.el7.noarch
+Selinux Enabled               True
+Policy Type                   targeted
+Enforcing Mode                Enforcing
+Host Name                     master
+Platform                      Linux master 3.10.0-514.el7.x86_64 #1 SMP Tue Nov
+                              22 16:42:41 UTC 2016 x86_64 x86_64
+Alert Count                   19
+First Seen                    2017-10-06 03:30:00 CST
+Last Seen                     2017-10-10 07:17:54 CST
+Local ID                      e2b71e85-bb1a-4bdb-8e89-4912515da194
+
+Raw Audit Messages
+type=AVC msg=audit(1507591074.499:402575): avc:  denied  { getattr } for  pid=15696 comm="svnserve" path="/var/svn/shqy/format" dev="dm-0" ino=33610568 scontext=system_u:system_r:svnserve_t:s0 tcontext=unconfined_u:object_r:var_t:s0 tclass=file(不光是format目录，要改变shqy及其子目录)
+Hash: svnserve,svnserve_t,var_t,file,getattr
