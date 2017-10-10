@@ -2,7 +2,6 @@ svn
 °²×°sudo yum install subversion
 ²é¿´°²×°°æ±¾svnserve --version
 subversionÄ¬ÈÏÒÔ/var/svn×÷ÎªÊı¾İ¸ùÄ¿Â¼£¬¿ÉÒÔÍ¨¹ı/etc/sysconfig/svnserveĞŞ¸ÄÕâ¸öÄ¬ÈÏÎ»ÖÃ¡£(½¨¶à¿â¿ÉÒÔOPTIONS="-r /var/svn --config-file /var/svn/conf/svnserve.conf")
-restorecon -vr /var/svn/svnserve(ĞèÒªĞŞÕıseLinuxÉÏÏÂÎÄµÃµ½²Ù×÷Ğí¿É)
 ´´½¨SVN°æ±¾¿âÄ¿Â¼sudo mkdir -p /var/svn/
 ´´½¨°æ±¾¿âsudo svnadmin create /var/svn/svnrepos
 ½øÈëconfÄ¿Â¼£¨¸Ãsvn°æ±¾¿âÅäÖÃÎÄ¼ş£©cd /var/svn/svnrepos/conf/
@@ -10,9 +9,9 @@ svnserve.conf ·şÎñ×ÛºÏÅäÖÃÎÄ¼ş
 [general]
 anon-access = none¡¡¡¡¡¡¡¡  #¿ØÖÆ·Ç¼øÈ¨ÓÃ»§·ÃÎÊ°æ±¾¿âµÄÈ¨ÏŞ
 auth-access = write¡¡¡¡¡¡¡¡  #¿ØÖÆ¼øÈ¨ÓÃ»§·ÃÎÊ°æ±¾¿âµÄÈ¨ÏŞ
-password-db = passwd¡¡¡¡   #Ö¸¶¨ÓÃ»§Ãû¿ÚÁîÎÄ¼şÃû
-authz-db = authz¡¡¡¡¡¡¡¡¡¡¡¡#Ö¸¶¨È¨ÏŞÅäÖÃÎÄ¼şÃû
-realm = Jishu¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡#Ö¸¶¨°æ±¾¿âµÄÈÏÖ¤Óò£¬¼´ÔÚµÇÂ¼Ê±ÌáÊ¾µÄÈÏÖ¤ÓòÃû³Æ
+password-db = /var/svn/conf/passwd¡¡¡¡   #Ö¸¶¨ÓÃ»§Ãû¿ÚÁîÎÄ¼şÃû
+authz-db = /var/svn/conf/authz¡¡¡¡¡¡¡¡¡¡¡¡#Ö¸¶¨È¨ÏŞÅäÖÃÎÄ¼şÃû
+# realm = Jishu¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡#Ö¸¶¨°æ±¾¿âµÄÈÏÖ¤Óò£¬¼´ÔÚµÇÂ¼Ê±ÌáÊ¾µÄÈÏÖ¤ÓòÃû³Æ
 passwdÊÇÕÊºÅÃÜÂëÎÄ¼ş
 [users]
 admin = admin1234 ¡¡¡¡  #ÓÃ»§£¬ÃÜÂë
@@ -35,12 +34,18 @@ sudo systemctl enable svnserve.service #×¢Òâ£º¸ùÄ¿Â¼±ØĞëÊÇ/var/svn ÕâÑù²ÅÄÜÉèÖÃ³
 ÕÒ³ö¸Ã½ø³Ì£¬Ö±½Ókillµô¡£
 ps -aux |grep svn
 kill -9 ½ø³Ìid
+
+ps -eZ | grep svnserve(²é¿´selinuxµÄ½ø³Ì°²È«ÉÏÏÂÎÄ)
+restorecon -vr /var/svn/svnserve(ĞèÒªĞŞÕıseLinuxÉÏÏÂÎÄµÃµ½²Ù×÷Ğí¿É)
+
 http://svnbook.red-bean.com/en/1.6/svn.serverconfig.svnserve.html
 http://www.cnblogs.com/fjping0606/p/6049868.html
+http://blog.csdn.net/newnewman80/article/details/8109569
+
+
 
 SelinuxÆª
 system_u:system_r:svnserve_t:s0 tcontext=system_u:object_r:var_t:s0
-
 
 restorecon -v /var/svn/shqy/format(²»¹âÊÇformatÄ¿Â¼£¬Òª¸Ä±äshqy¼°Æä×ÓÄ¿Â¼)
 semanage fcontext -a -t FILE_TYPE '/var/svn/shqy/format'(²»¹âÊÇformatÄ¿Â¼£¬Òª¸Ä±äshqy¼°Æä×ÓÄ¿Â¼)
