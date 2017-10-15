@@ -43,3 +43,10 @@ show status;
 
 创建新数据库时进行编码设置
 create database `database_name` default character set utf8 collate utf8_general_ci;
+
+mysql set password for root='root';
+flush privileges;
+GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira';
+revoke all on *.* from dba@localhost;
+命令关闭sql服务
+mysqladmin -u root -proot shutdown

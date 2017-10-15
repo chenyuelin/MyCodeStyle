@@ -141,6 +141,30 @@ firewall-cmd --zone=work --add-forward-port=port=58080:proto=tcp:toport=8080:toa
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
 
+screen
+yum install screen -y
+C-a ?	显示所有键绑定信息
+C-a w	显示所有窗口列表
+C-a C-a	切换到之前显示的窗口
+C-a c	创建一个新的运行shell的窗口并切换到该窗口
+C-a n	切换到下一个窗口
+C-a p	切换到前一个窗口(与C-a n相对)
+C-a 0..9	切换到窗口0..9
+C-a a	发送 C-a到当前窗口
+C-a d	暂时断开screen会话
+C-a k	杀掉当前窗口
+C-a [	进入拷贝/回滚模式
+Screen命令的常规用法:
+screen -S david 
+screen -d -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户再连接。
+screen -D -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户并让他logout再连接
+screen -ls或者-list:显示存在的screen进程，常用命令
+screen -m:如果在一个Screen进程里，用快捷键crtl+a c或者直接打screen可以创建一个新窗口,screen -m可以新建一个screen进程。
+screen -dm:新建一个screen，并默认是detached模式，也就是建好之后不会连上去。
+screen -p number or name:预先选择一个窗口。
+http://man.linuxde.net/screen
+https://www.ibm.com/developerworks/cn/linux/l-cn-screen/
+
 静态ip
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
 BOOTPROTO="static"

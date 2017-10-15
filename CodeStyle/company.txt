@@ -21,3 +21,6 @@ jifenzhi-sh.vicp.io
 vpn
 shqy
 2017shqyvpn99)(...
+
+mariadb
+root:2017sh_2017****
