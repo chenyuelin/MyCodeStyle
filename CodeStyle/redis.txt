@@ -1,0 +1,18 @@
+设置Redis最大占用内存
+redis.conf
+maxmemory
+<bytes>
+
+maxmemory-policy
+volatile-lru
+
+volatile-lru -> 根据LRU算法生成的过期时间来删除。
+allkeys-lru -> 根据LRU算法删除任何key。
+volatile-random -> 根据过期设置来随机删除key。
+allkeys->random -> 无差别随机删。
+volatile-ttl -> 根据最近过期时间来删除（辅以TTL）
+noeviction -> 谁也不删，直接在写操作时返回错误。
+
+
+
+http://www.cnblogs.com/kreo/p/4423362.html

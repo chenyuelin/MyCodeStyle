@@ -154,6 +154,12 @@ C-a a	发送 C-a到当前窗口
 C-a d	暂时断开screen会话
 C-a k	杀掉当前窗口
 C-a [	进入拷贝/回滚模式
+
+分屏幕
+C-a S	水平
+C-a |	垂直
+C-a X	关闭当前屏
+C-a Q	关闭当前以外的屏
 Screen命令的常规用法:
 screen -S david 
 screen -d -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户再连接。
@@ -262,3 +268,6 @@ semanage
 或直接查看审查报告
 sealert -a /var/log/audit/audit.log > /path/to/mylogfile.txt
 http://www.toxingwang.com/management/security/1011.html
+
+后台运行程序
+http://blog.csdn.net/fuyuehua22/article/details/42101059

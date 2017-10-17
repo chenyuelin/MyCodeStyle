@@ -24,3 +24,6 @@ shqy
 
 mariadb
 root:2017sh_2017****
+
+redis
+redis_2017_))))
