@@ -46,6 +46,31 @@ vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处
 vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename 
 vi filename....filename ：打开多个文件，依次进行编辑 
 
+打开多个文件：
+1.vim还没有启动的时候：
+在终端里输入 
+vim -On file1 file2 ...
+vim -on file1 file2 ...
+2.vim已经启动
+输入
+:open file
+可以再打开一个文件，并且此时vim里会显示出file文件的内容。
+同时显示多个文件：
+:split    简写  :sp 
+:vsplit  简写  :vsp
+在文件之间切换：
+1.文件间切换
+Ctrl+6—下一个文件
+:bn—下一个文件
+:bp—上一个文件
+对于用(v)split在多个窗格中打开的文件，这种方法只会在当前窗格中切换不同的文件。
+2.在窗格间切换的方法
+Ctrl+w+方向键——切换到前／下／上／后一个窗格
+Ctrl+w+h/j/k/l ——同上
+Ctrl+ww——依次向后切换到下一个窗格中
+http://www.cnblogs.com/manziluo/p/5789700.html
+
+
 yw：将光标所在位置到字尾的字符复制到缓冲区中，y是yank的首字母。
 nyw：将光标所在位置开始的n个字复制到缓冲区中，n为数字。
 yb：从光标开始向左复制一个字。
