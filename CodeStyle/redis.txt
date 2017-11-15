@@ -13,6 +13,10 @@ allkeys->random -> 无差别随机删。
 volatile-ttl -> 根据最近过期时间来删除（辅以TTL）
 noeviction -> 谁也不删，直接在写操作时返回错误。
 
-
+关闭redis
+redis-cli shutdown
 
 http://www.cnblogs.com/kreo/p/4423362.html
+
+常用命令
+http://doc.redisfans.com

@@ -271,3 +271,7 @@ http://www.toxingwang.com/management/security/1011.html
 
 后台运行程序
 http://blog.csdn.net/fuyuehua22/article/details/42101059
+
+常用命今
+chown -R -v 用户:组 xxxx
+http://man.linuxde.net/chown

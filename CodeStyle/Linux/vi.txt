@@ -8,6 +8,10 @@ http://blog.csdn.net/edward_qing_lee/article/details/23290339(删除很全)
 set nu	行号
 set ruler 列号
 
+vim更改注释颜色
+用vim打开它   vim /etc/vimrc   然后按大写  G 到最后一行，插入 hi comment ctermfg=6 然后wq保存离开
+http://www.cnblogs.com/the-tops/p/5845481.html
+
 :0,:1,gg都可以到第一行
 shift+g到末行
 或者:$=检查总行数比如24，:24到第24行
