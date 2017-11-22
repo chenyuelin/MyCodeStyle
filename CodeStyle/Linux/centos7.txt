@@ -228,6 +228,17 @@ https://www.digitalocean.com/community/tutorials/how-to-enable-sftp-without-shel
 添加AllowAgentForwarding no(可选)
 systemctl restart sshd
 
+systemctl系统服务
+http://blog.csdn.net/xiaoyu411502/article/details/51518229
+systemctl status svnserve.service查看服务状态
+systemctl is-enabled svnserve是否开机启动
+systemctl is-active svnserve是否是运行中
+systemctl list-unit-files列出所有可用单元
+systemctl list-unit-files --type=service列出所有服务
+systemctl list-unit-files --type=mount列出所有系统挂载点
+systemctl list-unit-files --type=socket列出所有可用系统套接口
+systemctl list-unit-files --type=service --state=enabled
+systemctl list-unit-files --type=service svnserve.service要看svn服务状态
 
 日志
 /var/log/secure可以看到登陆的情况
@@ -271,6 +282,18 @@ http://www.toxingwang.com/management/security/1011.html
 
 后台运行程序
 http://blog.csdn.net/fuyuehua22/article/details/42101059
+
+看linux内核
+uname -a
+
+查看linux发行商与版本(包括RedHat、SUSE、Debian等)
+lsb_release -a
+
+查看centos版本
+cat /etc/redhat-release
+
+查看是32位还是64位
+getconf LONG_BIT
 
 常用命今
 chown -R -v 用户:组 xxxx

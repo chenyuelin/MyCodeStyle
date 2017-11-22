@@ -1,2 +1,14 @@
 client shell
 bin/hadoop fs -ls hdfs://ip:9000/path
+
+http://www.powerxing.com/install-hadoop-cluster/
+
+修改/etc/hosts
+192.168.1.95	master
+192.168.1.96	slavel
+
+生成ssh无密码登陆
+a机ssh-keygen -t dsa
+b机cat id_dsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+(ssh-copy-id)
