@@ -1,0 +1,219 @@
+SELinux
+查看SELinux状态
+sestatus或getenforce
+临时关闭
+setenforce 0(permissive模式)
+setenforce 1(enforcing模式)
+永久关闭
+修改/etc/selinux/config
+将SELINUX=enforcing改为SELINUX=disabled
+http://blog.csdn.net/jmilk/article/details/50337721
+http://blog.chinaunix.net/uid-26495963-id-3300475.html
+http://www.toxingwang.com/linux-unix/linux-basic/900.html
+getsebool setsebool
+chcon
+semanage
+问题排查
+1)tail /var/log/messages
+2)sealert -l 2ad073a4-7c64-4175-93ff-9d78f75133af(hash值更具实际情况变动,此步可得到修改建议)
+或直接查看审查报告
+sealert -a /var/log/audit/audit.log > /path/to/mylogfile.txt
+或
+sealert -b
+sealert -l 加编号
+http://www.toxingwang.com/management/security/1011.html
+https://www.cnblogs.com/zgx/archive/2011/08/31/2160330.html
+http://blog.51cto.com/rangochen/1380560
+
+
+实例篇
+在安装Oracle的时候.先要检查SELinux是否已经启用.
+[root@localhost ~]# sestatus
+SELinux status:  disabled
+常用命令如下:
+
+sestatus
+查询系统的selinux目前的状态
+
+selinuxenabled
+查询系统的selinux支 援是否有启用
+
+setenforce
+设定selinux运作状态
+
+getsebool
+列出所有selinux bool数值清单列表与内容
+
+setsebool      
+设定selinux bool数值内容
+
+chcon
+变更档案目录security context
+
+restorecon
+恢复档案目录的预设的security context
+
+fixfiles
+修正档案目录的预设的security context
+
+semanage
+SELiux policy管理程式
+
+secon
+检视行程、档案等等项目的SELinux context
+
+audit2why
+检视SELinux audit讯息内容
+
+sealert
+SELinux 讯息诊断用户端程式
+
+
+下面列出几个常用的：
+
+1、sestatus工具
+查询系统的selinux 目前的状态
+例如：root@monitor:~# sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /selinux
+Current mode:                   permissive
+Mode from config file:          permissive
+Policy version:                 21
+Policy from config file:        targeted
+
+2、selinuxenabled工具
+检查系统selinux是否开启，是通过返回值进行判断selinux是否已经启动，0：表示已经启动selinux；1：表示已经关闭selinux
+例如：selinuxenabled ; echo?，返回的结果为：1
+
+3、setenforce工具
+功能：设定切换selinux的运行状态（0或者1），前提是开启了selinux，同时这种切换只对当前有效，如果重新启动的话，就没有效了（注意：如果关闭了selinux，那么就必须配置/etc/selinux/config文件）
+语法：setenforce [ Enforcing | Permissive | 1 | 0 ]
+说明如下：
+enforcing 或者1，表示开启强制模式
+permissive 或者0，表示开启警告但是无限制模式
+例如：下面这个例子
+root@monitor:~# sestatus | grep -i mod
+Current mode:                   permissive
+Mode from config file:          permissive
+root@monitor:~# setenforce 1
+root@monitor:~# sestatus | grep -i mod
+Current mode:                   enforcing
+Mode from config file:          permissive
+
+4、getsebool与setsebool工具
+说明：SELinux规范了许多boolean数值清单档案，提供开启或关闭功能存取项目，而这些值都存放在/selinux/booleans/目录内相关档案，这些档案里的值只有两种：1（启用）或 0（关闭）
+
+1）getsebool
+说明：列出所有selinux bool数值清单列表与内容
+使用方式：getsebool [ -a ]
+例如以下范例：
+#getsebool ftpd_disable_trans
+ftpd_disable_trans --> off
+#getsebool -a
+NetworkManager_disable_trans --> off
+allow_cvs_read_shadow --> off
+allow_daemons_dump_core --> on
+allow_daemons_use_tty --> off
+allow_execheap --> off
+allow_execmem --> on
+allow_execmod --> off
+..........
+
+2）setsebool
+说明：设定selinux bool数值清单列表与内容
+使用方式：setsebool [ -P ]  boolean value | bool1=val1 bool2=val2 bool3=val3......
+参数配置： -P表示设定该项目永久套用
+使用范例：
+setsebool ftpd_disable_trans=on ( on 或者 1 )
+setsebool -P ftpd_disable_trans=off ( off 或者 0 )
+
+5、chcon
+说明：变更档案目录的security context
+使用方式：
+chcon [OPTION]... CONTEXT FILE...
+chcon [OPTION]... --reference=RFILE FILE...
+参数如下：
+-u USER：set user USER in the target security context
+-r ROLE：set role ROLE in the target security context
+-t TYPE：set type TYPE in the target security context
+范例：
+chcon -t var_t /etc/vsftpd/vsftpd.conf
+chcon --reference=/var/www/html index.html
+注意事项：若是变更于目录上，后续于该目录内建立的档案目录会套用目录本身type设定
+
+6、restorecon
+说明：恢复档案目录的预设的security Context
+规格来源：/etc/selinux/<POLICY>/contexts/files/目录内的file_contexts与file_contexts.local
+常用参数如下：
+-r | -R：包含子目录与其下档案目录
+-F：恢复使用预设的項目（就算是檔案符合存取规范）
+-v：显示执行过程
+使用方式：restorecon [FRrv] [-e excludedir ] pathname... ]
+使用范例如下：
+restorecon /etc/ntp.conf
+restorecon -v /etc/ntp.conf
+restorecon -v -F /etc/ntp.conf
+手动配置新增恢复规则
+1）档案名称
+/etc/selinux/<POLICYTYPE>/contexts/files/file_contexts.local
+2）新增配置范例
+/var/ftp(/.*)?   system_u:object_r:public_content_t
+3）注意
+可以使用semanage程式来维护会比较方便
+
+7、fixfiles
+说明：修正档案目录的预设的security Context，依据/etc/selinux/<POLICY>/contexts/files/内相关档案修正
+使用方式：
+fixfiles { check | restore|[-F] relabel } [[dir] ... ]
+fixfiles -R rpmpackage[,rpmpackage...] { check | restore }
+参数：
+-R：使用指定的rpm 套件所提供的檔案清單
+使用范例：
+fixfiles check /etc
+fixfiles restore /etc
+fixfiles -F relabel /
+fixfiles -R setup check
+
+8、audit2why
+说明：检视SELinux audit讯息内容，提供检视/var/log/audit/audit.log内的记录资讯说明
+使用范例：audit2why <  /var/log/audit/audit.log
+注意：需要搭配启动auditd服务程式一起使用
+
+9、sealert
+说明：SELinux 讯息诊断用户端程序
+参数如下：
+-H, --html_output：使用网页格式输出（搭配 -a or -l 使用）
+-l, --lookupid ID：检视指定ID的警示讯息
+使用范例：
+sealert -l xxxxx-xxxxx-xxxx
+sealert -H -l xxxxx-xxxxx-xxxx > output.html
+注意：需要搭配setroubleshoot服务一起使用
+setroubleshoot服务启动后，会依据audit服务提供的资讯给予适当问题诊断，然后输出于/var/log/messages，该档案内会有相关输出资讯提供除错检视
+
+10、semanage
+说明：selinux policy维护工具
+使用方式：semanage { login | user | port | interface | fcontext | translation} -l [-n]
+使用范例：
+semanage login -l
+semanage user -l
+semanage port -l
+semanage port -a -t http_port_t -P tcp 81
+semanage fcontext  -a  -t    httpd_sys_Context_t   "/home/users/(.+)/public_html(/.*)?“
+
+11、secon
+说明：检视程式、档案与使用者等相关SELinux Context
+使用方式：
+secon [-hVurtscmPRfLp] [CONTEXT]
+secon [--file] FILE | [--link] FILE | [--pid] PID
+参数：
+-u, --user：show the user of the security context
+-r, --role：show the role of the security context
+-t, --type：show the type of the security context
+-f, --file FILE：gets the context from the specified file FILE
+-p, --pid PID：gets the context from the specified process PID
+使用范例：
+secon -u
+secon -r
+secon -t
+secon --file /etc/passwd
+secon --pid <pid>

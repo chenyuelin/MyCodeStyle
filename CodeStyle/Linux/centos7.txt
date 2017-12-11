@@ -45,7 +45,7 @@ Options:
   -noagent  不使用Pageant[不明白这里*]
   -agent    使用Pageant[不明白这里*]
   -batch    禁用所有交互提示
-  -unsafe   允许服务器段的通配符（危险的）
+  -unsafe   允许服务器段的通配符(危险的)
   -sftp     强制使用SFTP协议
   -scp      强制使用SCP协议
   
@@ -258,30 +258,28 @@ http://blog.163.com/wilicedon_lee/blog/static/8158848320156311186191/
 9. 输入 exit 回车
 10.  reboot 重启 过程慢，要耐心等等
 
-SELinux
-查看SELinux状态
-sestatus或getenforce
-临时关闭
-setenforce 0(permissive模式)
-setenforce 1(enforcing模式)
-永久关闭
-修改/etc/selinux/config
-将SELINUX=enforcing改为SELINUX=disabled
-http://blog.csdn.net/jmilk/article/details/50337721
-http://blog.chinaunix.net/uid-26495963-id-3300475.html
-http://www.toxingwang.com/linux-unix/linux-basic/900.html
-getsebool setsebool
-chcon
-semanage
-问题排查
-1)tail /var/log/messages
-2)sealert -l 2ad073a4-7c64-4175-93ff-9d78f75133af(hash值更具实际情况变动,此步可得到修改建议)
-或直接查看审查报告
-sealert -a /var/log/audit/audit.log > /path/to/mylogfile.txt
-http://www.toxingwang.com/management/security/1011.html
-
 后台运行程序
 http://blog.csdn.net/fuyuehua22/article/details/42101059
+
+查看磁盘
+lsblk查看分区情况
+http://man.linuxde.net/lsblk
+df -h查看空间使用情况
+
+查看处理器
+lscpu
+cat /proc/meminfo
+
+查看DMI
+dmidecode
+http://man.linuxde.net/dmidecode
+https://www.cnblogs.com/ggjucheng/archive/2013/01/14/2859613.html
+http://www.laozuo.org/6682.html
+
+查看PCI总线信息
+lspci
+http://man.linuxde.net/lspci
+
 
 看linux内核
 uname -a
