@@ -11,6 +11,7 @@ ssh
 chkconfig sshd on开机启动|chkconfig sshd off则禁止SSH开机启动
 service sshd restart重启SSH服务|service sshd start 启动服务 |service sshd stop 停止服务
 AllowUsers user1 user2指定用户登录，如果不加此属性则所有用户都可以登录
+PermitRootLogin no禁止root远程登录
 http://www.jinbuguo.com/openssh/sshd_config.html
 
 pscp
@@ -130,12 +131,24 @@ http://havee.me/linux/2015-01/using-firewalls-on-centos-7.html
 在开机时禁用一个服务：systemctl disable firewalld.service
 查看服务是否开机启动：systemctl is-enabled firewalld.service
 查看已启动的服务列表：systemctl list-unit-files|grep enabled
+drop: 丢弃所有进入的包，而不给出任何响应
+block: 拒绝所有外部发起的连接，允许内部发起的连接
+public: 允许指定的进入连接
+external: 同上，对伪装的进入连接，一般用于路由转发
+dmz: 允许受限制的进入连接
+work: 允许受信任的计算机被限制的进入连接，类似 workgroup
+home: 同上，类似 homegroup
+internal: 同上，范围针对所有互联网用户
+trusted: 信任所有连接
 firewall-cmd --state
 firewall-cmd --get-active-zones
 firewall-cmd --get-services
-firewall-cmd --info-service
+firewall-cmd --info-service ssh
+firewall-cmd --get-zone-of-interface=eth0(查看eth0网卡使用的是哪个zone)
+firewall-cmd --zone=public --list-all(查看public信息)
+firewall-cmd --zone=external --add-interface=eth0(将eth0添加到external)
 firewall-cmd --zone=work --add-service=ssh
-firewall-cmd --zone=work --change-interface=eth0
+firewall-cmd --zone=work --change-interface=eth0(将eth0转至work)
 firewall-cmd --zone=work --add-port=8080/tcp
 firewall-cmd --zone=work --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
 firewall-cmd --runtime-to-permanent
@@ -296,3 +309,7 @@ getconf LONG_BIT
 常用命今
 chown -R -v 用户:组 xxxx
 http://man.linuxde.net/chown
+
+踢人
+w
+pkill -kill -t pts/2
