@@ -293,7 +293,6 @@ http://www.laozuo.org/6682.html
 lspci
 http://man.linuxde.net/lspci
 
-
 看linux内核
 uname -a
 
@@ -305,6 +304,24 @@ cat /etc/redhat-release
 
 查看是32位还是64位
 getconf LONG_BIT
+
+时间方面
+date查看或修改
+http://blog.csdn.net/jk110333/article/details/8590746/
+tzselect(修改时区)
+timedatectl status
+timedatectl list-timezones
+timedatectl set-timezone Asia/Shanghai
+timedatectl set-local-rtc 1(将硬件时钟调整为与本地时钟一致, 0 为同步为 UTC 时间)
+timedatectl set-ntp true
+timedatectl set-ntp false
+https://www.tecmint.com/install-ntp-server-in-centos/
+https://www.tecmint.com/set-time-timezone-and-synchronize-time-using-timedatectl-command/
+ntpdate -u cn.pool.ntp.org(时间同步，u参数可穿防火墙)
+hwclock(clock)
+-r, --show读取并打印硬件时钟
+-s, --hctosys将硬件时钟同步到系统时钟
+-w, --systohc将系统时钟同步到硬件时钟
 
 常用命今
 chown -R -v 用户:组 xxxx
