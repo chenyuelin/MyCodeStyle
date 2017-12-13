@@ -10,6 +10,9 @@ systemctl enable mariadb
 进行基本选项配置
 mysql_secure_installation
 
+https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/#mycnf-hierarchy
+https://mariadb.com/kb/en/library/server-system-variables/
+
 编码配置
 # 编辑/etc/my.cnf
 vim /etc/my.cnf
@@ -33,7 +36,6 @@ vim /etc/my.cnf.d/mysql-clients.cnf
 # 在[mysql]标签下添加下面内容
 default-character-set=utf8(gbk)
 
-
 查看字符集
 # 登录mysql之后，键入下面内容
 show variables like "%character%";
@@ -50,3 +52,15 @@ GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira';
 revoke all on *.* from dba@localhost;
 命令关闭sql服务
 mysqladmin -u root -proot shutdown
+
+centos7 安装mariadb最新版并配置
+http://blog.csdn.net/buyaoxx/article/details/77370841
+http://www.linuxprobe.com/centos7-mariadb10-easy.html
+打开http://mirrors.aliyun.com/，查找mariadb，然后拼装地址http://mirrors.aliyun.com/mariadb/yum打开，点开你想要的版本，选择你的操作系统点进去。比较http://mirrors.aliyun.com/mariadb/yum/10.3/centos7-amd64/
+vi /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://mirrors.aliyun.com/mariadb/yum/10.3/centos7-amd64/
+gpgkey =  http://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
+gpgcheck = 1
+yum -y install MariaDB-server MariaDB-client 

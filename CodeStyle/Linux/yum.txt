@@ -1,0 +1,4 @@
+http://www.360doc.com/content/12/0426/20/9318309_206763053.shtml
+
+yum -y update kernelÉı¼¶ÄÚºË
+http://blog.csdn.net/jacson_bai/article/details/43525023
