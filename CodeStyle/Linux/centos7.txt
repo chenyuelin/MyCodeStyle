@@ -76,8 +76,9 @@ lzip=lz
 lzma=.lzma .tlz
 lzop=.lzo
 xz=.xz
-#tar zxvf /bbs.tar.zip -C /zzz/bbs解压
-#tar zcvf /zzz.tar.gz ./zzz压缩
+#tar xzvf /bbs.tar.zip -C /zzz/bbs解压
+#tar czvf /zzz.tar.gz ./zzz压缩(绝对路径加P参数，如:tar czvf /zzz.tar.gz /usr/local)
+#tar tzf /zzz.tar.gz 查看压缩文件
 https://superuser.com/questions/305128/how-to-specify-level-of-compression-when-using-tar-zcvf
 https://superuser.com/questions/514260/how-to-obtain-maximum-compression-with-tar-gz
 
@@ -144,6 +145,8 @@ firewall-cmd --state
 firewall-cmd --get-active-zones
 firewall-cmd --get-services
 firewall-cmd --info-service ssh
+firewall-cmd --get-default-zone
+firewall-cmd --set-default-zone=external
 firewall-cmd --get-zone-of-interface=eth0(查看eth0网卡使用的是哪个zone)
 firewall-cmd --zone=public --list-all(查看public信息)
 firewall-cmd --zone=external --add-interface=eth0(将eth0添加到external)
