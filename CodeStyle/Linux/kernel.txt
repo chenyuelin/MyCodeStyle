@@ -1,0 +1,41 @@
+http://www.zdfans.com/2774.html
+http://web.mit.edu/kolya/.f/root/net.mit.edu/sipb.mit.edu/contrib/linux/init/Kconfig
+https://www.cnblogs.com/chulia20002001/p/7967584.html
+http://blog.csdn.net/wdsfup/article/details/52302142
+http://blog.csdn.net/suma110/article/details/54381674
+
+
+kernel_4.14
+yum install bc -y 
+yum install openssl-devel -y 
+yum install kernel-devel kernel-headers -y
+yum install elfutils-libelf-devel -y
+
+make clean  
+make mrproper #这两条用于清除之前编译生成的.ko和.config
+
+make clean删除大多数的编译生成文件， 但是会保留内核的配置文件.config， 还有足够的编译支持来建立扩展模块
+make mrproper 删除所有的编译生成文件， 还有内核配置文件， 再加上各种备份文件
+make distclean删除的文件， 加上编辑备份文件和一些补丁文件。
+
+make oldconfig          #使用当前的内核配置
+(make default)是直接使用linus提供的默认配置，这个基本什么不用选编译也很快但是也不建议用，编译快是因为很多东西都没启用使用这个内核你的发行版基本重启启不来了。
+(make config)是每项都要自己选择，这个除了自己明白要什么配置不然不建议使用。
+(make menuconfig)菜单设置编译参数
+
+make                    #编译，半小时以上是正常的
+make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
+make install
+
+yum remove kernel删除旧内核
+
+
+查看启动模块
+cat /boot/grub2/grub.cfg |grep menuentry
+
+设置默认启动项
+grub2-set-default "xxxxxxxxx"
+查看默认启动项是否正确
+grub2-editenv list
+
+

@@ -1,3 +1,6 @@
+先安装setroubleshoot 组件。有的资料说他是默认安装的，但在我的CentOS5.5上没有。
+yum install setroubleshoot -y
+
 SELinux
 查看SELinux状态
 sestatus或getenforce

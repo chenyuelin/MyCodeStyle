@@ -43,12 +43,13 @@ http://svnbook.red-bean.com/en/1.6/svn.serverconfig.svnserve.html
 http://www.cnblogs.com/fjping0606/p/6049868.html
 http://blog.csdn.net/newnewman80/article/details/8109569
 
-
+restorecon -vr /var/svn/svnrepos
+restorecon -vr /var/svn/conf
 
 Selinux篇
 system_u:system_r:svnserve_t:s0 tcontext=system_u:object_r:var_t:s0
 
-restorecon -v /var/svn/shqy/format(不光是format目录，要改变shqy及其子目录)
+restorecon -v /var/svn/svnrepos(不光是format目录，要改变shqy及其子目录)
 semanage fcontext -a -t FILE_TYPE '/var/svn/shqy/format'(不光是format目录，要改变shqy及其子目录)
 
 If you believe that svnserve should be allowed getattr access on the format file by default.
