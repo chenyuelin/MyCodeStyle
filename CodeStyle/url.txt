@@ -33,6 +33,11 @@ http://www.china-pub.com
 mozilla
 http://ftp.mozilla.org/pub
 
+rtorrent
+https://github.com/rakshasa/rtorrent/issues/295
+https://github.com/rakshasa/rtorrent/releases
+http://pkgs.fedoraproject.org/repo/pkgs/rtorrent/
+
 Fernando
 http://www.win-raid.com/t11f23-Modded-Intel-AHCI-and-RAID-Drivers-digitally-signed.html
 http://www.win-raid.com/t25f23-Which-are-the-quot-best-quot-Intel-AHCI-RAID-drivers.html
@@ -81,6 +86,9 @@ http://subhd.com
 
 opera_http
 http://get.geo.opera.com/pub/opera
+
+nexus
+https://www.sonatype.com/download-oss-sonatype
 
 ID3
 http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/ID3.html

@@ -1,0 +1,20 @@
+http://www.nginx.cn/doc/
+http://blog.sina.com.cn/s/blog_40ce02d7010173p5.html
+https://github.com/rakshasa/rtorrent/issues/295
+https://github.com/rakshasa/rtorrent/releases
+http://pkgs.fedoraproject.org/repo/pkgs/rtorrent/
+http://pkgs.fedoraproject.org/repo/pkgs/libtorrent/
+
+sudo yum install cppunit-devel -y
+sudo yum install libcurl-devel -y
+°²×°libtorrent(http://pkgs.fedoraproject.org/repo/pkgs/libtorrent/)
+tar -xvzf libtorrent-0.13.3.tar.gz
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+cd libtorrent-0.13.3
+rm -f scripts/{libtool,lt*}.m4
+./autogen.sh
+./configure
+make
+make install
+
+https://www.cnblogs.com/lidp/archive/2009/05/22/1697959.html

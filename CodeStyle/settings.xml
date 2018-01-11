@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="GB18030"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  			xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 
+  								http://maven.apache.org/xsd/settings-1.1.0.xsd">
+  								
+	<localRepository>d:/.m2/repository</localRepository>
+	
+	<mirrors>
+		<mirror>
+			<id>nexus-aliyun</id>
+			<name>Nexus Aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+
+		<mirror>
+			<id>UK</id>
+			<name>UK Central</name>
+			<url>http://uk.maven.org/maven2</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+	</mirrors>
+
+	<servers>
+		<server>
+			<!--这是server的id（注意不是用户登陆的id），该id与distributionManagement中repository元素的id相匹配。 -->
+			<id>nexus-releases</id>
+			<username>dev</username>
+			<password>dev</password>
+		</server>
+
+		<server>
+			<id>nexus-snapshots</id>
+			<username>dev</username>
+			<password>dev</password>
+		</server>
+	</servers>
+
+	<profiles>
+		<profile>
+			<id>nexus-profile</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>nexus-releases</id>
+					<name>Maven Repository Switchboard</name>
+					<url>http://192.168.2.20:8081/repository/maven-releases/</url>
+
+					<!-- 用于定位和排序构件的仓库布局类型-可以是default（默认）或者legacy（遗留）。 Maven 2为其仓库提供了一个默认的布局；然而，Maven 
+						1.x有一种不同的布局。我们可以使用该元素指定布局是default（默认）还是legacy（遗留）。 -->
+					<layout>default</layout>
+					<releases>
+						<!-- enabled: true or false for whether this repository is enabled for the respective type (releases or snapshots). -->
+						<enabled>true</enabled>
+
+						<!-- 该元素指定更新发生的频率。Maven会比较本地POM和远程POM的时间戳。这里的选项是： always（一直），daily（默认，每日），interval：X（这里X是以分钟为单位的时间间隔），或者never（从不）。 -->
+						<updatePolicy>daily</updatePolicy>
+
+						<!-- 当Maven验证构件校验文件失败时该怎么做: ignore（忽略），fail（失败），或者warn（警告）。 -->
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				
+				<repository>
+					<id>nexus-snapshots</id>
+					<name>Maven Repository Switchboard</name>
+					<url>http://192.168.2.20:8081/repository/maven-snapshots/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+      					<checksumPolicy>warn</checksumPolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+			
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-releases</id>
+					<name>Maven Repository Switchboard</name>
+					<url>http://192.168.2.20:8081/repository/maven-releases/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>daily</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+</settings>
+
+<!-- 
+	pom.xml发布jar
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://192.168.2.20:8081/repository/maven-releases/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://192.168.2.20:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	 -->

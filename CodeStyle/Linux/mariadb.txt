@@ -14,7 +14,7 @@ https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/#mycnf-hierarch
 https://mariadb.com/kb/en/library/server-system-variables/
 
 编码配置
-# 编辑/etc/my.cnf
+# 编辑/etc/my.cnf(客户端与服务端通用配制)
 vim /etc/my.cnf
 
 # 在[mysqld]标签下添加下面内容
@@ -63,4 +63,74 @@ name = MariaDB
 baseurl = http://mirrors.aliyun.com/mariadb/yum/10.3/centos7-amd64/
 gpgkey =  http://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
 gpgcheck = 1
-yum -y install MariaDB-server MariaDB-client 
+yum -y install MariaDB-server MariaDB-client
+
+
+优化
+/etc/my.cnf.d/server.cnf
+[mysqld]
+max_connections(默认151)
+告诉你当前你的服务器允许多少并发连接。
+
+datadir=/opt/local/mysql/data(数据存放路径)
+
+log_error=/var/log/mariadb/error.log
+
+innodb_buffer_pool_size=1G(默认128mb)
+缓存用户表及索引数据的最主要缓存空间，对Innodb整体性能影响也最大。无论是 MySQL 官方手册还是网络上很多人所分享的Innodb优化建议，如果是专用服务器，可以设置为整个系统物理内存的50%～80%之间。
+
+tmp_table_size=256M(默认64mb)
+设置内存表大小。
+
+thread_concurrency=10(默认10)
+数据库并发数
+
+back_log=254(默认254)
+back_log值指出在MySQL暂时停止回答新请求之前的短时间内多少个请求可以被存在堆栈中。也就是说，如果MySql的连接数达到max_connections时，新来的请求将会被存在堆栈中，以等待某一连接释放资源
+ 
+max_allowed_packet = 10M(可以使用默认值)
+如果一条sql语句很长，或者包含BLOB数据，会造成内存溢出。在以上配置文件中添加或者修改以下变量
+
+innodb_log_buffer_size(默认16m)
+innodb_log_file_size(默认50m)
+innodb_log_files_in_group(默认2)
+innodb_log_group_home_dir
+innodb_flush_log_at_trx_commit
+https://www.cnblogs.com/z-books/p/4285375.html
+
+innodb_flush_log_at_trx_commit(默认1,推荐2)
+0：log buffer将每秒一次地写入log file中，并且log file的flush(刷到磁盘)操作同时进行。该模式下在事务提交的时候，不会主动触发写入磁盘的操作。
+1：每次事务提交时MySQL都会把log buffer的数据写入log file，并且flush(刷到磁盘)中去，该模式为系统默认。
+2：每次事务提交时MySQL都会把log buffer的数据写入log file，但是flush(刷到磁盘)操作并不会同时进行。该模式下，MySQL会每秒执行一次 flush(刷到磁盘)操作。
+
+sync_binlog=n(默认0,可投为500或1000。主从库建议设为0或2，设为1最全安，是完全同步)
+因为有了数据更新的binlog，所以可以用于实时备份，与master/slave复制。
+这个参数直接影响mysql的性能和完整性
+0:当事务提交后，Mysql仅仅是将binlog_cache中的数据写入Binlog文件，但不执行fsync之类的磁盘        同步指令通知文件系统将缓存刷新到磁盘，而让Filesystem自行决定什么时候来做同步，这个是性能最好的。
+n:在进行n次事务提交以后，Mysql将执行一次fsync之类的磁盘同步指令，同志文件系统将Binlog文件缓存刷新到磁盘。
+Mysql中默认的设置是sync_binlog=0，即不作任何强制性的磁盘刷新指令，这时性能是最好的，但风险也是最大的。一旦系统绷Crash，在文件系统缓存中的所有Binlog信息都会丢失
+http://blog.csdn.net/z1988316/article/details/8095643
+http://blog.itpub.net/22664653/viewspace-1063134/
+
+innodb_file_per_table=1(最新版的默认为开，可以不分区时能把他关闭)
+每张表一个数据文件
+
+table_open_cache(默认2000)
+>=max_connections
+
+thread_cache_size(默认256)
+客户端连接数缓存
+
+skip_name_resolve(默认OFF，可改为ON)
+https://www.cnblogs.com/ivictor/p/5311607.html
+
+skip_external_locking(默认ON)
+
+slow_query_log=1(开启慢日志,出现性能问题时可以开启)
+slow_query_log_file =/var/log/mariadb/mysql-slow.log
+long_query_time=5(默认为10)
+超过5秒为慢查询
+
+
+http://blog.51cto.com/xianglinhu/1702472
+https://yq.aliyun.com/articles/59492
