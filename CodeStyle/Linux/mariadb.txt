@@ -134,3 +134,20 @@ long_query_time=5(默认为10)
 
 http://blog.51cto.com/xianglinhu/1702472
 https://yq.aliyun.com/articles/59492
+
+
+MyISAM
+key_buffer_size=512M
+MyISAM可以通过Key_buffer_size缓存索引,以大大提高访问性能,减少磁盘IO,但是这个缓存区只会缓存索引,而不会缓存数据.
+
+全局
+read_buffer_size=(128K131072)
+read_rnd_buffer_size=(256K262144)
+
+myisam_sort_buffer_size=256M(128M134216704)
+innodb_sort_buffer_size=2M(1M1048576)
+
+max_length_for_sort_data=2K(1K1024)
+
+sort_buffer_size=(2M2097152不设)
+join_buffer_size(不设)
