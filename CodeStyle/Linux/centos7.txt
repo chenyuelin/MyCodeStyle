@@ -156,6 +156,12 @@ firewall-cmd --zone=work --add-port=8080/tcp
 firewall-cmd --zone=work --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
+firewall-cmd --permanent --new-service=rabbitmq
+firewall-cmd --permanent --delete-service=rabbitmq
+firewall-cmd --permanent --service=rabbitmq --add-port=5672/tcp
+15672/tcp
+25672/tcp
+4369/tcp
 
 screen
 yum install screen -y
