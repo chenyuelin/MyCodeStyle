@@ -1,0 +1,41 @@
+http://www.erlang.org
+http://www.rabbitmq.com
+
+erlang
+编译安装erlang需要安装gcc,gcc-c++,perl,ncurses-devel,openssl-devel,unixODBC,unixODBC-devel
+./configure (--without-javac --with-ssl=/usr/local/ssl/) --prefix=/opt/erlang 就会开始编译安装  会编译到 /opt/erlang 下然后执行 
+安装完成后输入erl命令
+
+rabbitmq-server -detached start 后台方式运行
+rabbitmq-server stop  --停止运行
+rabbitmqctl stop
+rabbitmq-server status --查看状态
+rabbitmqctl status
+
+rabbitmq-plugins enable rabbitmq_management安装可视化插件
+在web浏览器中输入地址：http://127.0.0.1:15672/
+输入默认账号: guest   密码: guest(只能在本地登录)
+
+
+(1) 新增一个用户
+rabbitmqctl add_user Username Password
+(2) 删除一个用户
+rabbitmqctl delete_user Username
+(3) 修改用户的密码
+rabbitmqctl change_password Username Newpassword
+rabbitmqctl clear_password test //清除test用户的密码 
+(4) 查看当前用户列表
+rabbitmqctl list_users
+设置用户角色的命令为：
+rabbitmqctl set_user_tags User Tag
+User为用户名， Tag为角色名(对应于上面的administrator，monitoring，policymaker，management，或其他自定义名称)。
+也可以给同一用户设置多个角色，例如
+rabbitmqctl set_user_tags hncscwc monitoring policymaker
+(1) 设置用户权限
+rabbitmqctl set_permissions -p VHostPath User ConfP WriteP ReadP
+(2) 查看(指定hostpath)所有用户的权限信息
+rabbitmqctl list_permissions [-p VHostPath]
+(3) 查看指定用户的权限信息
+rabbitmqctl list_user_permissions User
+(4)  清除用户的权限信息
+rabbitmqctl clear_permissions [-p VHostPath] User

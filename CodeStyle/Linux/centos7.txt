@@ -14,6 +14,18 @@ AllowUsers user1 user2指定用户登录，如果不加此属性则所有用户都可以登录
 PermitRootLogin no禁止root远程登录
 http://www.jinbuguo.com/openssh/sshd_config.html
 
+在#%PAM-1.0的下面，即第二行，添加内容
+vim /etc/pam.d/sshd
+auth required pam_tally2.so deny=3 unlock_time=1800 even_deny_root root_unlock_time=1800
+deny  指定最大几次认证错误，如果超出此错误，将执行后面的策略。如锁定N秒，如果后面没有其他策略指定时，默认永远锁定，除非手动解锁。
+lock_time  锁定多长时间，按秒为单位；
+unlock_time 指定认证被锁后，多长时间自动解锁用户；
+magic_root 如果用户uid＝0（即root账户或相当于root的帐户）在帐户认证时调用该模块发现失败时，不计入统计；
+no_lock_time 不使用.fail_locktime项在/var/log/faillog 中记录用户 －－－按英文直译不太明白，个人理解即不进行用户锁定；
+even_deny_root root用户在认证出错时，一样被锁定（该功能慎用，搞不好就要单用户时解锁了）
+root_unlock_time  root用户在失败时，锁定多长时间。该选项一般是配合even_deny_root 一起使用的。
+http://www.361way.com/pam-tally2/4277.html
+
 pscp
 1、把服务器上的/root/dir目录取回本地"C:\My Documents\data\"目录
 C:\>pscp.exe -r root@192.168.32.50:/root/dir "C:\My Documents\data\"

@@ -1,3 +1,5 @@
+sudo systemctl restart svnserve.service
+
 svn
 安装sudo yum install subversion
 查看安装版本svnserve --version
