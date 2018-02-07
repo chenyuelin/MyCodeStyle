@@ -1,5 +1,6 @@
 http://www.erlang.org
 http://www.rabbitmq.com
+https://bintray.com/rabbitmq/rpm
 
 erlang
 编译安装erlang需要安装gcc,gcc-c++,perl,ncurses-devel,openssl-devel,unixODBC,unixODBC-devel
@@ -7,10 +8,8 @@ erlang
 安装完成后输入erl命令
 
 rabbitmq-server -detached start 后台方式运行
-rabbitmq-server stop  --停止运行
-rabbitmqctl stop
-rabbitmq-server status --查看状态
-rabbitmqctl status
+rabbitmqctl stop --停止运行
+rabbitmqctl status --查看状态
 
 rabbitmq-plugins enable rabbitmq_management安装可视化插件
 在web浏览器中输入地址：http://127.0.0.1:15672/
