@@ -13,6 +13,11 @@ service sshd restartÖØÆôSSH·şÎñ|service sshd start Æô¶¯·şÎñ |service sshd stop Í
 AllowUsers user1 user2Ö¸¶¨ÓÃ»§µÇÂ¼£¬Èç¹û²»¼Ó´ËÊôĞÔÔòËùÓĞÓÃ»§¶¼¿ÉÒÔµÇÂ¼
 PermitRootLogin no½ûÖ¹rootÔ¶³ÌµÇÂ¼
 http://www.jinbuguo.com/openssh/sshd_config.html
+¸Ä¶Ë¿Ú
+firewall-cmd --permanent --service=rabbitmq --add-port=63561/tcp
+firewall-cmd --reload(Ìí¼Ó·À»ğÇ½)
+semanage port -a -t ssh_port_t -p tcp 63561(Ìí¼ÓselinuxÈ¨ÏŞ)
+semanage port -l|grep ssh(²é¿´ÊÇ·ñÌí¼Ó³É¹¦)
 
 ÔÚ#%PAM-1.0µÄÏÂÃæ£¬¼´µÚ¶şĞĞ£¬Ìí¼ÓÄÚÈİ
 vim /etc/pam.d/sshd
@@ -320,6 +325,10 @@ http://blog.163.com/wilicedon_lee/blog/static/8158848320156311186191/
 8. Íê³ÉºóÊäÈë   touch /.autorelabel »Ø³µ
 9. ÊäÈë exit »Ø³µ
 10.  reboot ÖØÆô ¹ı³ÌÂı£¬ÒªÄÍĞÄµÈµÈ
+
+3. ro¸ÄÎªrw,ÔÚĞĞ×îºó(LANG=en_US.UFT-8)ºóÃæÌí¼Óinit=/bin/sh
+5. ²»ĞèÒª
+9. ÊäÈë exec /sbin/init
 
 ºóÌ¨ÔËĞĞ³ÌĞò
 http://blog.csdn.net/fuyuehua22/article/details/42101059
