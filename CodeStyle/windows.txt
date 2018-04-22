@@ -27,3 +27,15 @@ v7iu61g91vb3
 
 远程协助
 msra.exe
+
+[win8.1]
+禁用服务
+WdiServiceHost:Diagnostics Tracking Service
+
+HomeGroupProvider
+
+HomeGroupListener
+
+
+禁用定时任务
+/Microsoft/Windows/Application Experience/Microsoft Compatibility Appraiser
