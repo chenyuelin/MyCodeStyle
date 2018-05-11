@@ -228,6 +228,7 @@ C-a S	水平
 C-a |	垂直
 C-a X	关闭当前屏
 C-a Q	关闭当前以外的屏
+C-a tab 换屏
 Screen命令的常规用法:
 screen -S david 
 screen -d -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户再连接。
