@@ -1,0 +1,1 @@
+logstash_system2需要ingest_admin角色与logstash-*写权限

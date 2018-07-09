@@ -6,9 +6,6 @@ http://mirrors.163.com/centos/7/isos/x86_64/
 Sockscap64
 https://www.sockscap64.com
 
-JAVA Decompiler
-http://jd.benow.ca
-
 Boilsoft Video Splitter
 http://www.boilsoft.com
 
@@ -99,6 +96,9 @@ http://cpuboss.com
 
 picpick
 http://ngwin.com/picpick
+
+JD-GUI
+http://jd.benow.ca/
 
 cl1024
 http://t66y.com
