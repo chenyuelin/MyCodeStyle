@@ -1,0 +1,32 @@
+https://www.iteblog.com/archives/1615.html
+https://blog.csdn.net/lijiecong/article/details/6882267
+http://arganzheng.life/tomcat-monitor.html
+https://gquintana.github.io/2016/09/01/Securing-remote-JMX.html
+https://www.ibm.com/support/knowledgecenter/SSR27Q_5.0.2/com.ibm.jazz.repository.web.admin.doc/topics/t_server_mon_tomcat_option3.html
+
+-Dcom.sun.management.jmxremote=true
+-Djava.rmi.server.hostname=192.168.2.20(jvm所在host)
+-Dcom.sun.management.jmxremote.port=7091
+-Dcom.sun.management.jmxremote.rmi.port=40216
+-Dcom.sun.management.jmxremote.authenticate=true
+-Dcom.sun.management.jmxremote.access.file=/home/cyl/jar/jmxremote.access (这两文件可以从\jdk1.8.0_144\jre\lib\management目录中拷贝)
+-Dcom.sun.management.jmxremote.password.file=/home/cyl/jar/jmxremote.password.template (需要修改成400(600)权限)
+-Dcom.sun.management.jmxremote.ssl=true
+-Djavax.net.ssl.keyStore=/home/cyl/jconsole.keystore.jks
+-Djavax.net.ssl.keyStorePassword=111111
+
+[下列可以不设置]
+-Dcom.sun.management.jmxremote.ssl.need.client.auth=false
+-Dcom.sun.management.jmxremote.registry.ssl=true
+
+https://stackoverflow.com/questions/36864237/java-mission-control-failed-to-start-recorder
+若启动flight recording验证需要在jmxremote.access加如下权限:com.sun.management.*,com.oracle.jrockit.*
+
+[service]
+keytool -genkey -alias jconsole -keyalg RSA -validity 365 -keystore jconsole.keystore -storepass password -keypass password
+keytool -export -alias jconsole -keystore jconsole.keystore -file client.cer -storepass password
+
+[client]
+keytool -import -alias jconsole-ibm-team -file client.cer -keystore ibm-team-ssl.truststore -storepass ibm-team -noprompt
+jvisualvm.exe -J-Djavax.net.ssl.trustStore=d:/truststore.jks -J-Djavax.net.ssl.trustStorePassword=111111
+jmc.exe -vmargs -Djavax.net.ssl.trustStore=d:/truststore.jks -Djavax.net.ssl.trustStorePassword=111111

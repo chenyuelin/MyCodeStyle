@@ -8,8 +8,9 @@ http://blog.csdn.net/suma110/article/details/54381674
 kernel_4.14
 yum install bc -y 
 yum install openssl-devel -y 
-yum install kernel-devel kernel-headers -y
 yum install elfutils-libelf-devel -y
+yum install perl -y
+#yum install kernel-devel kernel-headers -y
 
 make clean  
 make mrproper #这两条用于清除之前编译生成的.ko和.config
