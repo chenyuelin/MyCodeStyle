@@ -4,6 +4,12 @@ http://man.linuxde.net/
 默认jvm路径
 /usr/lib/jvm
 
+top
+https://www.cnblogs.com/cherishry/p/5886041.html
+
+ps
+https://blog.csdn.net/freeking101/article/details/53444530
+
 ssh
 查看ssh服务是否启动systemctl status sshd.service
 启动sshd服务systemctl start sshd
