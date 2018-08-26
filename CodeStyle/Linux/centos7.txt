@@ -215,6 +215,13 @@ https://www.itlnmp.com/401.html
 ipv4 filter INPUT 1 -s 192.168.1.0/24 -p tcp --dport=22 -j ACCEPT
 ipv4 filter INPUT 2 -p tcp --dport=22 -j DROP
 
+firewall-cmd --direct --get-all-rules
+firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o enp2s0 -j MASQUERADE -s 172.17.0.0/24
+
+iftop
+iftop -i eth0 -n -P
+https://blog.csdn.net/junlon2006/article/details/70208612
+
 screen
 yum install screen -y
 Ctrl-a ?	显示所有键绑定信息

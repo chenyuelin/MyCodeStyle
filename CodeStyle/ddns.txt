@@ -12,8 +12,13 @@ chenyuelin311
 chenyuelin311.gicp.net
 
 http://b.oray.com
+phddns(start|status|stop|restart|reset|version)
+sh
 ORAY407490bc3050
 1929v78f03.iask.in
+wx
+ORAYec14a874c4fc(admin)
+2165c577u1.iask.in
 
 88ip.cn(¼«²»ÎÈ¶¨)
 chenyuelin

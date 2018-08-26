@@ -1,5 +1,5 @@
-http://www.nginx.cn/doc/
 http://blog.sina.com.cn/s/blog_40ce02d7010173p5.html
+https://blog.csdn.net/willierstrong/article/details/7098076
 https://github.com/rakshasa/rtorrent/issues/295
 https://github.com/rakshasa/rtorrent/releases
 http://pkgs.fedoraproject.org/repo/pkgs/rtorrent/
