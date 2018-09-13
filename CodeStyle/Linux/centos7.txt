@@ -10,6 +10,10 @@ https://www.cnblogs.com/cherishry/p/5886041.html
 ps
 https://blog.csdn.net/freeking101/article/details/53444530
 
+iproute2
+https://blog.csdn.net/astrotycoon/article/details/52317288
+https://www.jianshu.com/p/d129238d3853
+
 ssh
 查看ssh服务是否启动systemctl status sshd.service
 启动sshd服务systemctl start sshd
@@ -219,6 +223,7 @@ firewall-cmd --direct --get-all-rules
 firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o enp2s0 -j MASQUERADE -s 172.17.0.0/24
 
 iftop
+http://www.ex-parrot.com/~pdw/iftop/
 iftop -i eth0 -n -P
 https://blog.csdn.net/junlon2006/article/details/70208612
 

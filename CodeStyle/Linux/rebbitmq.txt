@@ -1,11 +1,21 @@
 http://www.erlang.org
 http://www.rabbitmq.com
+http://www.rabbitmq.com/download.html
 https://bintray.com/rabbitmq/rpm
+https://packagecloud.io/rabbitmq
 
-erlang
-编译安装erlang需要安装gcc,gcc-c++,perl,ncurses-devel,openssl-devel,unixODBC,unixODBC-devel
+rpm安装
+https://www.cnblogs.com/zqwang0929/p/3352237.html
+
+erlang(编译安装与rabbitmq rpm安装有冲突，所以erlang也需要rpm安装)
+编译安装erlang需要安装gcc-c++,perl,ncurses-devel,openssl-devel,unixODBC-devel
 ./configure (--without-javac --with-ssl=/usr/local/ssl/) --prefix=/opt/erlang 就会开始编译安装  会编译到 /opt/erlang 下然后执行 
+make && make install
 安装完成后输入erl命令
+
+yum install -y socat logrotate
+rpm -ivh rabbitmq-server-3.7.7-1.el7.noarch.rpm
+
 
 rabbitmq-server -detached start 后台方式运行
 rabbitmqctl stop --停止运行
@@ -15,6 +25,8 @@ rabbitmq-plugins enable rabbitmq_management安装可视化插件
 在web浏览器中输入地址：http://127.0.0.1:15672/
 输入默认账号: guest   密码: guest(只能在本地登录)
 
+#如果运行出现：Error when reading /var/lib/rabbitmq/.erlang.cookie: eacces
+chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
 
 (1) 新增一个用户
 rabbitmqctl add_user Username Password

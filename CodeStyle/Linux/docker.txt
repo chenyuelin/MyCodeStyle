@@ -1,0 +1,42 @@
+免sudo操作
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+启用systemctl
+1)run时启用--privileged参数
+2)run command为/usr/sbin/init
+3)docker exec -it centos7 /bin/bash进入容器
+
+
+================make dockerfile start======================
+#docker build -t imageID
+
+#Create rabbitmq image.
+#http://www.rabbitmq.com/download.html
+
+
+# base centos with net-tools
+FROM 5182e96772bf
+
+MAINTAINER cyl
+
+RUN mkdir /download
+
+ADD erlang-21.0.8-1.el7.centos.x86_64.rpm /download
+ADD rabbitmq-server-3.7.7-1.el7.noarch.rpm /download
+
+RUN yum install net-tools socat logrotate -y
+
+RUN rpm -i /download/erlang-21.0.8-1.el7.centos.x86_64.rpm
+RUN rpm -i /download/rabbitmq-server-3.7.7-1.el7.noarch.rpm
+
+RUN rm -f /download/*.*
+
+RUN rabbitmq-plugins enable rabbitmq_management
+
+RUN chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
+
+CMD ["/usr/sbin/init"]
+
+# ENTRYPOINT ["/usr/sbin/init"]
+=====================make dockerfile end===========================

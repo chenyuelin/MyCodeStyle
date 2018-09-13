@@ -9,7 +9,7 @@ tomcat
 打开远程调试
 SET CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
 https://www.cnblogs.com/lailailai/p/4560399.html
--agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
+[jdk5 later]-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
 dt_socket：使用的通信方式
 server：是主动连接调试器还是作为服务器等待调试器连接
 suspend：是否在启动JVM时就暂停，并等待调试器连接
