@@ -7,11 +7,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 
 
 kernel_4.14
-yum install bc -y 
-yum install openssl-devel -y 
-yum install elfutils-libelf-devel -y
-yum install perl -y
-#yum install kernel-devel kernel-headers -y
+yum install gcc-c++ openssl-devel elfutils-libelf-devel -y
 
 make clean  
 make mrproper #这两条用于清除之前编译生成的.ko和.config
@@ -29,15 +25,14 @@ make                    #编译，半小时以上是正常的
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
 make install
 
-yum remove kernel删除旧内核
-
-
 查看启动模块
 cat /boot/grub2/grub.cfg |grep menuentry
+cat /boot/efi/EFI/centos/grub.cfg | grep menuentry
 
 设置默认启动项
 grub2-set-default "xxxxxxxxx"
 查看默认启动项是否正确
 grub2-editenv list
 
+yum remove kernel kernel-headers kernel-tools kernel-tools-libs删除旧内核
 

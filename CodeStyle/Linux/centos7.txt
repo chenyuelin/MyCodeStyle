@@ -27,6 +27,7 @@ http://www.jinbuguo.com/openssh/sshd_config.html
 firewall-cmd --permanent --service=rabbitmq --add-port=63561/tcp
 firewall-cmd --reload(添加防火墙)
 semanage port -a -t ssh_port_t -p tcp 63561(添加selinux权限)
+#semanage port -d -t ssh_port_t -p tcp 22(ValueError: Port tcp/22 is defined in policy, cannot be deleted)
 semanage port -l|grep ssh(查看是否添加成功)
 
 在#%PAM-1.0的下面，即第二行，添加内容
@@ -271,6 +272,30 @@ GATEWAY=192.168.1.1
 DNS1=192.168.1.1
 DNS2=8.8.8.8
 service network restart
+
+TYPE=Ethernet
+BOOTPROTO=none
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_PEERDNS="yes"
+IPV6_PEERROUTES="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME=enp2s0
+UUID=7929a349-1e19-40dc-a7e9-58ea11a483cf
+DEVICE=enp2s0
+ONBOOT=yes
+PROXY_METHOD=none
+BROWSER_ONLY=no
+IPADDR=192.168.2.20
+PREFIX=24
+GATEWAY=192.168.2.1
+DNS1=192.168.2.1
+ZONE=external
+
 
 新建用户
 http://blog.csdn.net/li_101357/article/details/46778827
