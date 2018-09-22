@@ -194,7 +194,7 @@ https://www.itlnmp.com/401.html
 七、 IP 封禁 （这个是我们平时用得最多的）
 # firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='222.222.222.222' reject" --timeout=300  单个IP
 # firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='222.222.222.0/24' reject" --timeout=300 IP段
-# firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2 port port=80  protocol=tcp  accept" 单个IP的某个端口
+# firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2 port port=80 protocol=tcp accept" 单个IP的某个端口
 这个是我们用得最多的。封一个IP，和一个端口   reject 拒绝   accept 允许
 当然，我们仍然可以通过 ipset 来封禁 ip
 封禁 ip
@@ -208,7 +208,7 @@ https://www.itlnmp.com/401.html
 然后封禁 blacklist
 # firewall-cmd --permanent --zone=public --add-rich-rule='rule source ipset=blacklist drop'
 七、IP封禁和端口
-# firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2 port port=80  protocol=tcp  accept"
+# firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2 port port=80 protocol=tcp accept"
 只对192.168.1.2这个IP只能允许80端口访问  （拒绝访问只需把  accept 换成 reject、删除该规则把 –add-rich-rule 改成 –remove-rich-rule即可）
 # firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2/24 port port=80  protocol=tcp  accept"
 只对192.168.1.2这个IP段只能允许80端口访问（拒绝访问只需把  accept 换成 reject、删除该规则把 –add-rich-rule 改成 –remove-rich-rule即可）
@@ -433,3 +433,14 @@ http://man.linuxde.net/chown
 踢人
 w
 pkill -kill -t pts/2
+
+后台运行
+nohup command &
+
+ctrl+z(可以将一个正在前台执行的命令放到后台，并且处于暂停状态。)
+Ctrl+c(终止前台命令。)
+jobs (查看当前有多少在后台运行的命令。jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell 从当前的shell环境已知的列表中删除任务的进程标识。)
+command >out.file 2>&1(准出错重定向到标准输出)
+每个进程都和三个系统文件相关联：标准输入stdin，标准输出stdout和标准错误stderr，三个系统文件的文件描述符分别为0，1和2。
+fg x(将后台中的命令x调至前台继续运行)
+bg x(将一个在后台暂停的命令x，变成继续执行)
