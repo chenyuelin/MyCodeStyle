@@ -24,7 +24,7 @@ AllowUsers user1 user2指定用户登录，如果不加此属性则所有用户都可以登录
 PermitRootLogin no禁止root远程登录
 http://www.jinbuguo.com/openssh/sshd_config.html
 改端口
-firewall-cmd --permanent --service=rabbitmq --add-port=63561/tcp
+firewall-cmd --permanent --service=ssh --add-port=63561/tcp
 firewall-cmd --reload(添加防火墙)
 semanage port -a -t ssh_port_t -p tcp 63561(添加selinux权限)
 #semanage port -d -t ssh_port_t -p tcp 22(ValueError: Port tcp/22 is defined in policy, cannot be deleted)

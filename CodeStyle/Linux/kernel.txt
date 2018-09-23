@@ -9,7 +9,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 kernel_4.14
 yum install gcc-c++ openssl-devel elfutils-libelf-devel -y
 
-make clean  
+make clean
 make mrproper #这两条用于清除之前编译生成的.ko和.config
 
 make clean删除大多数的编译生成文件， 但是会保留内核的配置文件.config， 还有足够的编译支持来建立扩展模块
@@ -21,7 +21,7 @@ make oldconfig          #使用当前的内核配置
 (make config)是每项都要自己选择，这个除了自己明白要什么配置不然不建议使用。
 (make menuconfig)菜单设置编译参数
 
-make                    #编译，半小时以上是正常的
+make -j 4               #编译，半小时以上是正常的
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
 make install
 
@@ -36,3 +36,4 @@ grub2-editenv list
 
 yum remove kernel kernel-headers kernel-tools kernel-tools-libs删除旧内核
 
+yum upgrade -y
