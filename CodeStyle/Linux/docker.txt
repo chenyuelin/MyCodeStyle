@@ -43,3 +43,4 @@ CMD ["/usr/sbin/init"]
 
 rabbitmq
 docker run -d -h=rabbitmq_25 --name=rabbitmq_25 -e "RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log" -e "RABBITMQ_SASL_LOGS=/var/log/rabbitmq/rabbit_sasl.log" --net=2c60878988ce --ip=192.168.2.25 d502f687f36a
+docker run -d -h=rabbitmq_3 --name=rabbitmq_3 -e "RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log" -e "RABBITMQ_SASL_LOGS=/var/log/rabbitmq/rabbit_sasl.log" -p 25675:25672 -p 15675:15672 -p 4372:4369 -p 5677:5671 -p 5678:5672 f9bf67c4c7cc

@@ -178,12 +178,12 @@ firewall-cmd --info-service ssh
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=external
 firewall-cmd --get-zone-of-interface=eth0(查看eth0网卡使用的是哪个zone)
-firewall-cmd --zone=public --list-all(查看public信息)
+firewall-cmd --zone=external --list-all(查看public信息)
 firewall-cmd --zone=external --add-interface=eth0(将eth0添加到external)
-firewall-cmd --zone=work --add-service=ssh
-firewall-cmd --zone=work --change-interface=eth0(将eth0转至work)
-firewall-cmd --zone=work --add-port=8080/tcp
-firewall-cmd --zone=work --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
+firewall-cmd --zone=external --add-service=ssh
+firewall-cmd --zone=external --change-interface=eth0(将eth0转至work)
+firewall-cmd --zone=external --add-port=8080/tcp
+firewall-cmd --zone=external --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
 firewall-cmd --permanent --new-service=rabbitmq
@@ -198,15 +198,15 @@ https://www.itlnmp.com/401.html
 这个是我们用得最多的。封一个IP，和一个端口   reject 拒绝   accept 允许
 当然，我们仍然可以通过 ipset 来封禁 ip
 封禁 ip
-# firewall-cmd --permanent --zone=public --new-ipset=blacklist --type=hash:ip
-# firewall-cmd --permanent --zone=public --ipset=blacklist --add-entry=222.222.222.222
+# firewall-cmd --permanent --zone=external --new-ipset=blacklist --type=hash:ip
+# firewall-cmd --permanent --zone=external --ipset=blacklist --add-entry=222.222.222.222
 封禁网段
-# firewall-cmd --permanent --zone=public --new-ipset=blacklist --type=hash:net
-# firewall-cmd --permanent --zone=public --ipset=blacklist --add-entry=222.222.222.0/24
+# firewall-cmd --permanent --zone=external --new-ipset=blacklist --type=hash:net
+# firewall-cmd --permanent --zone=external --ipset=blacklist --add-entry=222.222.222.0/24
 倒入 ipset 规则
-# firewall-cmd --permanent --zone=public --new-ipset-from-file=/path/blacklist.xml
+# firewall-cmd --permanent --zone=external --new-ipset-from-file=/path/blacklist.xml
 然后封禁 blacklist
-# firewall-cmd --permanent --zone=public --add-rich-rule='rule source ipset=blacklist drop'
+# firewall-cmd --permanent --zone=external --add-rich-rule='rule source ipset=blacklist drop'
 七、IP封禁和端口
 # firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=192.168.1.2 port port=80 protocol=tcp accept"
 只对192.168.1.2这个IP只能允许80端口访问  （拒绝访问只需把  accept 换成 reject、删除该规则把 –add-rich-rule 改成 –remove-rich-rule即可）
@@ -260,7 +260,7 @@ http://man.linuxde.net/screen
 https://www.ibm.com/developerworks/cn/linux/l-cn-screen/
 
 静态ip
-vi /etc/sysconfig/network-scripts/ifcfg-eth0
+vi /etc/sysconfig/network-scripts/ifcfg-enp6s0
 BOOTPROTO="static"
 ONBOOT="yes"
 PEERDNS=no 不重写/etc/resolv.conf
@@ -271,7 +271,6 @@ NM_CONTROLLED=no
 GATEWAY=192.168.1.1
 DNS1=192.168.1.1
 DNS2=8.8.8.8
-service network restart
 
 TYPE=Ethernet
 BOOTPROTO=none
@@ -295,6 +294,8 @@ PREFIX=24
 GATEWAY=192.168.2.1
 DNS1=192.168.2.1
 ZONE=external
+
+ETHTOOL_OPTS="speed 100 duplex half autoneg off"
 
 
 新建用户
@@ -374,9 +375,6 @@ http://blog.163.com/wilicedon_lee/blog/static/8158848320156311186191/
 5. 不需要
 9. 输入 exec /sbin/init
 
-后台运行程序
-http://blog.csdn.net/fuyuehua22/article/details/42101059
-
 查看磁盘
 lsblk查看分区情况
 http://man.linuxde.net/lsblk
@@ -434,9 +432,11 @@ http://man.linuxde.net/chown
 w
 pkill -kill -t pts/2
 
-后台运行
-nohup command &
 
+后台运行程序
+http://blog.csdn.net/fuyuehua22/article/details/42101059
+
+nohup command &
 ctrl+z(可以将一个正在前台执行的命令放到后台，并且处于暂停状态。)
 Ctrl+c(终止前台命令。)
 jobs (查看当前有多少在后台运行的命令。jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell 从当前的shell环境已知的列表中删除任务的进程标识。)
@@ -444,3 +444,15 @@ command >out.file 2>&1(准出错重定向到标准输出)
 每个进程都和三个系统文件相关联：标准输入stdin，标准输出stdout和标准错误stderr，三个系统文件的文件描述符分别为0，1和2。
 fg x(将后台中的命令x调至前台继续运行)
 bg x(将一个在后台暂停的命令x，变成继续执行)
+
+hostnamectl 设置主机名
+https://blog.csdn.net/dream361/article/details/56833248
+https://blog.csdn.net/linuxnews/article/details/51112022
+https://jingyan.baidu.com/article/a501d80c35cf9dec620f5e40.html
+
+环境变量配置
+https://blog.csdn.net/z3881006/article/details/71126848
+https://www.cnblogs.com/kuoAT/p/7555298.html
+
+查看是否有Meltdown,Spectre漏洞
+grep . /sys/devices/system/cpu/vulnerabilities/*

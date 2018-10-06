@@ -1,3 +1,4 @@
+https://mariadb.org/
 # 启动服务
 systemctl start mariadb
 
@@ -17,7 +18,7 @@ show collation;(查看支持的字符集)
 
 编码配置
 # 编辑/etc/my.cnf(客户端与服务端通用配制)
-vim /etc/my.cnf
+vi /etc/my.cnf
 
 # 在[mysqld]标签下添加下面内容
 default-storage-engine = innodb
@@ -27,13 +28,13 @@ collation-server = utf8_general_ci(gbk_chinese_ci)
 character-set-server = utf8(gbk)
 
 # 编辑/etc/my.cnf.d/client.cnf
-vim /etc/my.cnf.d/client.cnf
+vi /etc/my.cnf.d/client.cnf
 
 # 在[client]标签下添加下面内容
 default-character-set=utf8(gbk)
 
 # 编辑/etc/my.cnf.d/mysql-clients.cnf
-vim /etc/my.cnf.d/mysql-clients.cnf
+vi /etc/my.cnf.d/mysql-clients.cnf
 
 # 在[mysql]标签下添加下面内容
 default-character-set=utf8(gbk)
@@ -158,3 +159,5 @@ max_length_for_sort_data=2K(1K1024)
 
 sort_buffer_size=(2M2097152不设)
 join_buffer_size(不设)
+
+set password for root@'%' = password('xxx');
