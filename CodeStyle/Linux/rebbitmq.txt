@@ -16,6 +16,7 @@ make && make install
 yum install -y socat logrotate
 rpm -ivh rabbitmq-server-3.7.7-1.el7.noarch.rpm
 
+sudo usermod -aG rabbitmq $USER
 
 rabbitmq-server -detached start 后台方式运行
 rabbitmqctl stop --停止运行
@@ -30,6 +31,7 @@ rabbitmq-plugins enable rabbitmq_management安装可视化插件
 #如果运行出现：Error when reading /var/lib/rabbitmq/.erlang.cookie: eacces
 chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
 
+
 (1) 新增一个用户
 rabbitmqctl add_user Username Password
 (2) 删除一个用户
@@ -41,7 +43,7 @@ rabbitmqctl clear_password test //清除test用户的密码
 rabbitmqctl list_users
 设置用户角色的命令为：
 rabbitmqctl set_user_tags User Tag
-User为用户名， Tag为角色名(对应于上面的administrator，monitoring，policymaker，management，或其他自定义名称)。
+User为用户名， Tag为角色名(对应于上面的administrator,monitoring,policymaker,management,或其他自定义名称)。
 也可以给同一用户设置多个角色，例如
 rabbitmqctl set_user_tags hncscwc monitoring policymaker
 (1) 设置用户权限
@@ -52,6 +54,15 @@ rabbitmqctl list_permissions [-p VHostPath]
 rabbitmqctl list_user_permissions User
 (4)  清除用户的权限信息
 rabbitmqctl clear_permissions [-p VHostPath] User
+
+添加virtual host
+rabbitmqctl add_vhost /dev
+为用户设置virtual host
+rabbitmqctl set_permissions [-p vhostpath] {user} {conf} {write} {read}
+conf:一个正则表达式match哪些配置资源能够被该用户访问。
+write:一个正则表达式match哪些配置资源能够被该用户读。
+read:一个正则表达式match哪些配置资源能够被该用户访问。
+rabbitmqctl set_permissions -p /dev dev '.*' '.*' '.*'
 
 rabbitmqctl stop_app
 rabbitmqctl join_cluster --ram rabbit@queue

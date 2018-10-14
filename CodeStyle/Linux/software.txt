@@ -1,0 +1,39 @@
+ss5
+http://ss5.sourceforge.net
+https://nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz
+yum -y install pam-devel openldap-devel
+./configure --with-defaultport=10800
+make && make install
+默认配置/etc/opt/ss5
+/etc/opt/ss5/ss5.conf
+auth 0.0.0.0/0 - -
+auth 0.0.0.0/0 - u
+permit - 0.0.0.0/0 - 0.0.0.0/0 - - - - -
+permit u 0.0.0.0/0 - 0.0.0.0/0 - - - - -
+/etc/opt/ss5/ss5.passwd
+user user
+export SS5_SOCKS_PORT=10800
+/etc/sysconfig/ss5 SS5_OPTS=" -u root -b 0.0.0.0:8080" 也可以改端口
+log位置:/var/log/ss5/
+卸载:make uninstall 
+http://www.vuln.cn/8553
+
+pptp
+http://pptpclient.sourceforge.net/
+https://nchc.dl.sourceforge.net/project/pptpclient/pptp/pptp-1.10.0/pptp-1.10.0.tar.gz
+#yum install sysvinit-tools -y
+pidof
+#yum install iproute ppp perl sysvinit-tools -y
+yum install ppp pptp pptp-setup perl sysvinit-tools -y
+mkdir -p /etc/ppp/peers/
+cp /usr/share/doc/ppp-2.4.5/scripts/pon /usr/sbin
+cp /usr/share/doc/ppp-2.4.5/scripts/poff /usr/sbin
+pptpsetup --create devpn --server us2.heon.win --username chenyuelin --password 9u4lm8 --encrypt --start
+cat /etc/ppp/peers/devpn
+cat /etc/ppp/chap-secrets
+pptpsetup --delete devpn
+pppd call devpn
+ppp-off devpn
+docker需要--privileged参数
+echo 1 > /proc/sys/net/ipv4/ip_forward
+https://blog.csdn.net/huangdou0204/article/details/47282097
