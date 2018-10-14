@@ -24,9 +24,9 @@ AllowUsers user1 user2指定用户登录，如果不加此属性则所有用户都可以登录
 PermitRootLogin no禁止root远程登录
 http://www.jinbuguo.com/openssh/sshd_config.html
 改端口
-firewall-cmd --permanent --service=ssh --add-port=63561/tcp
+firewall-cmd --permanent --service=ssh --add-port=43561/tcp
 firewall-cmd --reload(添加防火墙)
-semanage port -a -t ssh_port_t -p tcp 63561(添加selinux权限)
+semanage port -a -t ssh_port_t -p tcp 43561(添加selinux权限)
 #semanage port -d -t ssh_port_t -p tcp 22(ValueError: Port tcp/22 is defined in policy, cannot be deleted)
 semanage port -l|grep ssh(查看是否添加成功)
 
@@ -183,7 +183,7 @@ firewall-cmd --zone=external --add-interface=eth0(将eth0添加到external)
 firewall-cmd --zone=external --add-service=ssh
 firewall-cmd --zone=external --change-interface=eth0(将eth0转至work)
 firewall-cmd --zone=external --add-port=8080/tcp
-firewall-cmd --zone=external --add-forward-port=port=58080:proto=tcp:toport=8080:toaddr=192.168.1.100 --permanent
+firewall-cmd --zone=external --add-forward-port=port=50080:proto=tcp:toport=80:toaddr=192.168.2.1 --permanent
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
 firewall-cmd --permanent --new-service=rabbitmq
