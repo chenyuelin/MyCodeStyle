@@ -3,7 +3,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 
 启用systemctl
-1)run时启用--privileged参数
+1)run时启用-d --privileged参数
 2)run command为/usr/sbin/init
 3)docker exec -it centos7 /bin/bash进入容器
 
