@@ -4,7 +4,7 @@ http://web.mit.edu/kolya/.f/root/net.mit.edu/sipb.mit.edu/contrib/linux/init/Kco
 https://www.cnblogs.com/chulia20002001/p/7967584.html
 http://blog.csdn.net/wdsfup/article/details/52302142
 http://blog.csdn.net/suma110/article/details/54381674
-
+http://blog.51cto.com/191226139/2059117
 
 kernel_4.14
 yum install gcc-c++ openssl-devel elfutils-libelf-devel bc -y
@@ -17,9 +17,10 @@ make mrproper 删除所有的编译生成文件， 还有内核配置文件， 再加上各种备份文件
 make distclean删除的文件， 加上编辑备份文件和一些补丁文件。
 
 make oldconfig          #使用当前的内核配置
-(make default)是直接使用linus提供的默认配置，这个基本什么不用选编译也很快但是也不建议用，编译快是因为很多东西都没启用使用这个内核你的发行版基本重启启不来了。
-(make config)是每项都要自己选择，这个除了自己明白要什么配置不然不建议使用。
-(make menuconfig)菜单设置编译参数
+make defconfig基于内核为目标平台执行提供的“默认”配置进行配置
+make menuconfig基于curses的文本窗口界面
+make gconfig基于GTK(GOME)环境窗口界面
+make xconfig基于QT(KDE) 环境的窗口界面
 aesni-intel blowfish-x86_64
 
 make -j 4               #编译，半小时以上是正常的
