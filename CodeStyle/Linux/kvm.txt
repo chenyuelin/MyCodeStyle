@@ -1,0 +1,89 @@
+https://www.cnblogs.com/kevingrace/p/5570504.html
+http://www.361way.com/kvm-windows-virtio/2816.html
+https://www.chenyudong.com/archives/libvirt-kvm-bridge-network.html
+https://blog.csdn.net/letterwuyu/article/details/53763768
+http://blog.51cto.com/dianel/2150736?source=dra
+
+https://www.spice-space.org/download/windows/qxl/
+
+yum install -y qemu-kvm libvirt
+virt-install --virt-type=kvm --name=tt --memory=1024 --arch=x86_64 --vcpus=2 --check-cpu --accelerate --os-type=windows --os-variant=winxp --disk path=/opt/img/xp.raw,size=5,format=raw --cdrom=/opt/xp.iso --vncport=5900 --graphics vnc,listen=0.0.0.0,port=5900,password=foobar --bridge=br0 -noautoconsole
+
+virt-install --virt-type=kvm --name=xp --memory=1024 \
+--arch=x86_64 --vcpus=2 --cpuset=0-1 --check-cpu \
+--os-type=windows --os-variant=winxp \
+--disk path=/opt/img/xp.raw,size=10,format=raw \
+--cdrom=/opt/xp.iso \
+--graphics vnc,listen=0.0.0.0,port=5900,password=foobar \
+--network bridge=br0 \
+--video=qxl \
+--soundhw default \
+--noautoconsole \
+--boot hd,cdrom,fd,network,menu=on
+
+bridge
+static ip配置
+/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+HWADDR=00:14:5E:C2:1E:40
+ONBOOT=yes
+NM_CONTROLLED=no
+BRIDGE=br0
+
+/etc/sysconfig/network-scripts/ifcfg-br0
+DEVICE=br0
+TYPE=Bridge
+NM_CONTROLLED=no
+BOOTPROTO=static
+IPADDR=10.10.1.152
+NETMASK=255.255.255.0
+ONBOOT=yes
+
+DHCP配置
+/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+HWADDR=00:14:5E:C2:1E:40
+ONBOOT=yes
+NM_CONTROLLED=no
+BRIDGE=br0 	
+
+/etc/sysconfig/network-scripts/ifcfg-br0
+DEVICE=br0
+TYPE=Bridge
+NM_CONTROLLED=no
+BOOTPROTO=dhcp
+ONBOOT=yes
+
+#可以不用#
+向文件/etc/sysctl.conf添加以下代码:
+net.bridge.bridge-nf-call-ip6tables = 0
+net.bridge.bridge-nf-call-iptables = 0
+net.bridge.bridge-nf-call-arptables = 0
+
+#可以不用#
+重新加载kernel参数
+# sysctl -p 
+net.ipv4.ip_forward = 0 
+net.bridge.bridge-nf-call-ip6tables = 0 
+net.bridge.bridge-nf-call-iptables = 0 
+net.bridge.bridge-nf-call-arptables = 0
+
+<interface type="bridge"> <!--虚拟机网络连接方式-->
+    <source bridge="br0" /> <!-- 当前主机网桥的名称-->
+    <mac address="00:16:e4:9a:b3:6a" /> <!--为虚拟机分配mac地址，务必唯一，否则dhcp获得同样ip,引起冲突-->
+</interface>
+
+添加esc启动选项
+<os>
+<type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+<boot dev='hd'/>
+<bootmenu enable='yes'/>
+</os>
+
+添加ac97声卡
+<sound model='ac97'>
+<address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+</sound>
+
