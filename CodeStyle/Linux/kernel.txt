@@ -17,7 +17,7 @@ make mrproper 删除所有的编译生成文件， 还有内核配置文件， 再加上各种备份文件
 make distclean删除的文件， 加上编辑备份文件和一些补丁文件。
 
 make oldconfig          #使用当前的内核配置
-make defconfig基于内核为目标平台执行提供的“默认”配置进行配置
+make defconfig基于内核为目标平台执行提供的"默认"配置进行配置
 make menuconfig基于curses的文本窗口界面
 make gconfig基于GTK(GOME)环境窗口界面
 make xconfig基于QT(KDE) 环境的窗口界面

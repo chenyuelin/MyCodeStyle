@@ -12,14 +12,16 @@ virt-install --virt-type=kvm --name=tt --memory=1024 --arch=x86_64 --vcpus=2 --c
 virt-install --virt-type=kvm --name=xp --memory=1024 \
 --arch=x86_64 --vcpus=2 --cpuset=0-1 --check-cpu \
 --os-type=windows --os-variant=winxp \
---disk path=/opt/img/xp.raw,size=10,format=raw \
+--disk device=disk,path=/opt/img/xp.raw,bus=virtio,size=10,format=raw,cache=writeback \
+--disk device=floppy,path=/opt/virtio-win-0.1.141_x86.vfd,perms=ro \
 --cdrom=/opt/xp.iso \
---graphics vnc,listen=0.0.0.0,port=5900,password=foobar \
---network bridge=br0 \
+--graphics vnc,listen=0.0.0.0,port=5900,password=cyl \
+--network bridge=br0,model=virtio \
 --video=qxl \
 --soundhw default \
 --noautoconsole \
 --boot hd,cdrom,fd,network,menu=on
+注:用vnc按装系统不用使用qxl视频
 
 bridge
 static ip配置
@@ -87,3 +89,5 @@ net.bridge.bridge-nf-call-arptables = 0
 <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
 </sound>
 
+virsh dominfo xxx看虚拟机配制
+virsh setmem xxx 2G动态调节内存
