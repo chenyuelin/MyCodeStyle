@@ -28,7 +28,8 @@ china-pub
 http://www.china-pub.com
 
 mozilla
-http://ftp.mozilla.org/pub
+http://ftp.mozilla.org/pub/
+https://www.mozilla.org/en-US/firefox/all/
 
 rtorrent
 https://github.com/rakshasa/rtorrent/issues/295

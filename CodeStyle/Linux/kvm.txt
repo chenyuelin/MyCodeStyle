@@ -91,3 +91,18 @@ net.bridge.bridge-nf-call-arptables = 0
 
 virsh dominfo xxx看虚拟机配制
 virsh setmem xxx 2G动态调节内存
+
+sudo virsh domblklist xxx
+
+virsh attach-disk xp /dev/cdrom hda --sourcetype file --driver qemu --subdriver raw --type cdrom --mode readonly
+
+virsh attach-device --live xp /opt/a.xml
+<disk type='file' device='cdrom'>
+  <driver name='qemu' type='raw'/>
+  <source file='/dev/cdrom'/>
+  <target dev='hda' bus='ide'/>
+  <readonly/>
+  <address type='drive' controller='0' bus='0' target='0' unit='0'/>
+</disk>
+
+virsh change-media xp hda /dev/cdrom
