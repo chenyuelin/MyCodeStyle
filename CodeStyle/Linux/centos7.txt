@@ -435,8 +435,19 @@ pkill -kill -t pts/2
 
 后台运行程序
 http://blog.csdn.net/fuyuehua22/article/details/42101059
+https://blog.csdn.net/liuyanfeier/article/details/62422742
 
 nohup command &
+nohup command > myout.file 2>&1 &
+1)command>out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。
+2)2>&1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&， 是让该命令在后台执行。
+3)试想2>1代表什么，2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&1，&与1结合就代表标准输出了，就变成错误重定向到标准输出.
+--------------------- 
+作者：liuyanfeier 
+来源：CSDN 
+原文：https://blog.csdn.net/liuyanfeier/article/details/62422742 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
 ctrl+z(可以将一个正在前台执行的命令放到后台，并且处于暂停状态。)
 Ctrl+c(终止前台命令。)
 jobs (查看当前有多少在后台运行的命令。jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell 从当前的shell环境已知的列表中删除任务的进程标识。)
@@ -456,3 +467,8 @@ https://www.cnblogs.com/kuoAT/p/7555298.html
 
 查看是否有Meltdown,Spectre漏洞
 grep . /sys/devices/system/cpu/vulnerabilities/*
+
+
+export JAVA_HOME=/usr/local/jdk1.8.0_152/jre
+export PATH=$PATH:$JAVA_HOME/bin
+#export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar

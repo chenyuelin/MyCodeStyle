@@ -1,3 +1,5 @@
+https://docs.docker.com/network/macvlan/
+
 Ãâsudo²Ù×÷
 sudo groupadd docker
 sudo usermod -aG docker $USER
@@ -40,6 +42,8 @@ CMD ["/usr/sbin/init"]
 
 # ENTRYPOINT ["/usr/sbin/init"]
 =====================make dockerfile end===========================
+
+docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -o parent=br0 macvlan2
 
 rabbitmq
 docker run -d -h=rabbitmq_25 --name=rabbitmq_25 -e "RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log" -e "RABBITMQ_SASL_LOGS=/var/log/rabbitmq/rabbit_sasl.log" --net=2c60878988ce --ip=192.168.2.25 d502f687f36a
