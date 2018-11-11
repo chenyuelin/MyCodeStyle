@@ -18,6 +18,7 @@ make distclean删除的文件， 加上编辑备份文件和一些补丁文件。
 
 make oldconfig          #使用当前的内核配置
 make defconfig基于内核为目标平台执行提供的"默认"配置进行配置
+yum install ncurses-devel -y
 make menuconfig基于curses的文本窗口界面
 make gconfig基于GTK(GOME)环境窗口界面
 make xconfig基于QT(KDE) 环境的窗口界面
@@ -39,3 +40,8 @@ grub2-editenv list
 yum remove kernel kernel-headers kernel-tools kernel-tools-libs删除旧内核
 
 yum upgrade -y
+
+
+http://www.jinbuguo.com/kernel/boot_parameters.html
+cat /proc/interrupts
+cat /proc/cmdline

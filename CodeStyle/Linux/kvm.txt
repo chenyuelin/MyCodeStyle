@@ -16,7 +16,7 @@ virt-install --virt-type=kvm --name=xp --memory=2048 \
 --disk device=floppy,path=/opt/virtio-win-0.1.141_x86.vfd,perms=ro \
 --cdrom=/opt/xp.iso \
 --graphics vnc,listen=0.0.0.0,port=5900,password=cyl \
---network bridge=br0,model=virtio \
+--network bridge=br0,model=virtio \(--network network=default,model=virtio \)
 --video=qxl \
 --soundhw default \
 --noautoconsole \
@@ -95,7 +95,8 @@ net.bridge.bridge-nf-call-arptables = 0
 virsh dominfo xxx看虚拟机配制
 virsh setmem xxx 2G动态调节内存
 
-sudo virsh domblklist xxx
+virsh domblklist xxx看虚拟机硬盘
+virsh undefine xxx删除虚拟机
 
 virsh attach-disk xp /dev/cdrom hda --sourcetype file --driver qemu --subdriver raw --type cdrom --mode readonly
 
