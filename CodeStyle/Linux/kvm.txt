@@ -6,10 +6,10 @@ http://blog.51cto.com/dianel/2150736?source=dra
 
 https://www.spice-space.org/download/windows/qxl/
 
-yum install -y qemu-kvm libvirt
+yum install -y qemu-kvm libvirt virt-install
 virt-install --virt-type=kvm --name=tt --memory=1024 --arch=x86_64 --vcpus=2 --check-cpu --accelerate --os-type=windows --os-variant=winxp --disk path=/opt/img/xp.raw,size=5,format=raw --cdrom=/opt/xp.iso --vncport=5900 --graphics vnc,listen=0.0.0.0,port=5900,password=foobar --bridge=br0 -noautoconsole
 
-virt-install --virt-type=kvm --name=xp --memory=1024 \
+virt-install --virt-type=kvm --name=xp --memory=2048 \
 --arch=x86_64 --vcpus=2 --cpuset=0-1 --check-cpu \
 --os-type=windows --os-variant=winxp \
 --disk path=/opt/img/xp.raw,size=10,format=raw \
@@ -20,6 +20,9 @@ virt-install --virt-type=kvm --name=xp --memory=1024 \
 --soundhw default \
 --noautoconsole \
 --boot hd,cdrom,fd,network,menu=on
+
+
+kernel Virtio drivers
 
 bridge
 static ip≈‰÷√
