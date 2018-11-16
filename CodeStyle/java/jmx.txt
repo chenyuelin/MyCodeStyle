@@ -30,3 +30,6 @@ keytool -export -alias jconsole -keystore jconsole.keystore -file client.cer -st
 keytool -import -alias jconsole-ibm-team -file client.cer -keystore ibm-team-ssl.truststore -storepass ibm-team -noprompt
 jvisualvm.exe -J-Djavax.net.ssl.trustStore=d:/truststore.jks -J-Djavax.net.ssl.trustStorePassword=111111
 jmc.exe -vmargs -Djavax.net.ssl.trustStore=d:/truststore.jks -Djavax.net.ssl.trustStorePassword=111111
+
+开启飞行记录参数
+-XX:+UnlockCommercialFeatures -XX:+FlightRecorder
