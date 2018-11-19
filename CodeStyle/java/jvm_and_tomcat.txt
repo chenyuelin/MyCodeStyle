@@ -1,10 +1,3 @@
-jvm
-常规gc设置
--XX:+UseConcMarkSweepGC -XX:CMSFullGCsBeforeCompaction=10 -XX:CMSInitiatingOccupancyFraction=85 -XX:+CMSIncrementalMode -XX:-PrintGCDetails
-url
-http://blog.csdn.net/shine0181/article/details/8533834
-http://hllvm.group.iteye.com/group/topic/37095
-
 tomcat
 打开远程调试
 SET CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
@@ -18,3 +11,53 @@ address：地址和端口，地址可以省略，两者用冒号分隔
 
 打开远程jmx
 SET CATALINA_OPTS=-server -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=7091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.managementote.ssl=false -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
+
+JDK8代替永久代-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m（JDK8）
+1、-XX:MetaspaceSize，class metadata的初始空间配额，以bytes为单位，达到该值就会触发垃圾收集进行类型卸载，同时GC会对该值进行调整：如果释放了大量的空间，就适当的降低该值；如果释放了很少的空间，那么在不超过MaxMetaspaceSize（如果设置了的话），适当的提高该值。
+2、 -XX：MaxMetaspaceSize，可以为class metadata分配的最大空间。默认是没有限制的。
+3、 -XX：MinMetaspaceFreeRatio,在GC之后，最小的Metaspace剩余空间容量的百分比，减少为class metadata分配空间导致的垃圾收集
+4、 -XX:MaxMetaspaceFreeRatio,在GC之后，最大的Metaspace剩余空间容量的百分比，减少为class metadata释放空间导致的垃圾收集
+
+https://blog.csdn.net/liuxinghao/article/details/73963399
+http://ifeve.com/useful-jvm-flags-part-7-cms-collector/
+https://blog.csdn.net/zqz_zqz/article/details/70568819
+Parallel New(Serial) CMS(用了CMS，新生代收集默认就是-XX:+UseParNewGC，不用自己设)
+-XX:+UseConcMarkSweepGC(-XX:+UseParNewGC)
+-server -Xms4g -Xmx4g -XX:NewRatio=2(-Xmn2g)
+-XX:+PrintFlagsFinal
+-XX:+CMSParallelRemarkEnabled并发清理默认开启
+-XX:+CMSConcurrentMTEnabled默认关,超多核CPU可以考虑开启
+-XX:+UseCMSCompactAtFullCollection默认开启
+-XX:CMSFullGCsBeforeCompaction=0设置多少次Full GC后,对年老代进行压缩
+-XX:CMSInitiatingOccupancyFraction=80(92%)
+-XX:+UseCMSInitiatingOccupancyOnly只是用设定的回收阈值(上面指定的70%),如果不指定,JVM仅在第一次使用设定值,后续则自动调整.
+-XX:+CMSScavengeBeforeRemark，默认为关闭，在CMS remark前，先执行一次minor GC将新生代清掉，这样从老生代的对象引用到的新生代对象的个数就少了，停止全世界的CMS remark阶段就短一些。如果看到GC日志里remark阶段的时间超长，可以打开此项看看有没有效果，否则还是不要打开了，白白多了次GC。
+-XX:-CMSClassUnloadingEnabled默认开启在CMS中清理永久代中的过期的Class而不等到Full GC，JDK7默认关闭而JDK8打开。看自己情况，比如有没有运行动态语言脚本如Groovy产生大量的临时类。它有时会大大增加CMS的暂停时间。所以如果新类加载并不频繁，这个参数还是显式关闭的好。
+https://blog.csdn.net/ning0323/article/details/76505378
+-XX:+ExplicitGCInvokesConcurrent在system.gc()时CMS采用background式以提高效率
+-XX:+ExplicitGCInvokesConcurrentAndUnloadsClasses
+-XX:+ParallelRefProcEnabled：默认为false，并行的处理Reference对象，如WeakReference，除非在GC log里出现Reference处理时间较长的日志，否则效果不会很明显
+-XX:+CMSIncrementalMode (CPU不强时可以开启此项)开启增量式CMS收集器,即CMS的并发阶段为增量方式，定期暂停并发，将处理器让步给应用线程。
+-XX:+CMSIncrementalPacing 允许增量式CMS收集器在放弃处理器前，根据应用程序的行为，自动控制工作量。只能与-XX:+CMSIncrementalMode 一起使用。
+-XX:CMSIncrementalDutyCycle=<N> default: 50 启动CMS的上线，每次增量回收垃圾的占总垃圾回收任务的比例
+-XX:CMSIncrementalDutyCycleMin=<N> default: 10 启动CMS的下线，每次增量回收垃圾的占总垃圾回收任务的最小比例
+-XX:CMSIncrementalSafetyFactor=<N> default: 10 用来计算循环次数
+-XX:CMSIncrementalOffset=<N> default: 0 最小循环次数（This is the percentage (0-100) by which the incremental mode duty cycle is shifted to the right within the period between minor collections.）
+–XX:ParallelGCThreads=n  不要去动(ncpus <= 8) ? ncpus : 3 + ((ncpus * 5) / 8) 并发垃圾回收线程数
+
+GC日志
+https://blog.csdn.net/liuxinghao/article/details/73963399
+-Xloggc:/dev/shm/gc-myapplication.log -XX:+PrintGCDateStamps -XX:+PrintGCDetails
+
+http://blog.csdn.net/shine0181/article/details/8533834
+http://hllvm.group.iteye.com/group/topic/37095
+
+http://calvin1978.blogcn.com/articles/jvmoption-7.html
+-XX:-UseBiasedLocking1. 取消偏向锁。JDK1.6开始默认打开的偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。如果始终只有一条线程在访问它，就成功略过同步操作以获得性能提升。但一旦有第二条线程访问这把锁，JVM就要撤销偏向锁恢复到未锁定线程的状态，如果打开安全点日志，可以看到不少RevokeBiasd的纪录，像GC一样Stop The World的干活，虽然只是很短的停顿，但对于多线程并发的应用，取消掉它反而有性能的提升，所以Cassandra就取消了它。
+-XX:AutoBoxCacheMax=20000：增加数字对象自动装箱的范围，JDK默认-128～127的int和long，超出范围就会即时创建对象，所以，增加范围可以提高性能，但是也是需要测试。
+-XX:+AlwaysPreTouch：在启动时把所有参数定义的内存全部捋一遍。使用这个参数可能会使启动变慢，但是在后面内存使用过程中会更快。可以保证内存页面连续分配，新生代晋升时不会因为申请内存页面使GC停顿加长。通常只有在内存大于32G的时候才会有感觉
+-XX:+PerfDisableSharedMem：启用标准内存使用。JVM控制分为标准或共享内存，区别在于一个是在JVM内存中，一个是生成/tmp/hsperfdata_{userid}/{pid}文件，存储统计数据，通过mmap映射到内存中，别的进程可以通过文件访问内容。通过这个参数，可以禁止JVM写在文件中写统计数据，代价就是jps、jstat这些命令用不了了，只能通过jmx获取数据。但是在问题排查是，jps、jstat这些小工具是很好用的，比jmx这种很重的东西好用很多，所以需要自己取舍。这里有个GC停顿的例子。
+-XX:-UseCounterDecay禁止JIT调用计数器衰减。默认情况下，每次GC时会对调用计数器进行砍半的操作，导致有些方法一直温热，永远都达不到触发C2编译的1万次的阀值。
+-XX:-OmitStackTraceInFastThrow为异常设置StackTrace是个昂贵的操作，所以当应用在相同地方抛出相同的异常N次(两万?)之后，JVM会对某些特定异常如NPE，数组越界等进行优化，不再带上异常栈。此时，你可能会看到日志里一条条Nul Point Exception，而之前输出完整栈的日志早被滚动到不知哪里去了，也就完全不知道这NPE发生在什么地方，欲哭无泪。 所以，将它禁止吧，ElasticSearch也这样干。
+
+-XX:MaxDirectMemorySize：一般去设置。堆外内存/直接内存的大小，默认为堆内存减去一个Survivor区的大小
