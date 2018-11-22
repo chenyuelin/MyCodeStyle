@@ -12,11 +12,18 @@ address：地址和端口，地址可以省略，两者用冒号分隔
 打开远程jmx
 SET CATALINA_OPTS=-server -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=7091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.managementote.ssl=false -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
 
+young 			Tenured 	JVM options
+Serial 			Serial 		-XX:+UseSerialGC
+Parallel Scavenge 	Serial 		-XX:+UseParallelGC -XX:-UseParallelOldGC
+Parallel Scavenge 	Parallel Old 	-XX:+UseParallelGC -XX:+UseParallelOldGC
+Parallel New或Serial 	CMS 		-XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+
+
 JDK8代替永久代-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m（JDK8）
 1、-XX:MetaspaceSize，class metadata的初始空间配额，以bytes为单位，达到该值就会触发垃圾收集进行类型卸载，同时GC会对该值进行调整：如果释放了大量的空间，就适当的降低该值；如果释放了很少的空间，那么在不超过MaxMetaspaceSize（如果设置了的话），适当的提高该值。
-2、 -XX：MaxMetaspaceSize，可以为class metadata分配的最大空间。默认是没有限制的。
-3、 -XX：MinMetaspaceFreeRatio,在GC之后，最小的Metaspace剩余空间容量的百分比，减少为class metadata分配空间导致的垃圾收集
-4、 -XX:MaxMetaspaceFreeRatio,在GC之后，最大的Metaspace剩余空间容量的百分比，减少为class metadata释放空间导致的垃圾收集
+2、-XX：MaxMetaspaceSize，可以为class metadata分配的最大空间。默认是没有限制的。
+3、-XX：MinMetaspaceFreeRatio,在GC之后，最小的Metaspace剩余空间容量的百分比，减少为class metadata分配空间导致的垃圾收集
+4、-XX:MaxMetaspaceFreeRatio,在GC之后，最大的Metaspace剩余空间容量的百分比，减少为class metadata释放空间导致的垃圾收集
 
 https://blog.csdn.net/liuxinghao/article/details/73963399
 http://ifeve.com/useful-jvm-flags-part-7-cms-collector/
@@ -43,7 +50,7 @@ https://blog.csdn.net/ning0323/article/details/76505378
 -XX:CMSIncrementalDutyCycleMin=<N> default: 10 启动CMS的下线，每次增量回收垃圾的占总垃圾回收任务的最小比例
 -XX:CMSIncrementalSafetyFactor=<N> default: 10 用来计算循环次数
 -XX:CMSIncrementalOffset=<N> default: 0 最小循环次数（This is the percentage (0-100) by which the incremental mode duty cycle is shifted to the right within the period between minor collections.）
-–XX:ParallelGCThreads=n  不要去动(ncpus <= 8) ? ncpus : 3 + ((ncpus * 5) / 8) 并发垃圾回收线程数
+-XX:ParallelGCThreads=n  不要去动(ncpus <= 8) ? ncpus : 3 + ((ncpus * 5) / 8) 并发垃圾回收线程数
 
 GC日志
 https://blog.csdn.net/liuxinghao/article/details/73963399
@@ -53,9 +60,14 @@ http://blog.csdn.net/shine0181/article/details/8533834
 http://hllvm.group.iteye.com/group/topic/37095
 
 http://calvin1978.blogcn.com/articles/jvmoption-7.html
--XX:-UseBiasedLocking1. 取消偏向锁。JDK1.6开始默认打开的偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。如果始终只有一条线程在访问它，就成功略过同步操作以获得性能提升。但一旦有第二条线程访问这把锁，JVM就要撤销偏向锁恢复到未锁定线程的状态，如果打开安全点日志，可以看到不少RevokeBiasd的纪录，像GC一样Stop The World的干活，虽然只是很短的停顿，但对于多线程并发的应用，取消掉它反而有性能的提升，所以Cassandra就取消了它。
+-XX:-UseBiasedLocking取消偏向锁。JDK1.6开始默认打开的偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。如果始终只有一条线程在访问它，就成功略过同步操作以获得性能提升。但一旦有第二条线程访问这把锁，JVM就要撤销偏向锁恢复到未锁定线程的状态，如果打开安全点日志，可以看到不少RevokeBiasd的纪录，像GC一样Stop The World的干活，虽然只是很短的停顿，但对于多线程并发的应用，取消掉它反而有性能的提升，所以Cassandra就取消了它。
+-XX:+EliminateLocks(默认开启)参数可以打开锁消除
+-XX:+DoEscapeAnalysis(默认开启)参数打开逃逸分析
+-XX:+PrintEscapeAnalysis
+-XX:+EliminateAllocations(默认开启)来开启标量替换
 -XX:AutoBoxCacheMax=20000：增加数字对象自动装箱的范围，JDK默认-128～127的int和long，超出范围就会即时创建对象，所以，增加范围可以提高性能，但是也是需要测试。
 -XX:+AlwaysPreTouch：在启动时把所有参数定义的内存全部捋一遍。使用这个参数可能会使启动变慢，但是在后面内存使用过程中会更快。可以保证内存页面连续分配，新生代晋升时不会因为申请内存页面使GC停顿加长。通常只有在内存大于32G的时候才会有感觉
+-XX:-UsePerfData
 -XX:+PerfDisableSharedMem：启用标准内存使用。JVM控制分为标准或共享内存，区别在于一个是在JVM内存中，一个是生成/tmp/hsperfdata_{userid}/{pid}文件，存储统计数据，通过mmap映射到内存中，别的进程可以通过文件访问内容。通过这个参数，可以禁止JVM写在文件中写统计数据，代价就是jps、jstat这些命令用不了了，只能通过jmx获取数据。但是在问题排查是，jps、jstat这些小工具是很好用的，比jmx这种很重的东西好用很多，所以需要自己取舍。这里有个GC停顿的例子。
 -XX:-UseCounterDecay禁止JIT调用计数器衰减。默认情况下，每次GC时会对调用计数器进行砍半的操作，导致有些方法一直温热，永远都达不到触发C2编译的1万次的阀值。
 -XX:-OmitStackTraceInFastThrow为异常设置StackTrace是个昂贵的操作，所以当应用在相同地方抛出相同的异常N次(两万?)之后，JVM会对某些特定异常如NPE，数组越界等进行优化，不再带上异常栈。此时，你可能会看到日志里一条条Nul Point Exception，而之前输出完整栈的日志早被滚动到不知哪里去了，也就完全不知道这NPE发生在什么地方，欲哭无泪。 所以，将它禁止吧，ElasticSearch也这样干。
