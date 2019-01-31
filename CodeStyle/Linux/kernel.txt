@@ -36,8 +36,13 @@ cat /boot/efi/EFI/centos/grub.cfg | grep menuentry
 grub2-set-default "xxxxxxxxx"
 查看默认启动项是否正确
 grub2-editenv list
+grub2-reboot 0
 
-yum remove kernel kernel-headers kernel-tools kernel-tools-libs删除旧内核
+vi /boot/efi/EFI/centos/grub.cfg 15dd
+rm -r /usr/lib/modules/4.14.95
+rm /boot/System.map-4.14.95 /boot/vmlinuz-4.14.95 /boot/initramfs-4.14.95.img /boot/System.map-4.14.95.old
+
+yum remove kernel kernel-tools kernel-tools-libs删除旧内核
 
 yum upgrade -y
 
