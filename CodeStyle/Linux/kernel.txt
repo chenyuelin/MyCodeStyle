@@ -7,7 +7,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 http://blog.51cto.com/191226139/2059117
 
 kernel_4.14
-yum install gcc-c++ openssl-devel elfutils-libelf-devel bc -y
+yum install gcc-c++ openssl-devel elfutils-libelf-devel bc aesni-intel blowfish-x86_64 perl -y
 
 make clean
 make mrproper #这两条用于清除之前编译生成的.ko和.config
@@ -22,7 +22,6 @@ yum install ncurses-devel -y
 make menuconfig基于curses的文本窗口界面
 make gconfig基于GTK(GOME)环境窗口界面
 make xconfig基于QT(KDE) 环境的窗口界面
-aesni-intel blowfish-x86_64
 
 make -j 4               #编译，半小时以上是正常的
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}

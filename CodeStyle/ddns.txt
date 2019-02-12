@@ -14,8 +14,8 @@ chenyuelin311.gicp.net
 http://b.oray.com
 phddns(start|status|stop|restart|reset|version)
 sh
-ORAY407490bc3050
-1929v78f03.iask.in
+ORAYfc40c4c49470
+zp23647800.imwork.net
 wx
 ORAY043400302468(9u****)
 2w21r49287.iok.la
