@@ -38,4 +38,6 @@ HomeGroupListener
 
 
 禁用定时任务
+/Microsoft/Windows/Application Experience/AitAgent
 /Microsoft/Windows/Application Experience/Microsoft Compatibility Appraiser
+/Microsoft/Windows/Application Experience/ProgramDataUpdater
