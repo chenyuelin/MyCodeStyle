@@ -162,3 +162,20 @@ sort_buffer_size=(2M2097152不设)
 join_buffer_size(不设)
 
 set password for root@'%' = password('xxx');
+
+
+https://mariadb.com/kb/en/library/installing-and-using-mariadb-via-docker/
+https://docs.docker.com/samples/library/mariadb/
+
+
+docker run -d --name=mariadb -h=mariadb \
+-e TIMEZONE=Asis/Shanghai \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_ROOT_HOST=% \
+-e SERVER_ID=1 \
+-v /opt/data/mariadb/dbdata:/var/lib/mysql  \
+-p 3306:3306  mariadb \
+--character-set-server=gbk --collation-server=gbk_chinese_ci \
+--log_error=/var/lib/mysql/error.log \
+--lc-messages-dir=/var/lib/mysql/ \
+--slow_query_log_file=/var/lib/mysql/mariadb-slow.log

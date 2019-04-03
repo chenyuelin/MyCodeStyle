@@ -119,3 +119,8 @@ http://cl.g0d7.pw/index.php
 
 车牌网
 https://www.zhongziso.com/
+
+国家统计局
+http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/
+
+http://ftp.blizzard.com/pub/diablo2exp/patches/PC/LODPatch_113d.exe

@@ -49,3 +49,7 @@ yum upgrade -y
 http://www.jinbuguo.com/kernel/boot_parameters.html
 cat /proc/interrupts
 cat /proc/cmdline
+
+Device Drivers
+	Serial ATA and Parallel ATA drivers (libata)
+		ATA SFF support (for legacy IDE and PATA)

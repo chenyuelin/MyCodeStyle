@@ -227,6 +227,7 @@ iftop
 http://www.ex-parrot.com/~pdw/iftop/
 iftop -i eth0 -n -P
 https://blog.csdn.net/junlon2006/article/details/70208612
+watch cat /proc/net/dev 替代iftop
 
 screen
 yum install screen -y
@@ -472,3 +473,21 @@ grep . /sys/devices/system/cpu/vulnerabilities/*
 export JAVA_HOME=/usr/local/jdk1.8.0_152/jre
 export PATH=$PATH:$JAVA_HOME/bin
 #export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+source /etc/profile
+
+unixbench
+https://github.com/cloudharmony/unixbench
+
+ss5
+http://ss5.sourceforge.net/
+yum install openldap-devel pam-devel openssl-devel -y
+wget http://jaist.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz
+wget https://nchc.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz
+vi /etc/opt/ss5/ss5.conf
+chmod a+x /etc/init.d/ss5
+/etc/rc.d/init.d/ss5 start|stop|status|restart|reload
+more /var/log/ss5/ss5.log
+Can’t create pid file /var/run/ss5/ss5.pid. Can’t unlink pid file /var/run/ss5/ss5.pid. 需要先创建 /var/run/ss5 目录后再启动 ss5
+http://ss5.sourceforge.net/configuration.htm
+SS5_SYSLOG_LEVEL=warning
+. /etc/profile

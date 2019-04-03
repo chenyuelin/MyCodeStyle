@@ -67,3 +67,34 @@ rabbitmqctl set_permissions -p /dev dev '.*' '.*' '.*'
 rabbitmqctl stop_app
 rabbitmqctl join_cluster --ram rabbit@queue
 rabbitmqctl cluster_status
+
+docker
+https://docs.docker.com/samples/library/rabbitmq/
+docker run -d -h=rabbitmq_25 --name=rabbitmq_25 -e "RABBITMQ_LOGS=/var/log/rabbitmq/rabbit.log" -e "RABBITMQ_SASL_LOGS=/var/log/rabbitmq/rabbit_sasl.log" --net=2c60878988ce --ip=192.168.2.25 d502f687f36a
+
+docker run -d -h=rabbitmq --name=rabbitmq \
+-e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin \
+-e "RABBITMQ_LOGS=/var/lib/rabbitmq/rabbit.log" -e "RABBITMQ_SASL_LOGS=/var/lib/rabbitmq/rabbit_sasl.log" \
+-e RABBITMQ_ERLANG_COOKIE='secret cookie here' -e RABBITMQ_NODENAME=rabbit@my-rabbit \
+-e RABBITMQ_DEFAULT_VHOST=/dev \
+-p 25672:25672 -p 15672:15672 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 61613:61613 \
+-p 61614:61614 -p 8883:8883 -p 1883:1883 \
+f9bf67c4c7cc
+
+For SSL configuration without the management plugin:
+RABBITMQ_SSL_CACERTFILE
+RABBITMQ_SSL_CERTFILE
+RABBITMQ_SSL_DEPTH
+RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT
+RABBITMQ_SSL_KEYFILE
+RABBITMQ_SSL_VERIFY
+
+For SSL configuration using the management plugin:
+RABBITMQ_MANAGEMENT_SSL_CACERTFILE
+RABBITMQ_MANAGEMENT_SSL_CERTFILE
+RABBITMQ_MANAGEMENT_SSL_DEPTH
+RABBITMQ_MANAGEMENT_SSL_FAIL_IF_NO_PEER_CERT
+RABBITMQ_MANAGEMENT_SSL_KEYFILE
+RABBITMQ_MANAGEMENT_SSL_VERIFY
+
+/var/lib/rabbitmq
