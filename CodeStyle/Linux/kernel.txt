@@ -50,6 +50,22 @@ http://www.jinbuguo.com/kernel/boot_parameters.html
 cat /proc/interrupts
 cat /proc/cmdline
 
+General setup
+	Automatic process group scheduling(SCHED_AUTOGROUP) 桌面开启
+	SLUB per cpu partial cache(CONFIG_SLUB_CPU_PARTIAL) 快速响应关闭，服务器开启
+	Stack Protector buffer overflow detection 看是否存在溢出None/Regular/Strong
+Processor type and features
+	Preemption Model (Server,Desktop,Low-Latency Desktop)
+	Timer frequency (100,250,300,1000)
+Bus options (PCI etc.)
+	Interrupts on hypertransport devices 允许本地的HyperTransport设备使用中断.这个只可用于AMD平台,Intel平台不支持这个.
+Executable file formats / Emulations
+	IA32 Emulation(CONFIG_IA32_EMULATION) 允许在64位内核中运行32位代码
+	x32 ABI for 64-bit mode(CONFIG_X86_X32) 这可以提高32位程序的运行性能,如果你使用binutils-2.22以上的版本支持elf32_x86_64,就选"Y"
 Device Drivers
 	Serial ATA and Parallel ATA drivers (libata)
 		ATA SFF support (for legacy IDE and PATA)
+	Graphics support
+		Laptop Hybrid Graphics - GPU switching support(支持多个显卡之间的切换，通常是在集显和独显之间，这项特性主要用于笔记本)
+		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)允许应用程序以高效安全的方式直接访问GPU,主要用于硬件3D加速.不需要图形界面的用户应该选"N".桌面用户建议选"Y"
+		I2C encoder or helper chips(I2C编码器或辅助芯片,N卡用)
