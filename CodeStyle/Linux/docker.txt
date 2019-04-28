@@ -48,4 +48,5 @@ docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -
 
 redis
 dir参数默认为/data
-docker run -d -h=redis --name redis -p 6379:6379 xxxxx --requirepass "a6%8YDCnd<BgH_z=" --logfile "/data/redis.log"
+docker run -d -h=redis --name redis -p 6379:6379 -e TZ='Asia/Shanghai' xxxxx --requirepass "a6%8YDCnd<BgH_z=" --logfile "/data/redis.log"
+docker exec -it xxx redis-cli

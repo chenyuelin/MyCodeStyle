@@ -169,12 +169,14 @@ https://docs.docker.com/samples/library/mariadb/
 
 
 docker run -d --name=mariadb -h=mariadb \
--e TIMEZONE=Asis/Shanghai \
+-e TZ='Asia/Shanghai' \
+-e TIMEZONE=c \
 -e MYSQL_ROOT_PASSWORD=root \
 -e MYSQL_ROOT_HOST=% \
 -e SERVER_ID=1 \
 -v /opt/data/mariadb/dbdata:/var/lib/mysql  \
 -p 3306:3306  mariadb \
+--default-time-zone='+8:00' \
 --character-set-server=gbk --collation-server=gbk_chinese_ci \
 --log_error=/var/lib/mysql/error.log \
 --lc-messages-dir=/var/lib/mysql/ \
