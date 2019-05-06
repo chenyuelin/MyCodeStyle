@@ -50,6 +50,8 @@ http://www.jinbuguo.com/kernel/boot_parameters.html
 cat /proc/interrupts
 cat /proc/cmdline
 
+pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable no_stf_barrier
+
 General setup
 	Automatic process group scheduling(SCHED_AUTOGROUP) 桌面开启
 	SLUB per cpu partial cache(CONFIG_SLUB_CPU_PARTIAL) 快速响应关闭，服务器开启
