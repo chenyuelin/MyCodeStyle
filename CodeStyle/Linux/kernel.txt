@@ -50,7 +50,8 @@ http://www.jinbuguo.com/kernel/boot_parameters.html
 cat /proc/interrupts
 cat /proc/cmdline
 
-pti=off spectre_v2=off l1tf=off nospec_store_bypass_disable no_stf_barrier
+https://blog.csdn.net/wangwoshida/article/details/84753945
+nopti(pti=off) nospectre_v2(spectre_v2=off) nospec_store_bypass_disable(spec_store_bypass_disable=off) l1tf=off eagerfpu=off no_stf_barrier nospectre_v1
 
 General setup
 	Automatic process group scheduling(SCHED_AUTOGROUP) ×ÀÃæ¿ªÆô
