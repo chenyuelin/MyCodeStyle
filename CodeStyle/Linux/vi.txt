@@ -3,6 +3,8 @@ http://blog.chinaunix.net/uid-23964952-id-180556.html
 
 http://blog.csdn.net/edward_qing_lee/article/details/23290339(删除很全)
 
+vi "+e ++enc=gb18030" xxxx
+
 显示行号
 输入命令：vi /etc/virc(/etc/vimrc)
 set nu	行号
