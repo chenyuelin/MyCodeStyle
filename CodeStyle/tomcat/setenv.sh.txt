@@ -1,0 +1,14 @@
+export JAVA_OPTS="-server -Xms2g -Xmx3g \
+-Drabbitmq.connection.addresses=127.0.0.1 \
+-DredsiHostName=127.0.0.1 \
+-Dcom.sun.management.jmxremote=true \
+-Djava.rmi.server.hostname=192.168.2.20 \
+-Dcom.sun.management.jmxremote.port=7091 \
+-Dcom.sun.management.jmxremote.rmi.port=40216 \
+-Dcom.sun.management.jmxremote.authenticate=true \
+-Dcom.sun.management.jmxremote.access.file=/home/cyl/software/apache-tomcat-8.5.38/conf/jmxremote.access \
+-Dcom.sun.management.jmxremote.password.file=/home/cyl/software/apache-tomcat-8.5.38/conf/jmxremote.password.template \
+-Dcom.sun.management.jmxremote.ssl=false 
+"
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CATALINA_HOME/lib:/usr/local/apr/lib
