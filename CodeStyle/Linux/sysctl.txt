@@ -1,0 +1,6 @@
+sysctl -w net.ipv4.tcp_timestamps=1 开启对于TCP时间戳的支持,默认打开
+
+sysctl -w net.ipv4.tcp_tw_reuse=1 只对客户端起作用，开启后客户端在1s内回收。表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭。
+sysctl -w net.ipv4.tcp_tw_recycle=1 对客户端和服务器同时起作用，开启后在 3.5*RTO 内回收，RTO 200ms~ 120s 具体时间视网络状况。表示开启TCP连接中TIME-WAIT sockets的快速回收
+
+tw_reuse，tw_recycle 必须在客户端和服务端 timestamps 开启时才管用
