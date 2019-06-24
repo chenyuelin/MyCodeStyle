@@ -1,0 +1,10 @@
+https://www.cnblogs.com/muscleape/p/6385583.html
+http://www.mamicode.com/info-detail-2044417.html
+https://blog.51cto.com/hmtk520/2065710
+https://blog.51cto.com/13866567/2296457
+https://blog.51cto.com/10316297/2118395
+https://blog.csdn.net/xing_____/article/details/44831697
+
+xp解决方法（任选一种都可解决）：
+1. Samba服务器端smb.conf配置文件中添加“ntlm auth = yes”后重启smb服务。
+2. Windows XP客户端修改本地安全设置、安全选项、“网络安全：LAN Manager身份验证级别”的值为“仅发送 NTLMv2响应”。
