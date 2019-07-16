@@ -8,6 +8,10 @@ https://www.spice-space.org/download/windows/qxl/
 
 yum install -y qemu-kvm libvirt virt-install
 
+/etc/libvirt/qemu/networks/default.xml 修改dhcp
+
+/etc/libvirt/qemu.conf 修改用户组(＃user = "root"  #group = "root" ）
+
 virt-install --virt-type=kvm --accelerate --name=xp --memory=2048 \
 --arch=x86_64 \
 --cpu host-passthrough (host-model)
