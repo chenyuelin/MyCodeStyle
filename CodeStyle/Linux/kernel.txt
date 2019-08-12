@@ -53,6 +53,15 @@ cat /proc/cmdline
 https://blog.csdn.net/wangwoshida/article/details/84753945
 nopti(pti=off) nospectre_v2(spectre_v2=off) nospec_store_bypass_disable(spec_store_bypass_disable=off) l1tf=off eagerfpu=off no_stf_barrier nospectre_v1
 
+MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup 1) 开启gpu优化，有兼容问题可以关闭
+Enable PCI resource re-allocation detection/CONFIG_PCI_REALLOC_ENABLE_AUTO (pci=realloc=[on|off])
+Automount devtmpfs at /dev, after the kernel mounted the rootfs/CONFIG_DEVTMPFS_MOUNT (init=/bin/sh devtmpfs.mount=1)
+Number of loop devices to pre-create at init time/CONFIG_BLK_DEV_LOOP_MIN_COUNT (loop.max_loop=[0,1,2]) iso9660镜像文件系统预先初始化的loop设备个数
+SCSI: use blk-mq I/O path by default/CONFIG_SCSI_MQ_DEFAULT (scsi_mod.use_blk_mq) 对所有SCSI块设备I/O请求分散至多个CPU处理以提高性能
+Autodetect RAID arrays during kernel boot/CONFIG_MD_AUTODETECT (raid=noautodetect) 在内核启动过程中自动检测RAID模式
+Enable alpha quality support for new Intel hardware by default (i915.alpha_support=1) intel核显透明支持
+
+
 General setup
 	Automatic process group scheduling(SCHED_AUTOGROUP) 桌面开启
 	SLUB per cpu partial cache(CONFIG_SLUB_CPU_PARTIAL) 快速响应关闭，服务器开启
@@ -60,6 +69,15 @@ General setup
 Processor type and features
 	Preemption Model (Server,Desktop,Low-Latency Desktop)
 	Timer frequency (100,250,300,1000)
+	Reroute for broken boot IRQs (在某些情况下会发送多余的"boot IRQ"的修复功能)
+	AMD ACPI2Platform devices support (AMD)
+	AMD MCE features (AMD)
+	Performance monitoring
+		AMD Processor Power Reporting Mechanism (AMD)
+	AMD microcode loading support (AMD)
+Power management and ACPI options
+	CPU Frequency scaling
+		AMD frequency sensitivity feedback powersave bias (AMD Family 16h 或者更高级别的处理器,同时又使用"ondemand"频率调节器)
 Bus options (PCI etc.)
 	Interrupts on hypertransport devices 允许本地的HyperTransport设备使用中断.这个只可用于AMD平台,Intel平台不支持这个.
 Executable file formats / Emulations
@@ -72,3 +90,9 @@ Device Drivers
 		Laptop Hybrid Graphics - GPU switching support(支持多个显卡之间的切换，通常是在集显和独显之间，这项特性主要用于笔记本)
 		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)允许应用程序以高效安全的方式直接访问GPU,主要用于硬件3D加速.不需要图形界面的用户应该选"N".桌面用户建议选"Y"
 		I2C encoder or helper chips(I2C编码器或辅助芯片,N卡用)
+Device Drivers
+	Parallel port support (25针并口LPT接口支持)
+	Block devices
+		Normal floppy disk support (通用软驱支持)
+	Graphics support
+		Nouveau (NVIDIA) cards (nvidia开源驱动)
