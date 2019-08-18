@@ -66,8 +66,8 @@ General setup
 	Automatic process group scheduling(SCHED_AUTOGROUP) 桌面开启
 	SLUB per cpu partial cache(CONFIG_SLUB_CPU_PARTIAL) 快速响应关闭，服务器开启
 	Stack Protector buffer overflow detection 看是否存在溢出None/Regular/Strong
-Processor type and features
 	Preemption Model (Server,Desktop,Low-Latency Desktop)
+Processor type and features
 	Timer frequency (100,250,300,1000)
 	Reroute for broken boot IRQs (在某些情况下会发送多余的"boot IRQ"的修复功能)
 	AMD ACPI2Platform devices support (AMD)
