@@ -114,7 +114,7 @@ virsh attach-device --live xp /opt/a.xml
   <address type='drive' controller='0' bus='0' target='0' unit='0'/>
 </disk>
 
-virsh change-media xp hda/fda [--eject,/dev/cdrom]
+virsh change-media xp [hda/fda] [/dev/cdrom,--eject]
 
 virsh capabilities(²é¿´cpu topology)
 virsh emulatorpin xxxx 1-3
