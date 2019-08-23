@@ -8,6 +8,10 @@ https://www.spice-space.org/download/windows/qxl/
 
 yum install -y qemu-kvm libvirt virt-install
 
+/etc/libvirt/qemu/networks/default.xml 修改dhcp
+
+/etc/libvirt/qemu.conf 修改用户组(＃user = "root"  #group = "root" ）
+
 virt-install --virt-type=kvm --accelerate --name=xp --memory=2048 \
 --arch=x86_64 \
 --cpu host-passthrough (host-model)
@@ -110,7 +114,7 @@ virsh attach-device --live xp /opt/a.xml
   <address type='drive' controller='0' bus='0' target='0' unit='0'/>
 </disk>
 
-virsh change-media xp hda /dev/cdrom
+virsh change-media xp [hda/fda] [/dev/cdrom,--eject]
 
 virsh capabilities(查看cpu topology)
 virsh emulatorpin xxxx 1-3
