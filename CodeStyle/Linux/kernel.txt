@@ -24,6 +24,7 @@ make gconfig基于GTK(GOME)环境窗口界面
 make xconfig基于QT(KDE) 环境的窗口界面
 
 make -j 4               #编译，半小时以上是正常的
+make modules		#编译模块
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
 make install
 
@@ -53,7 +54,7 @@ cat /proc/cmdline
 https://blog.csdn.net/wangwoshida/article/details/84753945
 nopti(pti=off) nospectre_v2(spectre_v2=off) nospec_store_bypass_disable(spec_store_bypass_disable=off) l1tf=off eagerfpu=off no_stf_barrier nospectre_v1
 
-MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup 1) 开启gpu优化，有兼容问题可以关闭
+MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup enable_mtrr_cleanup mtrr_spare_reg_nr=1 mtrr_gran_size=32M mtrr_chunk_size=128M) 开启gpu优化，有兼容问题可以关闭
 Enable PCI resource re-allocation detection/CONFIG_PCI_REALLOC_ENABLE_AUTO (pci=realloc=[on|off])
 Automount devtmpfs at /dev, after the kernel mounted the rootfs/CONFIG_DEVTMPFS_MOUNT (init=/bin/sh devtmpfs.mount=1)
 Number of loop devices to pre-create at init time/CONFIG_BLK_DEV_LOOP_MIN_COUNT (loop.max_loop=[0,1,2]) iso9660镜像文件系统预先初始化的loop设备个数
@@ -90,9 +91,16 @@ Device Drivers
 		Laptop Hybrid Graphics - GPU switching support(支持多个显卡之间的切换，通常是在集显和独显之间，这项特性主要用于笔记本)
 		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)允许应用程序以高效安全的方式直接访问GPU,主要用于硬件3D加速.不需要图形界面的用户应该选"N".桌面用户建议选"Y"
 		I2C encoder or helper chips(I2C编码器或辅助芯片,N卡用)
-Device Drivers
+		Nouveau (NVIDIA) cards (nvidia开源驱动)
 	Parallel port support (25针并口LPT接口支持)
 	Block devices
 		Normal floppy disk support (通用软驱支持)
+
+########## 慎选 ################
+Networking support
+	Networking options
+		BPF based packet filtering framework/CONFIG_BPFILTER 选上之后会使KVM默认网络设置的虚拟机不能使用网络。
+Device Drivers
 	Graphics support
-		Nouveau (NVIDIA) cards (nvidia开源驱动)
+		Virtual GEM provider/CONFIG_DRM_VGEM 可设M；如设为*则进不了桌面系统，/var/log/Xorg.x.log查看到"(II) modeset(0): using drv /dev/dri/card2"而打不到设备。
+

@@ -126,3 +126,11 @@ https://www.zhongziso.com/
 http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/
 
 http://ftp.blizzard.com/pub/diablo2exp/patches/PC/LODPatch_113d.exe
+
+ä¯ÀÀÆ÷½Å±¾
+https://greasyfork.org/zh-CN
+https://github.com/syhyz1990/baiduyun
+https://xdown.org/
+
+XDM
+http://xdman.sourceforge.net/
