@@ -7,7 +7,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 http://blog.51cto.com/191226139/2059117
 
 kernel_4.14
-yum install gcc-c++ openssl-devel elfutils-libelf-devel bc aesni-intel blowfish-x86_64 perl bison flex -y
+yum install openssl-devel elfutils-libelf-devel ncurses-devel -y
 
 make clean
 make mrproper #这两条用于清除之前编译生成的.ko和.config
@@ -18,13 +18,13 @@ make distclean删除的文件， 加上编辑备份文件和一些补丁文件。
 
 make oldconfig          #使用当前的内核配置
 make defconfig基于内核为目标平台执行提供的"默认"配置进行配置
-yum install ncurses-devel -y
 make menuconfig基于curses的文本窗口界面
 make gconfig基于GTK(GOME)环境窗口界面
 make xconfig基于QT(KDE) 环境的窗口界面
 
 make -j 4               #编译，半小时以上是正常的
 make modules		#编译模块
+make headers_install
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
 make install
 
@@ -51,10 +51,19 @@ http://www.jinbuguo.com/kernel/boot_parameters.html
 cat /proc/interrupts
 cat /proc/cmdline
 
+command line ipv6.disable=1
+/etc/sysctl.d/xxxxx.conf (/etc/sysctl.conf)
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+
+运行中的系统
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
 https://blog.csdn.net/wangwoshida/article/details/84753945
 nopti(pti=off) nospectre_v2(spectre_v2=off) nospec_store_bypass_disable(spec_store_bypass_disable=off) l1tf=off eagerfpu=off no_stf_barrier nospectre_v1
 
-MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup enable_mtrr_cleanup mtrr_spare_reg_nr=1 mtrr_gran_size=32M mtrr_chunk_size=128M) 开启gpu优化，有兼容问题可以关闭
+MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup mtrr_spare_reg_nr=1 mtrr_gran_size=32M mtrr_chunk_size=128M) 开启gpu优化，有兼容问题可以关闭
 Enable PCI resource re-allocation detection/CONFIG_PCI_REALLOC_ENABLE_AUTO (pci=realloc=[on|off])
 Automount devtmpfs at /dev, after the kernel mounted the rootfs/CONFIG_DEVTMPFS_MOUNT (init=/bin/sh devtmpfs.mount=1)
 Number of loop devices to pre-create at init time/CONFIG_BLK_DEV_LOOP_MIN_COUNT (loop.max_loop=[0,1,2]) iso9660镜像文件系统预先初始化的loop设备个数
@@ -64,9 +73,8 @@ Enable alpha quality support for new Intel hardware by default (i915.alpha_suppo
 
 
 General setup
-	Automatic process group scheduling(SCHED_AUTOGROUP) 桌面开启
-	SLUB per cpu partial cache(CONFIG_SLUB_CPU_PARTIAL) 快速响应关闭，服务器开启
-	Stack Protector buffer overflow detection 看是否存在溢出None/Regular/Strong
+	Automatic process group scheduling/SCHED_AUTOGROUP 桌面开启
+	SLUB per cpu partial cache/CONFIG_SLUB_CPU_PARTIAL 快速响应关闭，服务器开启
 	Preemption Model (Server,Desktop,Low-Latency Desktop)
 Processor type and features
 	Timer frequency (100,250,300,1000)
@@ -76,12 +84,14 @@ Processor type and features
 	Performance monitoring
 		AMD Processor Power Reporting Mechanism (AMD)
 	AMD microcode loading support (AMD)
+General arachitecture-dependent options
+	Stack Protector buffer overflow detection/CONFIG_STACKPROTECTOR 看是否存在溢出None/Regular/Strong
 Power management and ACPI options
 	CPU Frequency scaling
 		AMD frequency sensitivity feedback powersave bias (AMD Family 16h 或者更高级别的处理器,同时又使用"ondemand"频率调节器)
 Bus options (PCI etc.)
 	Interrupts on hypertransport devices 允许本地的HyperTransport设备使用中断.这个只可用于AMD平台,Intel平台不支持这个.
-Executable file formats / Emulations
+Binary Emulations
 	IA32 Emulation(CONFIG_IA32_EMULATION) 允许在64位内核中运行32位代码
 	x32 ABI for 64-bit mode(CONFIG_X86_X32) 这可以提高32位程序的运行性能,如果你使用binutils-2.22以上的版本支持elf32_x86_64,就选"Y"
 Device Drivers

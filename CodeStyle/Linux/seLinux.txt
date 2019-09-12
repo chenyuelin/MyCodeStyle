@@ -9,7 +9,7 @@ setenforce 0(permissive模式)
 setenforce 1(enforcing模式)
 永久关闭
 修改/etc/selinux/config
-将SELINUX=enforcing改为SELINUX=disabled
+将SELINUX=enforcing改为SELINUX=permissive/disabled
 http://blog.csdn.net/jmilk/article/details/50337721
 http://blog.chinaunix.net/uid-26495963-id-3300475.html
 http://www.toxingwang.com/linux-unix/linux-basic/900.html
