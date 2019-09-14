@@ -2,6 +2,7 @@
 https://blog.csdn.net/u014690420/article/details/77855640
 sudo yum -y install epel-release
 yum-config-manager --add-repo=http://negativo17.org/repos/epel-steam.repo
+dnf config-manager --add-repo=https://negativo17.org/repos/fedora-steam.repo
 http://li.nux.ro/download/nux/dextop/el7/x86_64/ (Download all latest nux-dextop-release rpm from)
 rpm -Uvh nux-dextop-release*rpm
 yum -y install epel-release
