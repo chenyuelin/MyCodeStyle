@@ -49,3 +49,12 @@ make install
 --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32
 
 --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32
+
+
+下载repo文件，复制到/etc/yum.repos.d目录下
+http://spot.fedorapeople.org/steam/steam.repo
+
+rpm -Uvh http://mirrors.kernel.org/fedora-epel/epel-release-latest-7.noarch.rpm
+
+https://negativo17.org/steam/
+dnf config-manager --add-repo=https://negativo17.org/repos/fedora-steam.repo dnf -y install steam kernel-modules-extra

@@ -458,6 +458,7 @@ fg x(将后台中的命令x调至前台继续运行)
 bg x(将一个在后台暂停的命令x，变成继续执行)
 
 hostnamectl 设置主机名
+hostnamectl set-hostname cyl_fedora_workstation
 https://blog.csdn.net/dream361/article/details/56833248
 https://blog.csdn.net/linuxnews/article/details/51112022
 https://jingyan.baidu.com/article/a501d80c35cf9dec620f5e40.html

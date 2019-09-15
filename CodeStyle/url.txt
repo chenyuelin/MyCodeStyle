@@ -141,3 +141,6 @@ https://u9388027.pipipan.com/dir/9388027-28227217-5babc8/
 
 ¿ªÔ´¾µÏñÕ¾
 https://mirrors.tuna.tsinghua.edu.cn/
+
+fedora
+http://mirrors.yun-idc.com/fedora/releases/
