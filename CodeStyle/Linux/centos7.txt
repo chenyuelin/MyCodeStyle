@@ -492,3 +492,17 @@ Can’t create pid file /var/run/ss5/ss5.pid. Can’t unlink pid file /var/run/ss5
 http://ss5.sourceforge.net/configuration.htm
 SS5_SYSLOG_LEVEL=warning
 . /etc/profile
+
+fedora在线安装源
+https://www.cnblogs.com/jackadam/p/8195100.html
+https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/$releasever/Everything/$basearch/os/
+
+
+systemctl set-default multi-user.target
+
+systemctl set-default graphical.target
+
+
+dnf install vdpauinfo libva-vdpau-driver libva-utils
+/usr/lib/modprobe.d/nvidia-installer-disable-nouveau.conf
+./NVIDIA-Linux-x86_64-430.26.run  --kernel-source-path=/usr/src/kernels/
