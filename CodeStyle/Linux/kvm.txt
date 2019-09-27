@@ -138,3 +138,16 @@ https://blog.csdn.net/dylloveyou/article/details/71169463
 <cpu mode='host-passthrough' check='none'>
   <topology sockets='1' cores='2' threads='2'/>
 </cpu>
+
+usb
+1)lsusb
+2)vi usb.xml
+<hostdev mode='subsystem' type='usb'>
+  <source>
+    <vendor id='0x0424'/>
+    <product id='0x2514'/>
+  </source>
+</hostdev>
+Bus 001 Device 003: ID 0424:2514 Standard Microsystems Corp. USB 2.0 Hub (vendor id : product id = 0424:2514)
+virsh attach-device domain usb.xml
+virsh detach-device domain usb.xml

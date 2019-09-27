@@ -18,3 +18,74 @@ make
 make install
 
 https://www.cnblogs.com/lidp/archive/2009/05/22/1697959.html
+http://www.mikewootc.com/wiki/linux/usage/rtorrent.html
+
+配置
+# https://github.com/rakshasa/rtorrent/blob/master/doc/rtorrent.rc
+#每个种子所允许的最大最小连接数
+#min_peers = 40
+#max_peers = 52
+#throttle.min_peers.normal.set = 40
+throttle.max_peers.normal.set = 100
+
+
+# 同上，针对的是已经完成的种子 （-1 表示和下载中的种子一致）
+#min_peers_seed = 1
+#max_peers_seed = 5
+throttle.min_peers.seed.set = 5
+throttle.max_peers.seed.set = 10
+
+
+#每个种子的最大同时上传数
+#max_uploads = 8
+throttle.max_uploads.set = 8
+
+#选项将在下载完成或 rTorrent 重新启动时对文件进行 Hash 校验。这将确保你获得/做种的文件没有错误
+#check_hash = yes
+pieces.hash.on_completion.set = no
+
+#port_range = 65001-65535
+network.port_range.set = 65001-65535
+network.port_random.set = yes
+
+# Enable DHT support for trackerless torrents or when all trackers are down.
+# May be set to "disable" (completely disable DHT), "off" (do not start DHT),
+# "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
+# The default is "off". For DHT to work, a session directory must be defined.
+#
+# dht.mode.set = auto
+
+# UDP port to use for DHT.
+#
+#dht.port.set = 65000
+
+# 使能 peer 的交换 (对那些没有被标记为私有的 torrent)
+#peer_exchange = yes
+protocol.pex.set = yes
+
+# Set whether the client should try to connect to UDP trackers.
+trackers.use_udp.set = yes
+
+# Encryption options, set to none (default) or any combination of the following:
+# allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+#
+# The example value allows incoming encrypted connections, starts unencrypted
+# outgoing connections but retries with encryption if they fail, preferring
+# plain-text to RC4 encryption after the encrypted handshake.
+#
+#protocol.encryption.set = try_outgoing,require
+
+# 临时下载文件
+#directory = /home/cyl/software/rtorrent/directory
+directory.default.set = /home/cyl/Downloads
+
+# 保存和恢复torrent会话的目录
+# session = /home/cyl/software/rtorrent/session
+session.path.set = /home/cyl/software/rtorrent/session
+
+#schedule = watch_directory,5,5,load_start=/home/cyl/software/rtorrent/schedule/*.torrent 
+
+pieces.memory.max.set = 1800M
+network.xmlrpc.size_limit.set = 4M
+
+
