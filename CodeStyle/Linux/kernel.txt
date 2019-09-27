@@ -62,6 +62,8 @@ sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
 https://blog.csdn.net/wangwoshida/article/details/84753945
 nopti(pti=off) nospectre_v2(spectre_v2=off) nospec_store_bypass_disable(spec_store_bypass_disable=off) l1tf=off eagerfpu=off no_stf_barrier nospectre_v1
+mitigations=[auto|auto,nosmt|off]
+https://github.com/speed47/spectre-meltdown-checker
 
 MTRR cleanup enable value/CONFIG_MTRR_SANITIZER_ENABLE_DEFAULT (enable_mtrr_cleanup mtrr_spare_reg_nr=1 mtrr_gran_size=32M mtrr_chunk_size=128M) 开启gpu优化，有兼容问题可以关闭
 Enable PCI resource re-allocation detection/CONFIG_PCI_REALLOC_ENABLE_AUTO (pci=realloc=[on|off])
@@ -97,6 +99,11 @@ Binary Emulations
 Device Drivers
 	Serial ATA and Parallel ATA drivers (libata)
 		ATA SFF support (for legacy IDE and PATA)
+	Input device support
+		Joysticks/Gamepads (游戏杆驱动)
+		Tablets (平板驱动)
+		Hardware I/O ports
+			Gameport support (15针电脑游戏接口)
 	Graphics support
 		Laptop Hybrid Graphics - GPU switching support(支持多个显卡之间的切换，通常是在集显和独显之间，这项特性主要用于笔记本)
 		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)允许应用程序以高效安全的方式直接访问GPU,主要用于硬件3D加速.不需要图形界面的用户应该选"N".桌面用户建议选"Y"
