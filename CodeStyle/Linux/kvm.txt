@@ -40,7 +40,7 @@ static ip配置
 /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 TYPE=Ethernet
-HWADDR=00:14:5E:C2:1E:40
+HWADDR=00:14:5E:C2:1E:40 #网卡的Mac地址
 ONBOOT=yes
 NM_CONTROLLED=no
 BRIDGE=br0
@@ -48,17 +48,23 @@ BRIDGE=br0
 /etc/sysconfig/network-scripts/ifcfg-br0
 DEVICE=br0
 TYPE=Bridge
-NM_CONTROLLED=no
+NM_CONTROLLED=no #实时生效，修改后无需要重启网卡立即生效。
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
 BOOTPROTO=static
 IPADDR=10.10.1.152
 NETMASK=255.255.255.0
+GATEWAY=10.10.1.1
+DNS1=10.10.1.1
+DNS2=8.8.8.8
 ONBOOT=yes
 
 DHCP配置
 /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 TYPE=Ethernet
-HWADDR=00:14:5E:C2:1E:40
+HWADDR=00:14:5E:C2:1E:40 #网卡的Mac地址
 ONBOOT=yes
 NM_CONTROLLED=no
 BRIDGE=br0 	
@@ -66,9 +72,12 @@ BRIDGE=br0
 /etc/sysconfig/network-scripts/ifcfg-br0
 DEVICE=br0
 TYPE=Bridge
-NM_CONTROLLED=no
+NM_CONTROLLED=no #实时生效，修改后无需要重启网卡立即生效。
 BOOTPROTO=dhcp
 ONBOOT=yes
+
+systemctl restart network
+brctl show
 
 #可以不用#
 向文件/etc/sysctl.conf添加以下代码:
