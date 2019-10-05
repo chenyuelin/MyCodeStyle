@@ -497,12 +497,51 @@ fedora在线安装源
 https://www.cnblogs.com/jackadam/p/8195100.html
 https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/$releasever/Everything/$basearch/os/
 
-
+https://www.if-not-true-then-false.com/2015/fedora-nvidia-guide/
 systemctl set-default multi-user.target
-
 systemctl set-default graphical.target
-
 
 dnf install vdpauinfo libva-vdpau-driver libva-utils
 /usr/lib/modprobe.d/nvidia-installer-disable-nouveau.conf
 ./NVIDIA-Linux-x86_64-430.26.run  --kernel-source-path=/usr/src/kernels/
+
+调大TCP最大连接数
+用户级别进程
+echo "ulimit -HSn 65536" >> /etc/rc.local
+echo "ulimit -HSn 65536" >> /root/.bash_profile
+ulimit -HSn 65536
+
+open files的数值永久生效
+1)vi /etc/security/limits.conf
+* soft nofile 65535
+* hard nofile 65535
+* soft nproc 65535
+* hard nproc 65535
+2)vi /etc/pam.d/login
+session required pam_limits.so
+3)ulimit -n 查看
+
+sysctl.txt中有相关TCP TIME_WAIT优化
+(下列一般可不作更改)最大文件数，一般不用修改如fedora30为9223372036854775807
+查看sysctl -a|grep file-max
+vim /etc/sysctl.conf
+fs.file-max = 1000000
+立即生效：
+# sysctl -p
+net.ipv4.ip_conntrack_max = 1000000
+net.ipv4.netfilter.ip_conntrack_max = 1000000
+该参数设置系统的TIME_WAIT的数量，如果超过默认值则会被立即清除
+net.ipv4.tcp_max_tw_buckets = 20000
+定义了系统中每一个端口最大的监听队列的长度，这是个全局的参数
+net.core.somaxconn = 65535
+对于还未获得对方确认的连接请求，可保存在队列中的最大数目
+net.ipv4.tcp_max_syn_backlog = 262144
+在每个网络接口接收数据包的速率比内核处理这些包的速率快时，允许送到队列的数据包的最大数目
+net.core.netdev_max_backlog = 30000
+能够更快地回收TIME-WAIT套接字。此选项会导致处于NAT网络的客户端超时，建议为0
+net.ipv4.tcp_tw_recycle = 0
+系统所有进程一共可以打开的文件数量
+fs.file-max = 6815744
+防火墙跟踪表的大小。注意：如果防火墙没开则会提示error: "net.netfilter.nf_conntrack_max" is an unknown key，忽略即可
+net.netfilter.nf_conntrack_max = 2621440
+
