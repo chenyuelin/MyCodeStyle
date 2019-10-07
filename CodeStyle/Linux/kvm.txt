@@ -98,6 +98,16 @@ net.bridge.bridge-nf-call-arptables = 0
     <mac address="00:16:e4:9a:b3:6a" /> <!--为虚拟机分配mac地址，务必唯一，否则dhcp获得同样ip,引起冲突-->
 </interface>
 
+<network>
+  <name>br0</name>
+  <uuid>fb48b969-b9f4-e859-d957-50aedd850fb4</uuid>
+  <forward mode='bridge'>
+    <bridge name='br0'/>
+  </forward>
+</network>
+virsh net-create/net-define br0.xml
+virsh net-start br0
+
 添加esc启动选项
 <os>
 <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>

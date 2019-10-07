@@ -1,5 +1,6 @@
 centos7 xl2tpd libreswan vpn
 
+https://libreswan.org/man/ipsec.conf.5.html
 http://www.linuxcc.com/archives/56.html
 http://www.orangetakam.com/blog/archives/201
 https://imkira.com/a15.html
@@ -18,11 +19,12 @@ vi /etc/ipsec.conf
 vi /etc/ipsec.d/l2tp_psk.conf(此文件不存在 需要手动创建)
 conn L2TP-PSK-NAT
 	rightsubnet=vhost:%priv
-	forceencaps=yes(强制使用NAT-T，在不正常的情况下可以试下此值)
+	encapsulation=yes(强制使用NAT-T，在不正常的情况下可以试下此值)
 	also=L2TP-PSK-noNAT
 	auto=add
 conn L2TP-PSK-noNAT
-	authby=secret
+	authby=secret #PSK认证
+	ikev2=insist #强制使用ikev2
 	pfs=no
 	#keyingtries=3
 	#dpdaction=clear
@@ -57,7 +59,7 @@ vi /etc/ipsec.secrets
 include /etc/ipsec.d/*.secrets(却省配置中已包含这行，请确认)
 vi /etc/ipsec.d/linuxcc_l2tp.secrets(新建的文件)
 "Local Ip address" "remote ip address" :PSK "your key"
-列：192.168.3.148 %any 0.0.0.0 :PSK "123"
+列：192.168.3.148 %any/0.0.0.0: PSK "123"
 %any %any: PSK "shqy"(这里配制成功案例)
 
 6)修改内核支持，可以对照以下配置修改，或者直接复制，修改完后运行sysctl -p 使配置生效
@@ -98,11 +100,11 @@ ipsec saref = yes(启用xl2tpd的ipsec支持)
 #设置建立连接后，分配给客户端的ip地址ip range与local ip,并可以注掉ppp debug = yes
 ip range = 192.168.1.128-192.168.1.254
 local ip = 192.168.1.99
-9)修改xl2tpd属性配置文件
+9)修改/etc/ppp/options.xl2tpd属性配置文件
 添加require-mschap-v2(用来支持windows 7，windows8 连接)
 修改ms-dns(分配给客户端的dns)
 debug也可以注掉
-10）建立xl2tpd连接的用户
+10)设置拨号用户名和密码
 vi /etc/ppp/chap-secrets
 用户名 服务器名称 密码 客户端ip
 cyl * cyl *(现有例子)
