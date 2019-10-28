@@ -561,3 +561,6 @@ net.netfilter.nf_conntrack_max = 2621440
 Evolution and Office 365
 https://askubuntu.com/questions/109548/evolution-and-office-365/280075
 https://outlook.office365.com/EWS/Exchange.asmx
+
+torsocks(socket client)
+https://github.com/dgoulet/torsocks
