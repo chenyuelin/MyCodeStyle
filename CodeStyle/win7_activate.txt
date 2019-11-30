@@ -33,3 +33,18 @@ cscript ospp.vbs /remhst
 
 --------------------------------------- win8 win7 128gÄÚ´æÖ§³Ö --------------------------------------
 http://wj32.org/wp/
+
+start kms service
+cd /home/cyl/software/binaries/Linux/intel/static
+./vlmcsd-x64-musl-static
+
+windows
+slmgr /skms zp23647800.imwork.net
+slmgr /ato
+slmgr /xpr
+
+office
+cd C:\Program Files\Microsoft Office\Office15
+cscript ospp.vbs /sethst:zp23647800.imwork.net
+cscript ospp.vbs /act
+cscript ospp.vbs /dstatus
