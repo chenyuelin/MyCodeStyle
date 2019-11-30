@@ -170,3 +170,7 @@ usb
 Bus 001 Device 003: ID 0424:2514 Standard Microsystems Corp. USB 2.0 Hub (vendor id : product id = 0424:2514)
 virsh attach-device domain usb.xml
 virsh detach-device domain usb.xml
+
+
+ֱͨ
+https://blog.csdn.net/halcyonbaby/article/details/37776211
