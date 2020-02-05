@@ -57,6 +57,9 @@ http://alter.org.ua/en/soft/win/uni_ata/
 小马激活
 http://www.pccppc.com/
 
+ivy
+http://www.apache.org/dist/ant/ivyde/updatesite/
+
 Prime95
 https://www.mersenne.org
 
@@ -111,7 +114,7 @@ http://jd.benow.ca/
 
 得自由
 https://devpn.com/
-http://devpn.club/
+https://deding.site/
 us1.heon.win
 
 cl1024
