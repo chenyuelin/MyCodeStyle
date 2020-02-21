@@ -57,6 +57,9 @@ http://alter.org.ua/en/soft/win/uni_ata/
 Ð¡Âí¼¤»î
 http://www.pccppc.com/
 
+ivy
+http://www.apache.org/dist/ant/ivyde/updatesite/
+
 Prime95
 https://www.mersenne.org
 
