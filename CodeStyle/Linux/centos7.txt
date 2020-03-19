@@ -566,3 +566,11 @@ https://outlook.office365.com/EWS/Exchange.asmx
 
 torsocks(socket client)
 https://github.com/dgoulet/torsocks
+
+linux环境gcc多版本共存和版本切换
+sudo yum install centos-release-scl scl-utils-build
+yum list all --enablerepo='centos-sclo-rh'|grep gcc
+sudo yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-gcc-gdb-plugin devtoolset-9-gcc-gfortran devtoolset-9-libgccjit
+scl -l
+scl enable devtoolset-9 bash
+https://www.vpser.net/manage/centos-6-upgrade-gcc.html
