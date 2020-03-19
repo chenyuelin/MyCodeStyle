@@ -177,6 +177,8 @@ firewall-cmd --get-services
 firewall-cmd --info-service ssh
 firewall-cmd --get-default-zone
 firewall-cmd --set-default-zone=external
+firewall-cmd --zone=trusted --add-interface=eth0
+firewall-cmd --zone=trusted --change-interface=eth0
 firewall-cmd --get-zone-of-interface=eth0(查看eth0网卡使用的是哪个zone)
 firewall-cmd --zone=external --list-all(查看public信息)
 firewall-cmd --zone=external --add-interface=eth0(将eth0添加到external)

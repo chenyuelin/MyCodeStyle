@@ -11,3 +11,8 @@ eclipselink.weaving
 subclipse
 Links for 1.12.x Release:
 Eclipse update site URL: http://subclipse.tigris.org/update_1.12.x
+
+-DproxySet=true
+-DsocksProxyHost=192.168.122.104
+-DsocksProxyPort=1080
+-DsocksNonProxyHosts=localhost|127.0.0.1|10.61.10.*
