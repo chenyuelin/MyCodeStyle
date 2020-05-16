@@ -51,6 +51,9 @@ chenyuelin31
 ad77388499
 53220523
 
+051012385886
+113537
+
 游侠网
 chenyuelin
 3xxxxxxxxx
@@ -58,3 +61,21 @@ chenyuelin
 https://et8.org/index.php
 chenyuelin
 3xxxxxxxxx
+
+hotmail
+接收 (IMAP) 服务器
+服务器地址：imap-mail.outlook.com
+端口：993
+加密连接：SSL
+发送 (SMTP) 服务器
+服务器地址：smtp-mail.outlook.com
+端口：25（如果阻止了 25，则使用 587）
+身份验证：是
+加密连接：TLS
+
+qqmail
+urigmcajmwalbddb
+
+https://www.epicgames.com/store/zh-CN/
+chenyuelin311@hotmail.com
+aaxxxxxxxx
