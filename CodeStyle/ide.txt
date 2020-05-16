@@ -18,3 +18,8 @@ Eclipse update site URL: http://subclipse.tigris.org/update_1.12.x
 -Dhttp.proxyPort=port
 -Dhttps.proxyHost=ip
 -Dhttps.proxyPort=prot
+
+-DproxySet=true
+-DsocksProxyHost=192.168.122.104
+-DsocksProxyPort=1080
+-DsocksNonProxyHosts=localhost|127.0.0.1|10.61.10.*
