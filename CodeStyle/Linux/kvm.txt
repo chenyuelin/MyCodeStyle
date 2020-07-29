@@ -50,8 +50,6 @@ DEVICE=br0
 TYPE=Bridge
 NM_CONTROLLED=no #实时生效，修改后无需要重启网卡立即生效。
 DEFROUTE=yes
-PEERDNS=yes
-PEERROUTES=yes
 BOOTPROTO=static
 IPADDR=10.10.1.152
 NETMASK=255.255.255.0
@@ -75,6 +73,8 @@ TYPE=Bridge
 NM_CONTROLLED=no #实时生效，修改后无需要重启网卡立即生效。
 BOOTPROTO=dhcp
 ONBOOT=yes
+PEERDNS=yes
+PEERROUTES=yes
 
 systemctl restart network
 brctl show

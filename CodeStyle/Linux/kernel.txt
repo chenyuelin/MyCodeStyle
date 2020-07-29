@@ -7,7 +7,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 http://blog.51cto.com/191226139/2059117
 
 kernel_4.14
-yum install openssl-devel elfutils-libelf-devel ncurses-devel -y
+yum install openssl-devel elfutils-libelf-devel ncurses-devel bison flex bc -y
 
 make clean
 make mrproper #这两条用于清除之前编译生成的.ko和.config

@@ -8,3 +8,23 @@ https://blog.csdn.net/xing_____/article/details/44831697
 xp解决方法（任选一种都可解决）：
 1. Samba服务器端smb.conf配置文件中添加“ntlm auth = yes”后重启smb服务。
 2. Windows XP客户端修改本地安全设置、安全选项、“网络安全：LAN Manager身份验证级别”的值为“仅发送 NTLMv2响应”。
+
+[share_volume]
+        comment = share volume
+        path=/home/cyl/share_volume
+        valid users = cyl
+        browseable = Yes
+        read only = No
+        write list = cyl
+        public = no
+        writable = yes
+
+smbpasswd -a cyl
+
+selinux
+setsebool -P samba_export_all_rw on
+
+setsebool -P samba_domain_controller on
+setsebool -P samba_enable_home_dirs on
+setsebool -P samba_export_all_ro on
+chcon -t samba_share_t /path
