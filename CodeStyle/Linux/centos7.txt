@@ -445,11 +445,7 @@ nohup command > myout.file 2>&1 &
 1)command>out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。
 2)2>&1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。最后一个&， 是让该命令在后台执行。
 3)试想2>1代表什么，2与>结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出；换成2>&1，&与1结合就代表标准输出了，就变成错误重定向到标准输出.
---------------------- 
-作者：liuyanfeier 
-来源：CSDN 
-原文：https://blog.csdn.net/liuyanfeier/article/details/62422742 
-版权声明：本文为博主原创文章，转载请附上博文链接！
+
 
 ctrl+z(可以将一个正在前台执行的命令放到后台，并且处于暂停状态。)
 Ctrl+c(终止前台命令。)
@@ -649,3 +645,10 @@ NFS4.1：mount -t nfs4 -o (nfsvers=4.1)minorversion=1  192.168.122.1:/home/cyl
 umount /mnt/mountpoint/
 
 mount -t cifs -o username=cyl,password=cyl //192.168.122.104/share /mnt/vm_win7 (访问window共享)
+
+yum list kubelet --showduplicates | sort -r
+kubeadm config images list
+yum install -y kubelet-1.17.6 kubeadm-1.17.6 kubectl-1.17.6 kubernetes-cni
+kubeadm init --kubernetes-version=v1.17.6　--image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=192.168.0.0/16 --token-ttl 0
+kubectl get pod -o wide
+

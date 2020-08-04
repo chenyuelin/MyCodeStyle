@@ -15,7 +15,7 @@ virsh net-edit default
 
 /etc/libvirt/qemu.conf 修改用户组(＃user = "root"  #group = "root" ）
 
-virt-install --virt-type=kvm --accelerate --name=xp --memory=2048 \
+virt-install --virt-type=kvm --accelerate --name=xp --memory=2G,maxmemory=3G \
 --arch=x86_64 \
 --cpu host-passthrough \(host-model)
 --vcpus sockets=1,cores=2,threads=1 \(--vcpus=2 --cpuset=0-1 --check-cpu \)
@@ -170,6 +170,10 @@ usb
 Bus 001 Device 003: ID 0424:2514 Standard Microsystems Corp. USB 2.0 Hub (vendor id : product id = 0424:2514)
 virsh attach-device domain usb.xml
 virsh detach-device domain usb.xml
+
+动态调内存
+virsh setmem xp 1G
+virsh dominfo xp
 
 
 直通

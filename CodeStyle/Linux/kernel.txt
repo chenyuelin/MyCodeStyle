@@ -7,7 +7,7 @@ http://blog.csdn.net/suma110/article/details/54381674
 http://blog.51cto.com/191226139/2059117
 
 kernel_4.14
-yum install openssl-devel elfutils-libelf-devel ncurses-devel bison flex bc -y
+yum install gcc openssl-devel elfutils-libelf-devel ncurses-devel bison flex bc -y
 
 make clean
 make mrproper #这两条用于清除之前编译生成的.ko和.config
@@ -75,7 +75,7 @@ Number of loop devices to pre-create at init time/CONFIG_BLK_DEV_LOOP_MIN_COUNT 
 SCSI: use blk-mq I/O path by default/CONFIG_SCSI_MQ_DEFAULT (scsi_mod.use_blk_mq) 对所有SCSI块设备I/O请求分散至多个CPU处理以提高性能
 Autodetect RAID arrays during kernel boot/CONFIG_MD_AUTODETECT (raid=noautodetect) 在内核启动过程中自动检测RAID模式
 Enable alpha quality support for new Intel hardware by default (i915.alpha_support=1) intel核显透明支持
-
+Intel's TSX (Transactional Synchronization Extensions) feature allows to optimize locking protocols through lock elision which can lead to a noticeable performance boost (tsx=on) 优化cpu锁，但有安全隐患
 
 General setup
 	Automatic process group scheduling/SCHED_AUTOGROUP 桌面开启
@@ -83,6 +83,7 @@ General setup
 	Preemption Model (Server,Desktop,Low-Latency Desktop)
 Processor type and features
 	Timer frequency (100,250,300,1000)
+	TSX enable mode (off/auto)
 	Reroute for broken boot IRQs (在某些情况下会发送多余的"boot IRQ"的修复功能)
 	AMD ACPI2Platform devices support (AMD)
 	AMD MCE features (AMD)

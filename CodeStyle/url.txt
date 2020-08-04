@@ -164,6 +164,9 @@ https://github.com/Wind4/vlmcsd
 https://github.com/Wind4/vlmcsd/releases/
 https://laod.cn/black-technology/kms-centos-vlmcsd.html
 
+SLIC
+https://github.com/AR1972/WindSLIC
+
 linux check point
 https://supportcenter.checkpoint.com/supportcenter/portal/user/anon/page/default.psml/media-type/html?action=portlets.DCFileAction&eventSubmit_doGetdcdetails=&fileid=10656
 
