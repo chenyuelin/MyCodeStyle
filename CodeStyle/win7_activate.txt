@@ -48,3 +48,13 @@ cd C:\Program Files\Microsoft Office\Office15
 cscript ospp.vbs /sethst:zp23647800.imwork.net
 cscript ospp.vbs /act
 cscript ospp.vbs /dstatus
+
+old win7 update
+https://jingyan.baidu.com/article/295430f107d6d34d7f005048.html
+http://www.catalog.update.microsoft.com/Home.aspx
+KB3138612
+http://download.windowsupdate.com/d/msdownload/update/software/updt/2016/02/windows6.1-kb3138612-x86_6e90531daffc13bc4e92ecea890e501e807c621f.msu
+https://support.microsoft.com/en-us/help/3138612/windows-update-client-for-windows-7-and-windows-server-2008-r2-march-2
+https://www.microsoft.com/en-us/download/details.aspx?id=51208
+
+

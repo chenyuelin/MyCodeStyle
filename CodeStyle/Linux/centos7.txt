@@ -562,6 +562,10 @@ https://outlook.office365.com/EWS/Exchange.asmx
 
 torsocks(socket client)
 https://github.com/dgoulet/torsocks
+https://www.systutorials.com/docs/linux/man/5-torsocks.conf/
+/etc/tor/torsocks.conf
+TorAddress 192.168.122.180
+TorPort 1080
 
 linux环境gcc多版本共存和版本切换
 sudo yum install centos-release-scl scl-utils-build
@@ -574,6 +578,7 @@ https://www.vpser.net/manage/centos-6-upgrade-gcc.html
 nfs
 yum install -y nfs-utils(rpcbind)
 firewall-cmd --add-service=nfs3/rpc-bind/(mountd)
+/home/cyl/nfs 192.168.1.0/24(rw,root_squash,anonuid=1000,anongid=1000,fsid=0)
 /home/cyl/nfs1 192.168.1.0/24(rw,all_squash,anonuid=1000,anongid=1000,fsid=1)
 /home/cyl/nfs2 *(rw,all_squash,anonuid=1000,anongid=1000,fsid=2)
 1、配置文件定义
