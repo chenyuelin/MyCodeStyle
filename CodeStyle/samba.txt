@@ -23,6 +23,14 @@ vi /etc/samba/smb.conf
         hosts deny=192.168.2.1
 
 smbpasswd -a cyl
+pdbedit -a username：新建Samba账户。
+pdbedit -r username：修改Samba账户。
+pdbedit -x username：删除Samba账户。
+pdbedit -L：列出Samba用户列表，读取passdb.tdb数据库文件。
+pdbedit -Lv：列出Samba用户列表详细信息。
+pdbedit -c “[D]” -u username：暂停该Samba用户账号。
+pdbedit -c “[]” -u username：恢复该Samba用户账号。
+
 
 selinux
 setsebool -P samba_export_all_rw on
