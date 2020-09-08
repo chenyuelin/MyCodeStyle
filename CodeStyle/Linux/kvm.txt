@@ -126,7 +126,12 @@ virsh setmem xxx 2G动态调节内存
 virsh domblklist xxx看虚拟机硬盘
 virsh undefine xxx删除虚拟机
 
-virsh attach-disk xp /dev/cdrom hda --sourcetype file --driver qemu --subdriver raw --type cdrom --mode readonly
+qemu-img create -f raw /home/vm/raw/disk1.raw 1G
+virsh attach-disk xp /dev/cdrom hda 
+virsh attach-disk xp /home/vm/raw/disk1.raw vdb --driver qemu --subdriver raw --live --config
+--sourcetype file --type cdrom --driver qemu --subdriver raw --mode readonly
+virsh detach-disk xp vdb --live --config
+
 
 virsh attach-device --live xp /opt/a.xml
 <disk type='file' device='cdrom'>
