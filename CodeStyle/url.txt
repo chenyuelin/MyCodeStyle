@@ -1,11 +1,5 @@
 http://wj32.org/wp/
 
-CentOS
-http://mirrors.163.com/centos/7/isos/x86_64/
-
-Sockscap64
-https://www.sockscap64.com
-
 Boilsoft Video Splitter
 http://www.boilsoft.com
 
@@ -175,9 +169,18 @@ https://www.wowinterface.com/downloads/index.php?cid=23
 
 free-ss
 https://github.com/free-ss/free-ss.site
+https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 
 linux ±Ê¼Ç
 http://www.peter-zhou.com/
 
 driver
 https://drivers.eu/
+
+Sockscap64
+https://www.sockscap64.com
+https://github.com/bobo2334/sockscap64/releases/tag/4.7
+https://github.com/mayunbaba2/SSTap-beta-setup
+https://sourceforge.net/projects/sstap/
+
+
