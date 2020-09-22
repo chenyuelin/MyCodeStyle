@@ -1,5 +1,13 @@
 linux命令大全
 http://man.linuxde.net/
+gnome-tweaks
+dconf read /org/gnome/gedit/preferences/ui/max-recents
+gsettings get org.gnome.gedit.preferences.ui max-recents
+dconf write /org/gnome/gedit/preferences/ui/max-recents "uint32 40"
+gsettings set org.gnome.gedit.preferences.ui max-recents "uint32 40"
+#gconftool-2 --type int --set /org/gnome/gedit/preferences/ui/max-recents 20
+dconf-editor org > gnome > gedit > preferences > ui
+
 
 默认jvm路径
 /usr/lib/jvm
@@ -191,6 +199,7 @@ firewall-cmd --reload
 firewall-cmd --permanent --new-service=rabbitmq
 firewall-cmd --permanent --delete-service=rabbitmq
 firewall-cmd --permanent --service=rabbitmq --add-port=5672/tcp
+firewall-cmd --zone=trusted --add-masquerade
 
 https://www.itlnmp.com/401.html
 七、 IP 封禁 （这个是我们平时用得最多的）

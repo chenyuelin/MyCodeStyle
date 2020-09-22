@@ -45,8 +45,21 @@ CMD ["/usr/sbin/init"]
 
 docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.1 -o parent=br0 macvlan2
 
+https://docs.docker.com/engine/install/centos/
+yum install -y yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io -y
+
 
 redis
 dir参数默认为/data
 docker run -d -h=redis --name redis -p 6379:6379 -e TZ='Asia/Shanghai' xxxxx --requirepass "a6%8YDCnd<BgH_z=" --logfile "/data/redis.log"
 docker exec -it xxx redis-cli
+
+-------------------------
+docker run -d -p 9000:9000 -p 9000:9000/udp (-P,--net host) --name ss-libev -v shadowsocks-libev(宿主机目录,相对目录在/var/lib/docker/volumes/下):/etc/shadowsocks-libev(容器内目录) teddysun/shadowsocks-libev
+hostPort:containerPort、ip:hostPort:containerPort、 ip::containerPort(映射指定地址的任意端口127.0.0.1::5000,绑定 localhost 的任意端口到容器的 5000 端口，本地主机会自动分配一个端口)。
+
+
+https://hub.docker.com/r/kedu/snx-checkpoint-vpn
+https://hub.docker.com/r/danshan/docker-shadowsocks-client
