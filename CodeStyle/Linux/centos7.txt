@@ -681,8 +681,9 @@ vi /etc/shadowsocks.json
     "workers": 1                    # 工作线程数
 }
 sslocal -c /etc/shadowsocks.json
+sysctl -w net.ipv4.tcp_fastopen=3
 sslocal -s 服务器IP -p 服务器端口号 -k Shadowsocks密码 -l 1080 -t 600 -m aes-256-cfb --fast-open
-
+ssserver -k xxxxx -m aes-128-cfb -d start -q --fast-open
 
 yum list kubelet --showduplicates | sort -r
 kubeadm config images list

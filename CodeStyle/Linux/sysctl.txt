@@ -1,6 +1,29 @@
+/etc/sysctl.conf
+sysctl -p
+
 sysctl -w net.ipv4.tcp_timestamps=1 开启对于TCP时间戳的支持,默认打开
 
 sysctl -w net.ipv4.tcp_tw_reuse=1 只对客户端起作用，开启后客户端在1s内回收。表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭。
 sysctl -w net.ipv4.tcp_tw_recycle=1 对客户端和服务器同时起作用，开启后在 3.5*RTO 内回收，RTO 200ms~ 120s 具体时间视网络状况。表示开启TCP连接中TIME-WAIT sockets的快速回收
 
 tw_reuse，tw_recycle 必须在客户端和服务端 timestamps 开启时才管用
+
+net.ipv4.tcp_fastopen=3
+1: Enables sending data in the opening SYN on the client w/ MSG_FASTOPEN.
+	2: Enables TCP Fast Open on the server side, i.e., allowing data in
+	   a SYN packet to be accepted and passed to the application before
+	   3-way hand shake finishes.
+	4: Send data in the opening SYN regardless of cookie availability and
+	   without a cookie option.
+	0x100: Accept SYN data w/o validating the cookie.
+	0x200: Accept data-in-SYN w/o any cookie option present.
+	0x400/0x800: Enable Fast Open on all listeners regardless of the
+	   TCP_FASTOPEN socket option. The two different flags designate two
+	   different ways of setting max_qlen without the TCP_FASTOPEN socket
+	   option.
+	Default: 1
+	Note that the client & server side Fast Open flags (1 and 2
+	respectively) must be also enabled before the rest of flags can take
+	effect.
+	See include/net/tcp.h and the code for more details.
+
