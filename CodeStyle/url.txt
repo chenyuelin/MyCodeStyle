@@ -183,4 +183,5 @@ https://github.com/bobo2334/sockscap64/releases/tag/4.7
 https://github.com/mayunbaba2/SSTap-beta-setup
 https://sourceforge.net/projects/sstap/
 
-
+google play download
+http://apps.evozi.com/apk-downloader/
