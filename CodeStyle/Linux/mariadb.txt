@@ -54,6 +54,7 @@ create database `database_name` default character set utf8 collate utf8_general_
 mysql set password for root='root';
 flush privileges;
 GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira';
+DROP USER 'jack'@'localhost';
 revoke all on *.* from dba@localhost;
 ÃüÁî¹Ø±Õsql·þÎñ
 mysqladmin -u root -proot shutdown
