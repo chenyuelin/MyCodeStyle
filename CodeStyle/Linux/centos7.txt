@@ -691,3 +691,16 @@ yum install -y kubelet-1.17.6 kubeadm-1.17.6 kubectl-1.17.6 kubernetes-cni
 kubeadm init --kubernetes-version=v1.17.6¡¡--image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=192.168.0.0/16 --token-ttl 0
 kubectl get pod -o wide
 
+chrome
+vi /etc/yum.repos.d/google-chrome.repo
+[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+yum -y install google-chrome-stable (--nogpgcheck)
+
+
+
+
