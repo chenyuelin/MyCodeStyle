@@ -186,9 +186,12 @@ https://github.com/mayunbaba2/SSTap-beta-setup
 https://sourceforge.net/projects/sstap/
 
 google play download
+https://play.google.com/store
 http://apps.evozi.com/apk-downloader/
 
 7.6.7600.320 (Both 7.6.7600.256 &7.6.7600.320 in ONE package)
 http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x86.exe
 http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x64.exe
 http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-ia64.exe
+
+https://parler.com
