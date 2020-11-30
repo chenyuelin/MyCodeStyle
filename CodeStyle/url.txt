@@ -187,6 +187,7 @@ https://github.com/mayunbaba2/SSTap-beta-setup
 https://sourceforge.net/projects/sstap/
 
 google play download
+https://play.google.com/store
 http://apps.evozi.com/apk-downloader/
 
 7.6.7600.320 (Both 7.6.7600.256 &7.6.7600.320 in ONE package)
@@ -198,3 +199,4 @@ https://github.com/ytdl-org/youtube-dl
 
 https://www.ibm.com/support/pages/ibm-heapanalyzer
 
+https://parler.com
