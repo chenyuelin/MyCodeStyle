@@ -23,6 +23,7 @@ http://www.china-pub.com
 
 mozilla
 http://ftp.mozilla.org/pub/
+http://ftp.mozilla.org/pub/firefox/releases/
 https://www.mozilla.org/en-US/firefox/all/
 
 rtorrent
@@ -196,5 +197,6 @@ http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/W
 
 https://github.com/ytdl-org/youtube-dl
 
+https://www.ibm.com/support/pages/ibm-heapanalyzer
 
 https://parler.com
