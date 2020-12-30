@@ -50,12 +50,15 @@ show status;
 
 创建新数据库时进行编码设置
 create database `database_name` default character set utf8 collate utf8_general_ci;
+create database `database_name` default character set gb18030 utf8 collate gb18030_chinese_ci ;
 
 mysql set password for root='root';
 flush privileges;
-GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira';
+create user 'alex'@'%' identified by '123';
+GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira' WITH GRANT OPTION;
+show grants for 'root'@'%';
 DROP USER 'jack'@'localhost';
-revoke all on *.* from dba@localhost;
+revoke all privileges on db1.* from dba@localhost;
 命令关闭sql服务
 mysqladmin -u root -proot shutdown
 

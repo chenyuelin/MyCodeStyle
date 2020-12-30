@@ -13,6 +13,7 @@ erlang(编译安装与rabbitmq rpm安装有冲突，所以erlang也需要rpm安装)
 make && make install
 安装完成后输入erl命令
 
+https://github.com/rabbitmq/erlang-rpm/releases
 yum install -y socat logrotate
 rpm -ivh rabbitmq-server-3.7.7-1.el7.noarch.rpm
 
