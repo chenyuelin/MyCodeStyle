@@ -158,6 +158,8 @@ unzip -t wwwroot.zip
 8、把/home目录下面wwwroot.zip里面的所有文件解压到第一级目录
 unzip -j wwwroot.zip
 
+7z a work_resource.7z work_resource/* -mx7 -r
+7z x manager.7z -r -o /home/xx
 
 cent7防火墙
 http://havee.me/linux/2015-01/using-firewalls-on-centos-7.html
@@ -661,9 +663,44 @@ umount /mnt/mountpoint/
 
 mount -t cifs -o username=cyl,password=cyl //192.168.122.104/share /mnt/vm_win7 (访问window共享)
 
+shadowsocks client
+yum install -y epel-release
+yum install -y python-pip python-setuptools m2crypto
+pip install --upgrade pip
+pip install shadowsocks
+vi /etc/shadowsocks.json
+{
+    "server":"your_server_ip",      #ss服务器IP
+    "server_port":your_server_port, #端口
+    "local_address": "127.0.0.1",   #本地ip
+    "local_port":1080,              #本地端口
+    "password":"your_server_passwd",#连接ss密码
+    "timeout":300,                  #等待超时
+    "method":"rc4-md5",             #加密方式
+    "fast_open": false,             # true 或 false。如果你的服务器 Linux 内核在3.7+，可以开启 fast_open 以降低延迟。开启方法： echo 3 > /proc/sys/net/ipv4/tcp_fastopen 开启之后，将 fast_open 的配置设置为 true 即可
+    "workers": 1                    # 工作线程数
+}
+sslocal -c /etc/shadowsocks.json
+sysctl -w net.ipv4.tcp_fastopen=3
+sslocal -s 服务器IP -p 服务器端口号 -k Shadowsocks密码 -l 1080 -t 600 -m aes-256-cfb --fast-open
+ssserver -k xxxxx -m aes-128-cfb -d start -q --fast-open
+
 yum list kubelet --showduplicates | sort -r
 kubeadm config images list
 yum install -y kubelet-1.17.6 kubeadm-1.17.6 kubectl-1.17.6 kubernetes-cni
 kubeadm init --kubernetes-version=v1.17.6　--image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=192.168.0.0/16 --token-ttl 0
 kubectl get pod -o wide
+
+chrome
+vi /etc/yum.repos.d/google-chrome.repo
+[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+yum -y install google-chrome-stable (--nogpgcheck)
+
+
+
 

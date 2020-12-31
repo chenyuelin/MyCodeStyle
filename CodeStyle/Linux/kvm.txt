@@ -15,17 +15,17 @@ virsh net-edit default
 
 /etc/libvirt/qemu.conf 修改用户组(＃user = "root"  #group = "root" ）
 
-virt-install --virt-type=kvm --accelerate --name=xp --memory=2G,maxmemory=3G \
+virt-install --virt-type=kvm --accelerate --name=xp --memory=2048,maxmemory=3072 \
 --arch=x86_64 \
 --cpu host-passthrough \(host-model)
 --vcpus sockets=1,cores=2,threads=1 \(--vcpus=2 --cpuset=0-1 --check-cpu \)
 --os-type=windows --os-variant=winxp \
---disk device=disk,path=/opt/img/xp.raw,bus=virtio,size=10,format=raw,cache=writeback \
---disk device=floppy,path=/opt/virtio-win-0.1.141_x86.vfd,perms=ro \
---cdrom=/opt/xp.iso \
+--disk device=disk,path=/home/vm/raw/xp.raw,bus=virtio,size=10,format=raw,cache=writeback \
+--disk device=floppy,path=/home/vm/iso/virtio-win-0.1.141_x86.vfd,perms=ro \
+--cdrom=/home/vm/iso/xp.iso \
 --graphics vnc,listen=0.0.0.0,port=5900,password=cyl \
 --network bridge=br0,model=virtio \(--network network=default,model=virtio \)
---video=qxl (--video=vga)\
+--video=vga \(--video=qxl)
 --soundhw default \
 --noautoconsole \
 --boot hd,cdrom,fd,network,menu=on

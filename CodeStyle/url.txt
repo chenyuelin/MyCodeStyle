@@ -23,6 +23,7 @@ http://www.china-pub.com
 
 mozilla
 http://ftp.mozilla.org/pub/
+http://ftp.mozilla.org/pub/firefox/releases/
 https://www.mozilla.org/en-US/firefox/all/
 
 rtorrent
@@ -108,8 +109,10 @@ http://jd.benow.ca/
 
 µÃ×ÔÓÉ
 https://devpn.com/
-https://deding.site/
 us1.heon.win
+
+https://tipas.net/
+https://tipasvpn.com/
 
 cl1024
 http://t66y.com
@@ -183,4 +186,20 @@ https://github.com/bobo2334/sockscap64/releases/tag/4.7
 https://github.com/mayunbaba2/SSTap-beta-setup
 https://sourceforge.net/projects/sstap/
 
+google play download
+https://play.google.com/store
+http://apps.evozi.com/apk-downloader/
+
+7.6.7600.320 (Both 7.6.7600.256 &7.6.7600.320 in ONE package)
+http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x86.exe
+http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x64.exe
+http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-ia64.exe
+
+https://github.com/ytdl-org/youtube-dl
+
+https://www.ibm.com/support/pages/ibm-heapanalyzer
+
+https://parler.com
+
+http://fightback.law/
 

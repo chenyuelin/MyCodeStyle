@@ -9,6 +9,7 @@ sudo usermod -aG docker $USER
 2)run command为/usr/sbin/init
 3)docker exec -it centos7 /bin/bash进入容器
 
+https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
 
 ================make dockerfile start======================
 #docker build -t imageID
@@ -50,6 +51,7 @@ yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce docker-ce-cli containerd.io -y
 
+yum list docker-ce --showduplicates | sort -r
 
 redis
 dir参数默认为/data
@@ -62,4 +64,50 @@ hostPort:containerPort、ip:hostPort:containerPort、 ip::containerPort(映射指定地
 
 
 https://hub.docker.com/r/kedu/snx-checkpoint-vpn
+docker run --name snx-vpn \
+  --cap-add=ALL \
+  -v /lib/modules:/lib/modules \
+  -e SNX_SERVER=122.193.20.46 \
+  -e SNX_USER=eb-Yuelin_Chen \
+  -e SNX_PASSWORD=catV^cb4 \
+  -t \
+  -d bf29ddb89e39
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' 00e58275ad36
+route add -net 10.157.0.0 gw 172.17.0.2 netmask 255.255.0.0
+vi /etc/resolv.conf
+nameserver 10.157.20.164
 https://hub.docker.com/r/danshan/docker-shadowsocks-client
+https://hub.docker.com/r/gibby/openconnect
+docker run --privileged \
+-p 127.0.0.1::9000 \
+-v custom.conf:/etc/unbound/unbound.conf.d/custom.conf \
+-e OPTIONS="-u chenyuelin --authgroup=ADMINS --no-cert-check" \
+-e SERVER=jp1.heon.win \
+-e PASSWORD=9***** \
+-t gibby/openconnect
+https://hub.docker.com/r/wuamin/alpine-l2tp-vpn-client
+https://hub.docker.com/r/leodagan/pptp
+sysctl -w net.netfilter.nf_conntrack_helper=1
+docker run --privileged (--cap-add NET_ADMIN) --name pptpclient -d \
+-e SERVER=jp1.heon.win \
+-e USERNAME=xxxxxxx \
+-e PASSWORD=xxxxxx \
+--device=/dev/ppp \
+--dns 8.8.8.8 --dns 8.8.4.4 \
+leodagan/pptp
+docker run --rm --network container:pptpclient busybox wget -O- www.google.com
+https://hub.docker.com/r/ajoergensen/tinyproxy
+docker run --privileged --name tinyproxy \
+--net container:pptpclient \
+-e "ALLOWED=0.0.0.0/0" \
+-e "MINSPARESERVERS=20" \
+-e "MAXSPARESERVERS=20" \
+-e "MAXCLIENTS=200" \
+-e "LOG_TO_SYSLOG=Off" \
+-e "LOG_LEVEL=Warning" \
+ajoergensen/tinyproxy
+
+
+docker save docker.io/openjdk:tag | gzip > imageName.tar.gz
+gunzip -c imageName.tar.gz | docker load
+gzip -d -c imageName.tar.gz | docker load
