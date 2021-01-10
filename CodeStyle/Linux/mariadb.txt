@@ -50,12 +50,19 @@ show status;
 
 创建新数据库时进行编码设置
 create database `database_name` default character set utf8 collate utf8_general_ci;
+create database `database_name` default character set gb18030 utf8 collate gb18030_chinese_ci ;
 
-mysql set password for root='root';
+SET PASSWORD = PASSWORD('xxxxx');
+SET PASSWORD FOR user = PASSWORD('xxxxx');
+
 flush privileges;
-GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira';
-DROP USER 'jack'@'localhost';
+GRANT ALL PRIVILEGES ON jiradb.* TO 'db_dev'@'%' IDENTIFIED by 'xxx';
 revoke all on *.* from dba@localhost;
+create user 'alex'@'%' identified by '123';
+GRANT ALL PRIVILEGES ON jiradb.* TO 'jira'@'localhost' IDENTIFIED by 'jira' WITH GRANT OPTION;
+show grants for 'root'@'%';
+DROP USER 'jack'@'localhost';
+revoke all privileges on db1.* from dba@localhost;
 命令关闭sql服务
 mysqladmin -u root -proot shutdown
 
@@ -70,6 +77,10 @@ baseurl = http://mirrors.aliyun.com/mariadb/yum/10.3/centos7-amd64/
 gpgkey =  http://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
 gpgcheck = 1
 yum -y install MariaDB-server MariaDB-client
+
+sudo mysql_secure_installation 初始化数据库
+https://www.cnblogs.com/apollo1616/p/10205216.html
+https://dev.mysql.com/doc/refman/5.7/en/mysql-secure-installation.html
 
 
 优化
@@ -182,3 +193,5 @@ docker run -d --name=mariadb -h=mariadb \
 --log_error=/var/lib/mysql/error.log \
 --lc-messages-dir=/var/lib/mysql/ \
 --slow_query_log_file=/var/lib/mysql/mariadb-slow.log
+
+

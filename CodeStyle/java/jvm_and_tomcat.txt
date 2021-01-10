@@ -73,3 +73,22 @@ http://calvin1978.blogcn.com/articles/jvmoption-7.html
 -XX:-OmitStackTraceInFastThrow为异常设置StackTrace是个昂贵的操作，所以当应用在相同地方抛出相同的异常N次(两万?)之后，JVM会对某些特定异常如NPE，数组越界等进行优化，不再带上异常栈。此时，你可能会看到日志里一条条Nul Point Exception，而之前输出完整栈的日志早被滚动到不知哪里去了，也就完全不知道这NPE发生在什么地方，欲哭无泪。 所以，将它禁止吧，ElasticSearch也这样干。
 
 -XX:MaxDirectMemorySize：一般去设置。堆外内存/直接内存的大小，默认为堆内存减去一个Survivor区的大小
+
+https://docs.oracle.com/javase/8/docs/api/java/net/doc-files/net-properties.html
+
+-Djava.net.useSystemProxies=true
+-Dhttp.proxyHost=ip
+-Dhttp.proxyPort=port
+-Dhttp.nonProxyHosts="*.mycompany.com|*.mycompany.local|localhost"
+-Dhttps.proxyHost=ip
+-Dhttps.proxyPort=prot
+-DsocksProxyHost=ip
+-DsocksProxyPort=1080
+-DsocksNonProxyHosts=localhost|127.0.0.1|10.61.10.*
+-Djava.net.socks.username=abc
+-Djava.net.socks.password=abc
+
+-DproxySet=true
+-DsocksProxyHost=192.168.122.104
+-DsocksProxyPort=1080
+

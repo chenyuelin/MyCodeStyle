@@ -188,7 +188,11 @@ https://sourceforge.net/projects/sstap/
 
 google play download
 https://play.google.com/store
-http://apps.evozi.com/apk-downloader/
+https://apps.evozi.com/apk-downloader/
+https://apk-dl.com/
+https://apkpure.com/region-free-apk-download
+https://apkcombo.com
+
 
 7.6.7600.320 (Both 7.6.7600.256 &7.6.7600.320 in ONE package)
 http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x86.exe
@@ -203,3 +207,4 @@ https://parler.com
 
 http://fightback.law/
 
+https://www.nvidia.com/Download/index.aspx

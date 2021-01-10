@@ -20,3 +20,5 @@ http://www.cnblogs.com/kreo/p/4423362.html
 
 ³£ÓÃÃüÁî
 http://doc.redisfans.com
+
+/usr/local/bin/redis-server /home/cyl/document/redis.conf
