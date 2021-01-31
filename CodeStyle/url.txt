@@ -193,6 +193,12 @@ https://apk-dl.com/
 https://apkpure.com/region-free-apk-download
 https://apkcombo.com
 
+VKD3D-Proton
+https://github.com/doitsujin/dxvk
+https://github.com/HansKristian-Work/vkd3d-proton
+https://github.com/GloriousEggroll/proton-ge-custom/releases
+https://www.nuget.org/packages/Microsoft.Direct3D.D3D12On7
+https://bbs.3dmgame.com/thread-6066059-1-2.html
 
 7.6.7600.320 (Both 7.6.7600.256 &7.6.7600.320 in ONE package)
 http://download.windowsupdate.com/windowsupdate/redist/standalone/7.6.7600.320/WindowsUpdateAgent-7.6-x86.exe
