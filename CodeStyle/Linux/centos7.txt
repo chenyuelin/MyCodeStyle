@@ -580,9 +580,11 @@ TorAddress 192.168.122.180
 TorPort 1080
 
 linux环境gcc多版本共存和版本切换
-sudo yum install centos-release-scl scl-utils-build
-yum list all --enablerepo='centos-sclo-rh'|grep gcc
-sudo yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-gcc-gdb-plugin devtoolset-9-gcc-gfortran devtoolset-9-libgccjit
+yum install centos-release-scl scl-utils-build
+yum list all --enablerepo='centos-sclo-rh' | grep gcc
+yum list all --enablerepo='centos-sclo-rh' --disablerepo='base','epel','updates' | grep python
+yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-gcc-gdb-plugin devtoolset-9-gcc-gfortran devtoolset-9-libgccjit
+yum install rh-python38
 scl -l
 scl enable devtoolset-9 bash
 https://www.vpser.net/manage/centos-6-upgrade-gcc.html
@@ -700,6 +702,15 @@ enabled=1
 gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 yum -y install google-chrome-stable (--nogpgcheck)
+
+Snap
+https://www.techgrow.cn/posts/ba754e9a.html
+
+software
+gimp
+yum
+
+meld
 
 
 

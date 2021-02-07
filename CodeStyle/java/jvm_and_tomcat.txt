@@ -92,3 +92,19 @@ https://docs.oracle.com/javase/8/docs/api/java/net/doc-files/net-properties.html
 -DsocksProxyHost=192.168.122.104
 -DsocksProxyPort=1080
 
+https://blog.csdn.net/dnc8371/article/details/106810247
+java \
+    -Xmx1024m \
+    -Xlog:gc*=debug:file=gc.log:utctime,uptime,tid,level:filecount=10,filesize=128m \
+    -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=heapdump.hprof \
+    -XX:StartFlightRecording=\
+        disk=true, \
+        dumponexit=true, \
+        filename=recording.jfr, \
+        maxsize=1024m,\
+        maxage=1d,\
+        settings=profile \
+        path-to-gc-roots=true \
+    OOMEGenerator 
+
+
