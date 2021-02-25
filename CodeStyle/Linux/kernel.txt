@@ -28,6 +28,17 @@ make headers_install
 make modules_install    #把编译出的内核模块复制到/lib/modules/${KERNEL_VERSION}
 make install
 
+1、只编译某子目录下的相关代码：
+make arch/  只编译核心代码
+make drivers/net/  只编译网络代码
+2、只编译部分模块：
+make M=drivers/net/
+3、只编译某一模块：
+make drivers/net/pcnet32.ko
+4、将编译完成的结果放置于别的目录中：
+make O=/tmp/kernel  O：大写字母o
+
+
 查看启动模块
 cat /boot/grub2/grub.cfg |grep menuentry
 cat /boot/efi/EFI/centos/grub.cfg | grep menuentry
