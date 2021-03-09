@@ -665,6 +665,24 @@ umount /mnt/mountpoint/
 
 mount -t cifs -o username=cyl,password=cyl //192.168.122.104/share /mnt/vm_win7 (∑√Œ windowπ≤œÌ)
 
+shadowsocks-libev
+https://wp.hellonp.com/centos7%E5%AE%89%E8%A3%85shadowsocks-libev/
+https://github.com/shadowsocks/shadowsocks-libev
+https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/
+yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/repo/epel-7/librehat-shadowsocks-epel-7.repo
+yum install -y shadowsocks-libev
+systemctl status shadowsocks-libev
+sslocal -d start -q -c /home/cyl/software/shadowsocks/devpn.json
+{
+	"server": "jp1.heon.win",
+	"server_port": 29879,
+	"password": "pxeg8t",
+	"method": "aes-128-cfb",
+	"local_address": "0.0.0.0"
+	"local_port": 61080,
+	"fast_open": true
+}
+
 shadowsocks client
 yum install -y epel-release
 yum install -y python-pip python-setuptools m2crypto
