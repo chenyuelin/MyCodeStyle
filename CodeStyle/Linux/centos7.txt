@@ -672,22 +672,25 @@ https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/
 yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/librehat/shadowsocks/repo/epel-7/librehat-shadowsocks-epel-7.repo
 yum install -y shadowsocks-libev
 systemctl status shadowsocks-libev
-sslocal -d start -q -c /home/cyl/software/shadowsocks/devpn.json
+ss-local -c /home/cyl/software/shadowsocks/devpn.json
 {
 	"server": "jp1.heon.win",
-	"server_port": 29879,
-	"password": "pxeg8t",
+	"server_port": 111111,
+	"password": "xxxxxx",
 	"method": "aes-128-cfb",
 	"local_address": "0.0.0.0"
 	"local_port": 61080,
 	"fast_open": true
 }
-
+systemctl start snapd
+snap install shadowsocks-libev
+snap list
+snap run shadowsocks-libev.ss-local -c /home/cyl/software/shadowsocks/devpn.json
 shadowsocks client
 yum install -y epel-release
-yum install -y python-pip python-setuptools m2crypto
-pip install --upgrade pip
-pip install shadowsocks
+yum install -y python3-pip m2crypto
+pip3 install --upgrade pip
+pip3 install shadowsocks
 vi /etc/shadowsocks.json
 {
     "server":"your_server_ip",      #ss服务器IP
@@ -700,10 +703,10 @@ vi /etc/shadowsocks.json
     "fast_open": false,             # true 或 false。如果你的服务器 Linux 内核在3.7+，可以开启 fast_open 以降低延迟。开启方法： echo 3 > /proc/sys/net/ipv4/tcp_fastopen 开启之后，将 fast_open 的配置设置为 true 即可
     "workers": 1                    # 工作线程数
 }
-sslocal -c /etc/shadowsocks.json
+ss-local -d start -q -c /etc/shadowsocks.json
 sysctl -w net.ipv4.tcp_fastopen=3
-sslocal -s 服务器IP -p 服务器端口号 -k Shadowsocks密码 -l 1080 -t 600 -m aes-256-cfb --fast-open
-ssserver -k xxxxx -m aes-128-cfb -d start -q --fast-open
+ss-local -s 服务器IP -p 服务器端口号 -k Shadowsocks密码 -l 1080 -t 600 -m aes-256-cfb --fast-open
+ss-server -k xxxxx -m aes-128-cfb -d start -q --fast-open
 
 yum list kubelet --showduplicates | sort -r
 kubeadm config images list
