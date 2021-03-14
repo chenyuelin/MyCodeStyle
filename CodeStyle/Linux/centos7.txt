@@ -686,6 +686,8 @@ systemctl start snapd
 snap install shadowsocks-libev
 snap list
 snap run shadowsocks-libev.ss-local -c /home/cyl/software/shadowsocks/devpn.json
+https://github.com/ACL4SSR/ACL4SSR/tree/master
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/fullgfwlist.acl
 shadowsocks client
 yum install -y epel-release
 yum install -y python3-pip m2crypto
