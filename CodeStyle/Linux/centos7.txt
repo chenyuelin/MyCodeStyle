@@ -680,6 +680,7 @@ ss-local -c /home/cyl/software/shadowsocks/devpn.json
 	"method": "aes-128-cfb",
 	"local_address": "0.0.0.0",
 	"local_port": 61080,
+	"acl":"/x/x/etc/shadowsocks-libev.acl",
 	"fast_open": true
 }
 systemctl start snapd
@@ -688,6 +689,22 @@ snap list
 snap run shadowsocks-libev.ss-local -c /home/cyl/software/shadowsocks/devpn.json
 https://github.com/ACL4SSR/ACL4SSR/tree/master
 https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/fullgfwlist.acl
+    For local servers (sslocal, ssredir, ...)
+        Modes:
+            [bypass_all] - ACL runs in BlackList mode. Bypasses all addresses that didn't match any rules.
+            [proxy_all] - ACL runs in WhiteList mode. Proxies all addresses that didn't match any rules.
+        Rules:
+            [bypass_list] - Rules for connecting directly
+            [proxy_list] - Rules for connecting through proxies
+    For remote servers (ssserver)
+        Modes:
+            [reject_all] - ACL runs in BlackList mode. Rejects all clients that didn't match any rules.
+            [accept_all] - ACL runs in WhiteList mode. Accepts all clients that didn't match any rules.
+        Rules:
+            [white_list] - Rules for accepted clients
+            [black_list] - Rules for rejected clients
+            [outbound_block_list] - Rules for blocking outbound addresses.
+https://man.archlinux.org/man/shadowsocks-libev.8.en
 shadowsocks client
 yum install -y epel-release
 yum install -y python3-pip m2crypto
