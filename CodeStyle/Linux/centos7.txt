@@ -658,9 +658,9 @@ vi /etc/fstab
 mount -a
 https://www.cnblogs.com/lykyl/archive/2013/06/14/3136921.html
 https://blog.csdn.net/u011483095/article/details/79563536
-NFS3：mount -t  nfs 192.16.1.11：/data/nfs（IP后跟全路径） /mnt/mountpoint/(本机挂载点)
-NFS4：mount -t nfs4 192.168.1.11:/nfs (IP后跟设备名称)  /mnt/mountpoint/
-NFS4.1：mount -t nfs4 -o (nfsvers=4.1)minorversion=1  192.168.122.1:/home/cyl/nfs/docker_volume /mnt/docker_volume/
+NFS3：mount -t?? nfs 192.16.1.11：/data/nfs（IP后跟全路径） /mnt/mountpoint/(本机挂载点)
+NFS4：mount -t nfs4 192.168.1.11:/nfs (IP后跟设备名称)?? /mnt/mountpoint/
+NFS4.1：mount -t nfs4 -o (nfsvers=4.1)minorversion=1?? 192.168.122.1:/home/cyl/nfs/docker_volume /mnt/docker_volume/
 umount /mnt/mountpoint/
 
 mount -t cifs -o username=cyl,password=cyl //192.168.122.104/share /mnt/vm_win7 (访问window共享)
@@ -678,7 +678,7 @@ ss-local -c /home/cyl/software/shadowsocks/devpn.json
 	"server_port": 111111,
 	"password": "xxxxxx",
 	"method": "aes-128-cfb",
-	"local_address": "0.0.0.0"
+	"local_address": "0.0.0.0",
 	"local_port": 61080,
 	"fast_open": true
 }
